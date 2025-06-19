@@ -1,0 +1,134 @@
+:root {
+  --white: #ffffff;
+  --black: #111;
+  --surface: #171717;
+  --primary: #FD853A;
+  --secondary: #FEB273;
+  --gray: #344054;
+  --light-gray: #98A2B3;
+  --border-color: #c9c9c999;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+main {
+  cursor: url("../assets/svgs/cursor.png"), auto;
+}
+
+header, footer, .project-section,
+#hero-image{
+  cursor: url("../assets/svgs/cursor-white.png"), auto;
+}
+
+body {
+  background: linear-gradient(-45deg,
+  #1b1a1e,#3b261d,#1b1c24, var(--primary));
+  background-size: 400% 400%;
+  animation: gradientShift 6s ease infinite;
+}
+@keyframes gradientShift {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 80% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 0.1s;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+@font-face {
+  font-family: Gilroy;
+  src: url("../assets/fonts/Gilroy-Medium.ttf");
+}
+
+body {
+  overflow: auto;
+  scrollbar-width: 0;     
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: var(--white);
+  font-family: Gilroy, "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+    sans-serif;
+}
+
+.heading {
+    color: var(--gray);
+    font-size: 3.6rem;
+    font-weight: 600;
+}
+
+.subheading{
+    color: var(--gray);
+    font-size: 2.4rem;
+    font-weight: 600;
+}
+
+.description{
+    color: var(--light-gray);
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+a {
+  cursor: pointer;
+  font-weight: 400;
+}
+
+h1 {
+  color: var(--black);
+  font-family: Gilroy;
+  font-size: 6.4rem;
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 1.5;
+  color: var(--black);
+}
+
+h3 {
+  color: var(--black);
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+p {
+  color: var(--black);
+  font-size: 1.3rem;
+  line-height: 1.75;
+}
+
+div {
+  box-sizing: border-box;
+}
