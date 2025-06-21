@@ -5,6 +5,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { IoSearch } from "react-icons/io5";
 import { BsCart2 } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
+import { FaBars, FaTimes } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import DailyEssentials from "../components/dailyEssentials";
 import PoojaProducts from "../components/PoojaProducts";
@@ -13,13 +14,19 @@ import HeavenlyHaste from "../components/HeavenlyHaste";
 import CategoryGrid from "../components/CategoryGrid";
 import Testimonials from "../components/Testimonials";
 import Footer from "../components/Footer";
+import { useState } from "react";
 
 export default function Home() {
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogin = () => {
     localStorage.setItem("auth", "true");
     navigate("/protected");
+  };
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
   };
 
   return (
@@ -30,8 +37,11 @@ export default function Home() {
         </p>
       </header>
       <nav className="navbar">
-        <div className="logo"><img src={logo} alt="" /></div>
-        <ul>
+        <div className="hamburger" onClick={toggleMenu}>
+          {menuOpen ? <FaTimes size={30} /> : <FaBars size={30} />}
+        </div>
+        <div className="logo"><img src={logo} alt="Kevaa Logo" /></div>
+        <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
           <li>Discovery <IoIosArrowDown /></li>
           <li>About</li>
           <li>Contact us</li>
@@ -45,7 +55,7 @@ export default function Home() {
       <main className="hero-section">
         <div className="overlay">
           <div className="hero-card">
-            <div className="hero-logo"><img src={mobilelogo} alt="" /></div>
+            <div className="hero-logo"><img src={mobilelogo} alt="Mobile Logo" /></div>
             <h2>The divine shop</h2>
             <p>
               Crafted with devotion, Kevaa brings you authentic, soul-soothing essentials for every sacred moment.
@@ -56,42 +66,34 @@ export default function Home() {
       </main>
       <div className="daily-essentials">
         <DailyEssentials />
-        {/* </div>
-      <div> */}
         <PoojaProducts />
-        {/* </div>
-      <div> */}
         <PopularProducts />
-        {/* </div>
-      <div> */}
         <HeavenlyHaste />
-        {/* </div>
-      <div> */}
         <CategoryGrid />
-        <div class="service-highlights">
-          <div class="service-box">
-            <i class="fas fa-box-open"></i>
+        <div className="service-highlights">
+          <div className="service-box">
+            <i className="fas fa-box-open"></i>
             <div>
               <h4>Free Shipping</h4>
               <p>Free Shipping for orders over £130</p>
             </div>
           </div>
-          <div class="service-box">
-            <i class="fas fa-dollar-sign"></i>
+          <div className="service-box">
+            <i className="fas fa-dollar-sign"></i>
             <div>
               <h4>Money Guarantee</h4>
               <p>Within 30 days for an exchange.</p>
             </div>
           </div>
-          <div class="service-box">
-            <i class="fas fa-headset"></i>
+          <div className="service-box">
+            <i className="fas fa-headset"></i>
             <div>
               <h4>Online Support</h4>
               <p>24 hours a day, 7 days a week</p>
             </div>
           </div>
-          <div class="service-box">
-            <i class="fas fa-credit-card"></i>
+          <div className="service-box">
+            <i className="fas fa-credit-card"></i>
             <div>
               <h4>Flexible Payment</h4>
               <p>Pay with Multiple Credit Cards</p>
@@ -100,7 +102,7 @@ export default function Home() {
         </div>
 
         <Testimonials />
-        <Footer/>
+        <Footer />
       </div>
     </div>
   );
