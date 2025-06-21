@@ -26,20 +26,19 @@
 
 .heavenly-banner img {
   width: 100%;
-  border-radius: 12px;
   height: 100%;
   object-fit: cover;
+  border-radius: 12px;
 }
 
 .banner-overlay {
-  /* border: 1px solid red; */
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 40px;
-  position: absolute;
-  inset: 0;
-  padding: 40px 40px;
+  padding: 40px;
   color: white;
   background-color: #00000066;
 }
@@ -52,14 +51,13 @@
 
 .banner-overlay button {
   background: #d61458;
-  display: flex;
-  /* justify-content: center; */
-  align-items: center;
-  gap: 0.8em;
   color: white;
   border: none;
   padding: 10px 24px;
   border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
   cursor: pointer;
 }
 
@@ -68,40 +66,35 @@
   border: 1px solid #eee;
   border-radius: 20px;
   padding: 16px;
+  min-width: 250px;
   display: flex;
   flex-direction: column;
-  align-items: start;
-  gap: 0px;
+  align-items: flex-start;
   position: relative;
 }
 
 .heavenly-card .label {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   font-size: 12px;
-  background: #ffe8e8;
-  color: #e60023;
   padding: 4px 18px;
   border-top-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  background: #ffe8e8;
+  color: #e60023;
 }
 
 .label.sale {
   background-color: #ed294d;
-  /* yellow */
   color: #fdfaf8;
 }
-
 .label.best-sale {
   background-color: #fcb15c;
-  /* blue */
   color: #fbfcfe;
 }
-
 .label.save {
   background-color: #fc3880;
-  /* light red */
   color: #fbf6f6;
 }
 
@@ -122,15 +115,12 @@
   font-weight: bold;
   color: rgb(46, 46, 46);
   margin: 6px 0;
-  /* border: 1px solid red; */
 }
 
 .heavenly-card .rating {
   font-size: 16px;
   color: rgb(237, 200, 35);
-  /* border: 1px solid green; */
 }
-
 
 .price {
   display: flex;
@@ -138,7 +128,6 @@
   color: black;
   gap: 10px;
   font-size: 14px;
-  /* margin: 6px 0; */
 }
 
 .price span {
@@ -175,10 +164,11 @@
   background: #d41256;
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 1.4rem;
   width: 100%;
   color: white;
-  padding: 10px 0px;
+  padding: 10px 0;
   border: none;
   border-radius: 6px;
   margin-top: 10px;
@@ -190,21 +180,10 @@
   display: flex;
   gap: 40px;
   flex-wrap: wrap;
+  margin-top: 40px;
 }
 
-.heavenly-boxes .box:nth-child(1) {
-  background-image: url('../../assets/product2.png');
-}
-
-.heavenly-boxes .box:nth-child(2) {
-  background-image: url('../../assets/product1.png');
-}
-
-.heavenly-boxes .box:nth-child(3) {
-  background-image: url('../../assets/product3.png');
-}
-
-.box {
+.heavenly-boxes .box {
   flex: 1;
   min-width: 200px;
   padding: 20px;
@@ -232,42 +211,132 @@
   cursor: pointer;
 }
 
-.box.pink {
-  background: #fde2e4;
+.prod1 {
+  background-image: url('../../assets/product2.png');
+}
+.prod2 {
+  background-image: url('../../assets/product1.png');
+}
+.prod3 {
+  background-image: url('../../assets/product3.png');
 }
 
-.box.blue {
-  background: #e0f2fe;
+.horizontal-scroll-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.horizontal-scroll {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 0;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  background-color: #d61458;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.scroll-btn.left {
+  left: -20px;
+}
+
+.scroll-btn.right {
+  right: -20px;
 }
 
 @media screen and (max-width: 768px) {
   .heavenly-grid {
     display: flex;
     overflow-x: auto;
-    /* flex-wrap: wrap; */
+    gap: 16px;
+    scroll-behavior: smooth;
+    padding-bottom: 10px;
+  }
+
+  .heavenly-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll-btn {
+    display: flex;
   }
 
   .heavenly-banner {
     display: none;
   }
 
-  .prodcuts-display {
-    display: flex;
+  .scroll-btn.left {
+    left: 0;
   }
 
-  .heavenly-card {
-    min-width: 200px;
-    margin: 0 auto;
+  .scroll-btn.right {
+    right: 0;
   }
+}
 
-  /* Optional: Adjust other elements for mobile */
+@media screen and (max-width: 480px) {
   .heavenly-container {
     padding: 20px;
   }
 
-
   .section-title {
     font-size: 20px;
-    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .box p {
+    font-size: 18px;
+    width: 100%;
+  }
+
+  .box {
+    padding: 16px;
+  }
+
+  .heavenly-card {
+    padding: 12px;
+    min-width: 220px;
+  }
+
+  .heavenly-card .title {
+    font-size: 16px;
+  }
+
+  .heavenly-card h4 {
+    font-size: 12px;
+  }
+
+  .heavenly-card img {
+    width: 100%;
+  }
+
+  .cart-btn {
+    font-size: 12px;
+    padding: 8px 0;
+  }
+
+  .scroll-btn {
+    display: none; /* hide on extra small screens if needed */
   }
 }

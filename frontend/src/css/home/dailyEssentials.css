@@ -1,6 +1,6 @@
-.daily-essentials{
-    background-color: white;
-    margin-top: -45px;
+.daily-essentials {
+  background-color: white;
+  margin-top: -45px;
 }
 
 .daily-section {
@@ -28,7 +28,7 @@
 
 .card {
   background: #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   overflow: hidden;
   position: relative;
@@ -74,7 +74,7 @@
   border-radius: 5px;
 }
 
-.content {
+.card .content {
   padding: 15px;
   position: relative;
   text-align: left;
@@ -85,10 +85,11 @@
   color: #0d1b2a;
 }
 
-.price {
+.card .price {
   font-size: 14px;
-  font-family:Helvetica, sans-serif;
+  font-family: Helvetica, sans-serif;
   display: flex;
+  justify-content: start;
   align-items: center;
   gap: 6px;
   color: #0d1b2a;
@@ -98,12 +99,12 @@
   color: grey;
 }
 
-.price span {
+.content .price span {
   color: red;
-  font-size: 12px;
+  font-size: 14px;
 }
 
-.add-btn {
+.card .content .add-btn {
   position: absolute;
   bottom: 15px;
   right: 15px;
@@ -133,4 +134,82 @@
 
 .pagination .active {
   background-color: #f92b72;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .daily-section {
+    padding: 40px 80px;
+    /* Adjust padding for medium screens */
+  }
+
+  .daily-section h2 {
+    font-size: 28px;
+    /* Decrease font size */
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 columns on medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+ 
+
+  .daily-section {
+    padding: 40px 20px;
+    /* Adjust padding for smaller screens */
+  }
+
+  .daily-section h2 {
+    font-size: 24px;
+    /* Further decrease font size */
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 columns on tablets */
+  }
+
+  .card {
+    margin-bottom: 20px;
+    /* Add margin between cards */
+  }
+
+  .price {
+    font-size: 12px;
+    /* Decrease price font size */
+  }
+
+  .add-btn {
+    padding: 4px 8px;
+    /* Adjust button size */
+    font-size: 18px;
+    /* Decrease button font size */
+  }
+}
+
+@media (max-width: 480px) {
+  .daily-section h2 {
+    font-size: 20px;
+    /* Further decrease font size */
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    /* 1 column on mobile */
+  }
+
+  .price {
+    font-size: 10px;
+    /* Further decrease price font size */
+  }
+
+  .add-btn {
+    padding: 4px 6px;
+    /* Adjust button size */
+    font-size: 16px;
+    /* Decrease button font size */
+  }
 }

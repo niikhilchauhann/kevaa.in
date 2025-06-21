@@ -12,8 +12,8 @@
   justify-content: space-between;
   color: white;
   border-radius: 16px;
-  padding: 20px 80px;
-  text-align: center;
+  padding: 20px 30px;
+  /* text-align: center; */
   margin-bottom: 60px;
 }
 
@@ -28,7 +28,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 30%;
+  width: 50%;
   gap: 15px;
 }
 
@@ -38,13 +38,13 @@
   background: white;
   border-radius: 40px;
   padding: 10px 20px;
-  width: 100%;
+  width: 80%;
   max-width: 400px;
 }
 
 .input-box input {
-    background-color: white;
-    color: #222;
+  background-color: white;
+  color: #222;
   border: none;
   outline: none;
   padding: 10px;
@@ -62,7 +62,7 @@
   background-color: white;
   color: #d9045a;
   border: none;
-  width: 100%;
+  width: 60%;
   padding: 12px 32px;
   border-radius: 40px;
   font-weight: 600;
@@ -72,10 +72,23 @@
 
 .footer-content {
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
   gap: 40px;
-  justify-content: space-between;
   margin-bottom: 40px;
+}
+
+.footer-company {
+  flex: 1;
+  min-width: 250px; 
+}
+
+.footer-navigations {
+  flex: 2;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; 
+  gap: 40px; 
 }
 
 .footer-column h4 {
@@ -127,4 +140,69 @@
 .footer-bottom .payments img {
   height: 24px;
   margin-left: 10px;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .footer {
+    padding: 40px 20px; /* Adjust padding for smaller screens */
+  }
+
+  .newsletter {
+    flex-direction: column; /* Stack elements vertically */
+    padding: 20px; /* Reduce padding */
+    text-align: center; /* Center align text */
+  }
+
+  .newsletter h2 {
+    font-size: 30px; /* Smaller heading for medium screens */
+  }
+
+  .newsletter-form {
+    width: 100%; /* Full width for the form */
+  }
+
+  .footer-content {
+    flex-direction: column; /* Stack footer columns vertically */
+    align-items: center; /* Center align columns */
+    gap: 20px; /* Reduce gap between columns */
+  }
+
+  .footer-column {
+    text-align: center; /* Center align text in columns */
+  }
+
+  .footer-bottom {
+    flex-direction: column; /* Stack footer bottom elements */
+    align-items: center; /* Center align items */
+    text-align: center; /* Center align text */
+  }
+  .newsletter-form button {
+    width: 70%;
+}
+}
+
+@media screen and (max-width: 480px) {
+  .footer {
+    padding: 20px 10px; /* Further reduce padding */
+  }
+
+  .newsletter h2 {
+    font-size: 24px; /* Smaller heading for smaller screens */
+  }
+
+  .footer-column h4 {
+    font-size: 16px; /* Adjust heading size */
+  }
+
+  .footer-column p {
+    font-size: 12px; /* Adjust paragraph size */
+  }
+
+  .footer-bottom {
+    font-size: 12px; /* Adjust footer bottom font size */
+  }
+   .newsletter-form button {
+    width: 90%;
+}
 }

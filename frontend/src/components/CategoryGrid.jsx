@@ -215,6 +215,9 @@ const products =
     ]
 
 export default function CategoryGrid() {
+    const [selectedCategory, setSelectedCategory] = useState('Featured');
+    const categories = ['Featured', 'Popular', 'New Added'];
+
     const [visibleCount, setVisibleCount] = useState(12);
 
     const handleLoadMore = () => {
@@ -228,61 +231,76 @@ export default function CategoryGrid() {
         return "";
     };
     return (
-        <div className="category-section">
-            <div className='sidebar'>
-                <div className="side-banner">
-                    <div className="overlay-grid">
-                        <h3>Chappan <span>BHOJ</span></h3>
-                        <p>100% Pure 🍎</p>
-                        <button>Shop Now</button>
-                    </div>
-                </div>
-
-                <div className="category-main">
-                    <div className="filters">
-                        <ul>
-                            <li className="active">All <FaArrowRight /></li>
-                            <li>Poshaks <FaArrowRight /></li>
-                            <li>Deepaks <FaArrowRight /></li>
-                            <li>Attars <FaArrowRight /></li>
-                            <li>Fruits <FaArrowRight /></li>
-                        </ul>
-                    </div>
+        <>
+            <div className='initial-category'>
+                <div>
+                    {categories.map((category) => (
+                        <span
+                            key={category}
+                            onClick={() => setSelectedCategory(category)}
+                            className={selectedCategory === category ? 'active' : ''}
+                        >
+                            {category}
+                        </span>
+                    ))}
                 </div>
             </div>
-            <div className="products">
-                {products.map((product) => (
-                    <div className="product-card" key={product.id}>
-                        {product.label && (
-                            <div className={`product-label ${getLabelClass(product.label)}`}>
-                                {product.label}
-                            </div>
-                        )}
-                        <img src={product.image} alt={product.title} className="product-image" />
-                        <p className="product-category">{product.category}</p>
-                        <h4 className="product-title">{product.title}</h4>
-                        <p className='rates'> <span className='rating'><IoStar /> </span> <span>( {product.rating} ) </span></p>
-                        <p className="product-brand">By <span>{product.brand}</span></p>
-                        <div className='cart'>
-                            <div className="price">
-                                <span className="current">${product.price}</span>
-                                <span className="original">${product.originalPrice}</span>
-                            </div>
-                            <button className="add-btn">
-                                <BsCart3 /> Add
-                            </button>
+            <div className="category-section">
+                <div className='sidebar'>
+                    <div className="side-banner">
+                        <div className="overlay-grid">
+                            <h3>Chappan <span>BHOJ</span></h3>
+                            <p>100% Pure 🍎</p>
+                            <button>Shop Now</button>
                         </div>
                     </div>
-                ))}
-                {visibleCount < products.length && (
-                    <div className="load-more-container">
-                        <button className="load-more-btn" onClick={handleLoadMore}>
-                            Load More <FaArrowRight/>
-                        </button>
-                    </div>
-                )}
 
+                    <div className="category-main">
+                        <div className="filters">
+                            <ul>
+                                <li className="active">All <FaArrowRight /></li>
+                                <li>Poshaks <FaArrowRight /></li>
+                                <li>Deepaks <FaArrowRight /></li>
+                                <li>Attars <FaArrowRight /></li>
+                                <li>Fruits <FaArrowRight /></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div className="products">
+                    {products.slice(0, visibleCount).map((product) => (
+                        <div className="product-card" key={product.id}>
+                            {product.label && (
+                                <div className={`product-label ${getLabelClass(product.label)}`}>
+                                    {product.label}
+                                </div>
+                            )}
+                            <img src={product.image} alt={product.title} className="product-image" />
+                            <p className="product-category">{product.category}</p>
+                            <h4 className="product-title">{product.title}</h4>
+                            <p className='rates'> <span className='rating'><IoStar /> </span> <span>( {product.rating} ) </span></p>
+                            <p className="product-brand">By <span>{product.brand}</span></p>
+                            <div className='cart'>
+                                <div className="price">
+                                    <span className="current">${product.price}</span>
+                                    <span className="original">${product.originalPrice}</span>
+                                </div>
+                                <button className="add-btn">
+                                    <BsCart3 /> Add
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+
+                </div>
             </div>
-        </div>
+            {visibleCount < products.length && (
+                <div className="load-more-container">
+                    <button className="load-more-btn" onClick={handleLoadMore}>
+                        Load More <FaArrowRight />
+                    </button>
+                </div>
+            )}
+        </>
     );
 }

@@ -16,8 +16,15 @@ html {
   width: 100vw;
   position: relative;
 }
-
+.header-navbar-controller{
+    position: fixed; /* Make the navbar fixed */
+  top: 0px; /* Position it at the top */
+  left: 0; /* Align to the left */
+  right: 0; /* Align to the right */
+  z-index: 1000; /* Ensure it stays above other content */
+}
 .top-bar {
+  /* position: fixed; */
   background: black;
   color: white;
   text-align: center;
@@ -37,6 +44,12 @@ html {
   padding: 0px 80px;
   background: rgb(255, 255, 255);
   color: black;
+  
+
+}
+
+.hero-section{
+  margin-top: 124px;
 }
 
 .left-group {
@@ -51,6 +64,12 @@ html {
   display: none;
 }
 
+
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 0px 10px; /* Set padding to 0px 10px for screens smaller than 1024px */
+  }
+}
 
 @media (max-width: 768px) {
   .navbar {
@@ -83,7 +102,6 @@ html {
     max-height: none;
     overflow-y: hidden;
     transition: left 0.3s ease-in-out;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     z-index: 1200;
     display: flex;
   }
@@ -198,7 +216,6 @@ html {
   border-radius: 5px;
 }
 
-
 /* Services highlights */
 
 .service-highlights {
@@ -242,12 +259,6 @@ html {
   flex-direction: column;
 }
 
-.hamburger {
-  display: none;
-  cursor: pointer;
-  z-index: 1100;
-}
-
 /* Temporary override to force display hamburger for testing */
 
 @media (max-width: 768px) {
@@ -274,12 +285,11 @@ html {
     margin-top: 0;
     width: auto;
     justify-content: space-between;
-    /* flex-grow: 1; */
   }
 
   .navbar ul {
     position: fixed;
-    top: 128px;
+    top: 120px;
     left: -300px;
     height: 100vh;
     width: 250px;
@@ -290,7 +300,6 @@ html {
     max-height: none;
     overflow-y: hidden;
     transition: left 0.3s ease-in-out;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     z-index: 1200;
   }
 
@@ -298,14 +307,8 @@ html {
     left: 0;
   }
 
-
-
   /* Responsive Styles */
   @media (max-width: 1200px) {
-    .navbar {
-      padding: 0px 40px;
-    }
-
     .navbar ul {
       gap: 40px;
     }
@@ -316,15 +319,12 @@ html {
     }
   }
 
-
-  /* @media (max-width: 1024px){ */
-  @media (min-width: 1024px) {
+  @media (max-width: 1024px) {
     .navbar {
-      padding: 0px 40px;
+      padding: 0px 10px; /* Set padding to 0px 10px for screens smaller than 1024px */
     }
   }
 
-  /* } */
   @media (max-width: 768px) {
     .navbar {
       padding: 10px 20px;
@@ -350,6 +350,8 @@ html {
     .service-highlights {
       flex-direction: column;
       align-items: center;
+      padding: 20px 0px;
+      margin: 20px 20px;
     }
 
     .service-box {
@@ -359,7 +361,6 @@ html {
   }
 
   @media (max-width: 480px) {
-
     .top-bar {
       font-size: 12px;
     }
@@ -369,6 +370,8 @@ html {
     }
 
     .navbar ul {
+      top: 120px;
+      width: 160px;
       gap: 20px;
     }
 
@@ -392,5 +395,4 @@ html {
       font-size: 12px;
     }
   }
-
 }

@@ -5,8 +5,6 @@
   justify-content: space-between;
   padding: 0rem 10rem;
   background: #f8fafc;
-  /* border-radius: 16px; */
-  /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06); */
   gap: 4rem;
   min-height: 100vh;
 }
@@ -27,7 +25,6 @@
 .pooja-left .subtitle {
   color: #e11d48;
   margin-bottom: 1.5rem;
-  /* font-weight: 500; */
   font-size: 1rem;
 }
 
@@ -72,15 +69,38 @@
   justify-content: center;
   align-items: center;
   min-width: 260px;
-   /* border: 2px solid #e11d48; */
 }
 
 .pooja-right img {
   width: 100%;
   max-width: 380px;
   height: auto;
-  /* min-height: 300px; */
   object-fit: contain;
   border-radius: 16px;
-  /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); */
 }
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .pooja-container {
+    padding: 0rem 5rem; /* Adjust padding for medium screens */
+  }
+
+  .pooja-left h1 {
+    font-size: 1.8rem; /* Decrease font size */
+  }
+
+  .pooja-left .subtitle {
+    font-size: 0.9rem; /* Decrease subtitle font size */
+  }
+
+  .learn-more {
+    padding: 0.5rem 2.5rem; /* Adjust button size */
+  }
+}
+
+@media (max-width: 768px) {
+  .pooja-container {
+  display: none;
+  }
+}
+

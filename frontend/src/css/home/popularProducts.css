@@ -2,24 +2,22 @@
   text-align: center;
   padding: 40px 130px;
   background-color: #fefefe;
- 
 }
 
-.popular-section h3{
-    font-size: 16px;
-    color: red;
-     line-height: 0.4;
+.popular-section h3 {
+  font-size: 16px;
+  color: red;
+  line-height: 0.4;
 }
 
 .popular-section h2 {
   font-size: 32px;
   color: #0d1b2a;
-   line-height: 0.4;
-  /* margin-bottom: 5px; */
+  line-height: 0.4;
 }
 
 .popular-section p {
-     line-height: 0.4;
+  line-height: 0.4;
   color: #7c8ba1;
   margin-bottom: 60px;
 }
@@ -33,7 +31,7 @@
 
 .popular-card {
   background: #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   border-radius: 6px;
   overflow: hidden;
   position: relative;
@@ -120,4 +118,52 @@
   border-radius: 50%;
   font-size: 20px;
   cursor: pointer;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .popular-section {
+    padding: 40px 80px; /* Adjust padding for medium screens */
+  }
+
+  .popular-section h2 {
+    font-size: 28px; /* Decrease font size */
+  }
+
+  .popular-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns on medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .popular-section {
+    padding: 40px 20px; /* Adjust padding for smaller screens */
+  }
+
+  .popular-section h2 {
+    font-size: 24px; /* Further decrease font size */
+  }
+
+  .popular-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+  }
+
+  .popular-card {
+    margin-bottom: 20px; /* Add margin between cards */
+  }
+
+  .popular-price {
+    font-size: 12px; /* Decrease price font size */
+  }
+
+  .popular-add-btn {
+    padding: 4px 8px; /* Adjust button size */
+    font-size: 18px; /* Decrease button font size */
+  }
+}
+
+@media (max-width: 468px) {
+  .popular-section {
+    display: none;
+  }
 }
