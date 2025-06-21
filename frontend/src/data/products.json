@@ -1,0 +1,63 @@
+
+[
+  {
+    "id": 1,
+    "label": "Hot",
+    "title": "Fresh organic villa farm lemon 500gm pack",
+    "category": "Snack",
+    "brand": "NestFood",
+    "price": 28.85,
+    "originalPrice": 32.8,
+    "image": "../assets/lemon.png"
+  },
+  {
+    "id": 2,
+    "label": "Sale",
+    "title": "Best snakes with hazel nut pack 200gm",
+    "category": "Hodo Foods",
+    "brand": "Stouffer",
+    "price": 52.85,
+    "originalPrice": 55.8,
+    "image": "../assets/nutpack.png"
+  },
+  {
+    "id": 3,
+    "label": "New",
+    "title": "Organic fresh venila farm watermelon 5kg",
+    "category": "Snack",
+    "brand": "StarKist",
+    "price": 48.85,
+    "originalPrice": 55.8,
+    "image": "../assets/watermelon.png"
+  },
+  {
+    "id": 4,
+    "label": "",
+    "title": "Fresh organic apple 1kg simla marning",
+    "category": "Vegetables",
+    "brand": "NestFood",
+    "price": 17.85,
+    "originalPrice": 19.8,
+    "image": "../assets/vegetables.png"
+  },
+  {
+    "id": 5,
+    "label": "",
+    "title": "Canada Dry Ginger Ale - 2 L Bottle - 200ml - 400g",
+    "category": "Meats",
+    "brand": "NestFood",
+    "price": 32.85,
+    "originalPrice": 35.8,
+    "image": "../assets/gingerale.png"
+  },
+  {
+    "id": 6,
+    "label": "-15%",
+    "title": "Blue Diamond Almonds Lightly Salted Vegetables",
+    "category": "Pet Foods",
+    "brand": "NestFood",
+    "price": 23.85,
+    "originalPrice": 25.8,
+    "image": "../assets/almonds.png"
+  }
+]

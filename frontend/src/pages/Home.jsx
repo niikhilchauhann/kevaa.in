@@ -7,6 +7,12 @@ import { BsCart2 } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import DailyEssentials from "../components/dailyEssentials";
+import PoojaProducts from "../components/PoojaProducts";
+import PopularProducts from "../components/popularProducts";
+import HeavenlyHaste from "../components/HeavenlyHaste";
+import CategoryGrid from "../components/CategoryGrid";
+import Testimonials from "../components/Testimonials";
+import Footer from "../components/Footer";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -50,6 +56,51 @@ export default function Home() {
       </main>
       <div className="daily-essentials">
         <DailyEssentials />
+        {/* </div>
+      <div> */}
+        <PoojaProducts />
+        {/* </div>
+      <div> */}
+        <PopularProducts />
+        {/* </div>
+      <div> */}
+        <HeavenlyHaste />
+        {/* </div>
+      <div> */}
+        <CategoryGrid />
+        <div class="service-highlights">
+          <div class="service-box">
+            <i class="fas fa-box-open"></i>
+            <div>
+              <h4>Free Shipping</h4>
+              <p>Free Shipping for orders over £130</p>
+            </div>
+          </div>
+          <div class="service-box">
+            <i class="fas fa-dollar-sign"></i>
+            <div>
+              <h4>Money Guarantee</h4>
+              <p>Within 30 days for an exchange.</p>
+            </div>
+          </div>
+          <div class="service-box">
+            <i class="fas fa-headset"></i>
+            <div>
+              <h4>Online Support</h4>
+              <p>24 hours a day, 7 days a week</p>
+            </div>
+          </div>
+          <div class="service-box">
+            <i class="fas fa-credit-card"></i>
+            <div>
+              <h4>Flexible Payment</h4>
+              <p>Pay with Multiple Credit Cards</p>
+            </div>
+          </div>
+        </div>
+
+        <Testimonials />
+        <Footer/>
       </div>
     </div>
   );

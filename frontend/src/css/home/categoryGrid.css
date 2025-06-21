@@ -1,0 +1,255 @@
+/* src/css/home/categoryGrid.css */
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.category-section {
+    display: flex;
+    gap: 40px;
+    padding: 40px 80px;
+    background: #fff;
+    flex-wrap: wrap;
+}
+
+.side-banner {
+    background: url('../../assets/temple.png') no-repeat center center/cover;
+    width: 280px;
+    height: 420px;
+    border-radius: 10px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.overlay-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    position: absolute;
+    border-radius: 10px;
+    inset: 0;
+    padding: 20px 40px;
+    color: white;
+    background-color: #00000066;
+}
+
+.overlay-grid h3 {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.overlay-grid h3 span {
+    color: #fdd835;
+}
+
+.overlay-grid p {
+    /* margin: 4px 0; */
+    font-size: 14px;
+}
+
+.overlay-grid button {
+    background: #f92b72;
+    color: #fff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.category-main {
+    background-color: rgb(248, 248, 248);
+    padding: 10px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.category-main .filters ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.category-main .filters li {
+    padding: 10px 30px;
+    border: 1px solid #d7d7d7;
+    cursor: pointer;
+    font-weight: 500;
+    color: #333;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.3s ease;
+}
+
+.category-main .filters li.active,
+.category-main .filters li:hover {
+    /* background-color: #ffffff; */
+    color: #f92b72;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    align-items: center;
+    flex: 1;
+}
+
+.product-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 20px;
+    padding: 16px;
+    /* text-align: center; */
+    position: relative;
+    transition: transform 0.3s ease;
+
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-label {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    font-size: 12px;
+    background: #ffe8e8;
+    color: #e60023;
+    padding: 4px 18px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.product-label.hot {
+    background: #ff6b6b;
+    color: white;
+}
+
+.product-label.sale {
+    background: #3b82f6;
+    color: white;
+}
+
+.product-label.new {
+    background: #10b981;
+    color: white;
+}
+
+.product-label.discount {
+    background: #f97316;
+    color: white;
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 12px;
+}
+
+.product-category {
+    font-size: 12px;
+    color: #888;
+}
+
+.product-title {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 6px 0;
+    color: rgb(65, 64, 64);
+}
+
+.product-card .rates {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    font-size: 16px;
+    color: grey;
+}
+
+.product-card .rating {
+    font-size: 16px;
+    color: rgb(237, 200, 35);
+}
+
+.product-brand {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 6px;
+}
+.product-brand span {
+    color: red;
+}
+
+.cart{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    /* margin: 18px  0px; */
+}
+.price {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    /* font-size: 14px; */
+    /* margin-bottom: 10px; */
+}
+
+.price .current {
+    font-size: 18px;
+    color: #10b981;
+    font-weight: bold;
+}
+
+.price .original {
+    color: #aaa;
+    text-decoration: line-through;
+    font-size: 14px;
+}
+
+.add-btn {
+    background: #f92b72;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.load-more-container {
+  text-align: center;
+  width: 100%;
+}
+
+.load-more-btn {
+    display: flex;
+    padding: 14px 34px;
+    align-items: center;
+    gap: 16px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #cc0742;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.load-more-btn:hover {
+  background-color: #a50536;
+}

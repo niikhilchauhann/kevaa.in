@@ -1,0 +1,86 @@
+.pooja-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0rem 10rem;
+  background: #f8fafc;
+  /* border-radius: 16px; */
+  /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06); */
+  gap: 4rem;
+  min-height: 100vh;
+}
+
+.pooja-left {
+  flex: 1;
+  min-width: 320px;
+}
+
+.pooja-left h1 {
+  font-size: 2.1rem;
+  color: #111827;
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+  max-width: 36rem;
+}
+
+.pooja-left .subtitle {
+  color: #e11d48;
+  margin-bottom: 1.5rem;
+  /* font-weight: 500; */
+  font-size: 1rem;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.8rem 0;
+}
+
+.features li {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.features li span {
+  color: #e11d48;
+  font-weight: bold;
+  margin-right: 0.4rem;
+}
+
+.learn-more {
+  padding: 0.6rem 3rem;
+  background-color: #e11d48;
+  color: white;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.learn-more:hover {
+  background-color: #be123c;
+  transform: scale(1.03);
+}
+
+.pooja-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 260px;
+   /* border: 2px solid #e11d48; */
+}
+
+.pooja-right img {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  /* min-height: 300px; */
+  object-fit: contain;
+  border-radius: 16px;
+  /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); */
+}
