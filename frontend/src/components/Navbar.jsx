@@ -7,16 +7,17 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { IoSearch } from 'react-icons/io5';
 import { IoIosArrowDown } from 'react-icons/io';
 import '../css/home/home.css'
+import { NavLink } from 'react-router-dom';
 
 function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
-    
-      const toggleMenu = () => {
+
+    const toggleMenu = () => {
         setMenuOpen(!menuOpen);
-      };
-    
+    };
+
     return (
-    
+
         <div className='header-navbar-controller'>
             <header className="top-bar">
                 <p>
@@ -29,7 +30,9 @@ function Navbar() {
                 </div>
                 <div className="logo"><img src={logo} alt="Kevaa Logo" /></div>
                 <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
-                    <li>Discovery <IoIosArrowDown /></li>
+                    <NavLink to='products'>
+                        <li>Discovery <IoIosArrowDown /></li>
+                    </NavLink>
                     <li>About</li>
                     <li>Contact us</li>
                 </ul>
@@ -39,7 +42,7 @@ function Navbar() {
                     <span><CgProfile /></span>
                 </div>
             </nav>
-    
+
         </div>
     )
 }
