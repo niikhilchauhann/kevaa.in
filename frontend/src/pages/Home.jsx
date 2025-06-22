@@ -8,7 +8,7 @@ import { CgProfile } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import DailyEssentials from "../components/dailyEssentials";
 import PoojaProducts from "../components/PoojaProducts";
-import PopularProducts from "../components/popularProducts";
+import PopularProducts from "../components/PopularProducts";
 import HeavenlyHaste from "../components/HeavenlyHaste";
 import CategoryGrid from "../components/CategoryGrid";
 import Testimonials from "../components/Testimonials";
