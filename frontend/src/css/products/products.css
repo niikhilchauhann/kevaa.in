@@ -1,0 +1,142 @@
+/* Base styles (your existing ones are preserved) */
+.main-products-container {
+  background-color: white;
+  width: 100vw; 
+  margin-top: 124px;
+  font-family: sans-serif;
+  color: black;
+  padding: 20px 60px;
+}
+
+.main-products-container .navigations-routes {
+  width: 90%;
+  margin-bottom: 20px;
+  font-size: 14px;
+  padding: 8px 16px;
+  font-weight: 500;
+  color: #333;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.breadcrumb-link {
+  cursor: pointer;
+  color: #010101;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb-link:hover {
+  color: #b30000;
+}
+
+.breadcrumb-separator {
+  font-size: 16px;
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+
+.app {
+  display: flex;
+  overflow-x: hidden;
+  color: black;
+  font-family: sans-serif;
+  width: 92%;
+  background-color: white;
+  gap: 24px;
+}
+
+.sidebar {
+  min-width: 250px;
+}
+
+.main {
+  flex: 1;
+  padding-left: 10px;
+}
+
+
+.other-components{
+  margin-left: -100px;
+}
+
+/* ----------- RESPONSIVE STYLES ----------- */
+
+@media (max-width: 1024px) {
+  .main-products-container {
+    padding: 16px 40px;
+  }
+
+  .sidebar {
+    width: 30%;
+    /* min-width: unset; */
+  }
+
+  .main {
+    padding-left: 0;
+  }
+  .other-components{
+  margin-left: -60px;
+}
+}
+
+@media (max-width: 768px) {
+  .main-products-container {
+    padding: 16px 24px;
+    margin-top: 100px;
+  }
+  .app {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .navigations-routes {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  .breadcrumb-separator {
+    font-size: 14px;
+  }
+
+  .app {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .sidebar,
+  .main {
+    width: 100%;
+    padding: 0;
+  }
+  .other-components{
+  margin-left: -40px;
+}
+}
+
+@media (max-width: 480px) {
+  .main-products-container {
+    padding: 12px 4px;
+    margin-top: 80px;
+  }
+
+  .navigations-routes {
+    font-size: 12px;
+    gap: 3px;
+    padding: 4px 10px;
+  }
+
+  .app {
+    width: 100%;
+    gap: 12px;
+  }
+
+  .breadcrumb-separator {
+    font-size: 12px;
+  }
+   .other-components{
+  margin-left: -10px;
+}
+}
