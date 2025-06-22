@@ -4,7 +4,7 @@ import blackStrippedTshirt from '../assets/blackStrippedTshirt.png';
 import skinnyFitJeans from '../assets/skinnyFitJeans.png';
 import checkeredShirt from '../assets/checkeredShirt.png';
 import sleeveStrippedTshirt from '../assets/sleeveStrippedTshirt.png';
-import verticalStrippedShirt from '../assets/verticalStrippedShirt.png';
+import verticalStrippedShirt from '../assets/VerticalStrippedShirt.png';
 import CourageGraphicTshirt from '../assets/CourageGraphicTshirt.png';
 import looseFitBermudaShorts from '../assets/looseFitBermudaShorts.png';
 import classicWhitePolo from '../assets/classicWhitePolo.avif';
