@@ -1,5 +1,5 @@
 import React from 'react'
-import '../css/home/ServiceHighlights.css';
+import '../css/home/serviceHighlights.css';
 
 function ServiceHighlights() {
     return (
