@@ -1,0 +1,230 @@
+.main-product-details-container {
+  margin-top: 120px;
+  font-family: Arial, sans-serif;
+  color: #222;
+  background-color: white;
+  /* border: 1px solid red; */
+  padding: 10px 0px 10px 80px;
+}
+
+.main-product-details-header {
+  display: flex;
+  align-items: center;
+}
+
+.product-details-container {
+  display: flex;
+  gap: 40px;
+}
+
+.product-info h1 {
+  font-size: 3.1rem;
+  margin-bottom: 10px;
+}
+
+.product-info .product-price-rating {
+  display: flex;
+  align-items: center;
+}
+
+.product-info .price {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.product-info .rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #f6b01e;
+  font-size: 1rem;
+}
+
+.stars svg {
+  font-size: 1.1rem;
+  margin-right: 2px;
+}
+
+.rating-number {
+  color: #555;
+}
+
+.product-info .desc {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.product-info .color-options {
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.product-info .color-options .color-circle {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  cursor: pointer;
+  transition: border 0.3s ease;
+}
+
+.product-info .color-options .color-circle.selected {
+  border: 3px solid #e91e63;
+}
+
+.product-info .quantity-add-to-cart {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.product-info .quantity-add-to-cart .quantity-selector {
+  border: 1px solid rgb(192, 190, 190);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  padding: 0px 8px;
+}
+
+.product-info .quantity-add-to-cart .quantity-selector button {
+  background-color: white;
+  color: black;
+  border: none;
+}
+
+.add-to-cart-btn {
+  background-color: #e91e63;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #c2185b;
+}
+
+.product-info .wishlist {
+  margin-top: 60px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #c2185b;
+}
+
+.product-images {
+  /* border: 1px solid red; */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-image-container {
+  /* border: 1px solid green; */
+  position: relative;
+  width: 100%;
+  /* max-width: 500px; */
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: transparent; /* 👈 ensures no background */
+  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
+  z-index: 6;
+  mix-blend-mode: multiply;
+}
+
+.thumbnail-container {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  width: 100%;
+  max-width: 500px;
+}
+
+.thumbnail {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.thumbnail.selected {
+  border-color: #e91e63;
+}
+
+.image-controls-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: absolute;
+  /* border: 1px solid green; */
+  top: -40px;
+  right: 100px;
+}
+
+.image-counter {
+  font-size: 20px;
+  color: #666;
+  /* border: 1px solid red; */
+  margin-bottom: 4px;
+}
+
+.image-counter span {
+  font-size: 30px;
+  color: black;
+}
+
+.arrow-controls {
+  display: flex;
+  /* border: 1px solid red; */
+  gap: 40px;
+}
+
+.arrow-controls button {
+  /* background-color: #eee; */
+  color: black;
+  border: none;
+  padding: 6px 16px;
+  font-size: 18px;
+  background-color: white;
+  border-radius:50%;
+  transition: color 2s ease-in;
+  cursor: pointer;
+}
+
+.arrow-controls button:hover {
+  border: none;
+  transform: scale(1.3);
+}
+
+.shadow-appealing {
+  position: absolute;
+  top: 40%;
+  right: 0;
+  width: 35%;
+  height: 40%;
+  pointer-events: none; /* So it doesn't interfere with image clicks */
+  z-index: 5;
+}

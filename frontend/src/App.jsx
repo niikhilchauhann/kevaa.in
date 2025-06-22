@@ -5,6 +5,7 @@ import Protected from "./pages/Protected";
 import PrivateRoute from "./utils/PrivateRoute";
 import Layout from "./components/Layout"; // Import the Layout component
 import Products from "./pages/Products";
+import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/products/product/:id" element={<ProductDetails />} />
           <Route path="protected" element={<PrivateRoute><Protected /></PrivateRoute>} />
         </Route>
       </Routes>

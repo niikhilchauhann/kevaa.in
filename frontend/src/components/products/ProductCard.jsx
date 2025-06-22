@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../../css/products/productCard.css';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 
@@ -17,17 +18,19 @@ const getStars = (rating) => {
 };
 
 const ProductCard = ({ product }) => (
-  <div className="product-card">
-    <div className="image-container">
-      <img src={product.image} alt={product.name} />
+  <Link to={`/products/product/${product.id}`} className="product-card-link">
+    <div className="product-card">
+      <div className="image-container">
+        <img src={product.image} alt={product.name} />
+      </div>
+      <h3>{product.name}</h3>
+      <div className="rating">
+        {getStars(product.rating)}
+        <span className="rating-text">{product.rating}/5</span>
+      </div>
+      <p className="price">${product.price}</p>
     </div>
-    <h3>{product.name}</h3>
-    <div className="rating">
-      {getStars(product.rating)}
-      <span className="rating-text">{product.rating}/5</span>
-    </div>
-    <p className="price">${product.price}</p>
-  </div>
+  </Link>
 );
 
 export default ProductCard;
