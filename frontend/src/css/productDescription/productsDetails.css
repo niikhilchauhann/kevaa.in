@@ -371,12 +371,14 @@
   }
 
   .related-products-list {
-    flex-direction: column;
+    flex-wrap: nowrap;
+    overflow-x: auto;
     align-items: center;
   }
 
   .related-product-card {
-    width: 90%;
+    /* width: 90%; */
+    min-width: 200px;
   }
 }
 
