@@ -363,7 +363,8 @@ export const products = [
     images: [CourageGraphicTshirt],
     description: "Stand out with this bold, motivational graphic tee. Soft fabric for all-day comfort.",
     shortDescription: "Bold graphic orange tee",
-    color: ["orange"],
+    color: "orange",
+    availableColors: ["orange"],
     size: "Medium",
     category: "T-shirt",
     dressStyle: "Casual",
@@ -374,7 +375,16 @@ export const products = [
     isTrending: false,
     deliveryInfo: "Free shipping",
     returnPolicy: "30 days return window",
-    tags: ["graphic", "motivational", "orange"]
+    tags: ["graphic", "motivational", "orange"],
+    variants: {
+      orange: {
+        images: [
+          CourageGraphicTshirt,
+          "https://mtgproshop.com/cdn/shop/files/LE16904_AW55413---DSK---Enduring-Courage-V2.png?v=1726192880",
+          "https://assets.ajio.com/medias/sys_master/root/20240314/ZfYT/65f245a805ac7d77bbb1c4e9/-473Wx593H-466217940-orange-MODEL3.jpg",
+        ]
+      },
+    }
   },
   {
     id: 9,
@@ -388,7 +398,8 @@ export const products = [
     images: [looseFitBermudaShorts],
     description: "Relaxed fit Bermuda shorts made from soft, breathable denim. Ideal for summers.",
     shortDescription: "Casual Bermuda denim",
-    color: ["blue"],
+    color: "blue",
+    availableColors: ["blue"],
     size: "Small",
     category: "Shorts",
     dressStyle: "Casual",
@@ -399,7 +410,16 @@ export const products = [
     isTrending: false,
     deliveryInfo: "Standard delivery in 4-6 days",
     returnPolicy: "Returnable within 10 days",
-    tags: ["shorts", "denim", "summer"]
+    tags: ["shorts", "denim", "summer"],
+    variants: {
+      blue: {
+        images: [
+          looseFitBermudaShorts,
+          "https://images-eu.ssl-images-amazon.com/images/I/41e9UJsQYTL._AC_SR308,462_.jpg",
+          "https://m.media-amazon.com/images/I/41nOfxcfLqL._UY1100_.jpg",
+        ]
+      },
+    }
   },
   {
     id: 10,
@@ -413,7 +433,8 @@ export const products = [
     images: [classicWhitePolo],
     description: "Timeless white polo shirt with premium cotton. Versatile style for every occasion.",
     shortDescription: "White premium cotton polo",
-    color: ["white"],
+    color: "white",
+    availableColors: ["white"],
     size: "X-Large",
     category: "T-shirt",
     dressStyle: "Event",
@@ -424,7 +445,16 @@ export const products = [
     isTrending: false,
     deliveryInfo: "Delivery in 3-5 days",
     returnPolicy: "30 days no-questions-asked return",
-    tags: ["white", "classic", "polo"]
+    tags: ["white", "classic", "polo"],
+    variants: {
+      white: {
+        images: [
+          classicWhitePolo,
+          "https://classicpolos.com/cdn/shop/products/2_60fc40b3-b8b5-4fdc-997e-9780e46d9432.jpg?v=1735976833",
+          "https://m.media-amazon.com/images/I/61I2hTOgH0L._AC_UY1100_.jpg",
+        ]
+      },
+    }
   },
   {
     id: 11,
@@ -438,7 +468,8 @@ export const products = [
     images: [navyFormalShirt],
     description: "Navy formal shirt with minimal texture, perfect for business or evening events.",
     shortDescription: "Textured formal shirt",
-    color: ["blue"],
+    color: "blue",
+    availableColors: ["blue"],
     size: "Large",
     category: "Shirt",
     dressStyle: "Event",
@@ -449,7 +480,16 @@ export const products = [
     isTrending: true,
     deliveryInfo: "Ships in 1-2 days",
     returnPolicy: "10-day return",
-    tags: ["formal", "navy", "office"]
+    tags: ["formal", "navy", "office"],
+    variants: {
+      blue: {
+        images: [
+          navyFormalShirt,
+          "https://rajubhaihargovindas.com/12367-large_default/japs-navy-blue-pure-cotton-formal-shirt.jpg",
+          "https://assets.ajio.com/medias/sys_master/root/20230707/CyzP/64a80099eebac147fc5c172a/-1117Wx1400H-443011366-navy-MODEL3.jpg",
+        ]
+      },
+    }
   },
   {
     id: 12,
@@ -463,7 +503,8 @@ export const products = [
     images: [strippedOrangeTee],
     description: "Vibrant striped orange tee with breathable material and modern cut. A must-have for summer.",
     shortDescription: "Orange striped summer tee",
-    color: ["orange", "white"],
+    color: "blue",
+    availableColors: ["blue", "white"],
     size: "Small",
     category: "T-shirt",
     dressStyle: "Daily",
@@ -474,7 +515,22 @@ export const products = [
     isTrending: false,
     deliveryInfo: "Delivered in 2-4 business days",
     returnPolicy: "15-day return policy",
-    tags: ["orange", "striped", "daily"]
+    tags: ["orange", "striped", "daily"],
+     variants: {
+      blue: {
+        images: [
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaYgqCq-KpasjQQs4wtJz7pfU9rwZsDOKGrA&s",
+          "https://www.koai.in/cdn/shop/files/2_aa3421fd-2495-454e-8578-8ce7c4c59974.jpg?v=1749286094&width=2400",
+        ]
+      },
+      white: {
+        images: [
+          strippedOrangeTee,
+          "https://images.prod.babyshopgroup.io/images/PM-64708%23b/1024x1024.jpeg",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjwmd-8WZq26yJykt3MTWGShHdatjVD8YGhQ&s",
+        ]
+      },
+    }
   }
 
 ];

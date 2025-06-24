@@ -1,12 +1,16 @@
-// Enhanced Product Details Page (Inspired by image you shared)
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { products as allProducts } from '../data/realProducts.js';
+import { testimonials } from '../data/testimonials.js'; // adjust path if needed
+import ReviewHeader from '../components/productsDetails/ReviewHeader.jsx'; // make sure the path is correct
 import '../css/productDescription/productsDetails.css';
+import '../css/productDescription/reviewProducts.css'
+
 import { MdKeyboardArrowRight } from "react-icons/md";
-import { FaStar, FaStarHalfAlt, FaRegStar, } from "react-icons/fa";
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { BsHeart } from 'react-icons/bs';
+import { GoVerified } from 'react-icons/go';
+import Testimonials from '../components/Testimonials.jsx';
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -15,8 +19,29 @@ export default function ProductDetails() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedColor, setSelectedColor] = useState(product?.color || '');
   const [quantity, setQuantity] = useState(1);
+  const [filter, setFilter] = useState('latest');
 
   if (!product) return <p>Product not found!</p>;
+
+  // reviews filteration
+  const productTestimonials = testimonials.filter(t => t.productId === product.id);
+
+
+  const filteredTestimonials = [...productTestimonials].sort((a, b) => {
+    if (filter === 'highest') return b.rating - a.rating;
+    if (filter === 'lowest') return a.rating - b.rating;
+    return 0; // Default: latest (assuming already sorted)
+  });
+
+  const handleWriteReview = () => {
+    alert("Redirect to review form or open modal.");
+  };
+
+  // related products
+  const relatedProducts = allProducts.filter(
+    (p) => p.category === product.category && p.id !== product.id
+  );
+
 
   const images = Array.isArray(product?.variants?.[selectedColor]?.images)
     ? product.variants[selectedColor].images
@@ -26,72 +51,100 @@ export default function ProductDetails() {
     setCurrentImageIndex(0);
   }, [selectedColor]);
 
-  const handleColorSelect = (color) => {
-    setSelectedColor(color);
-  };
-
-  const prevImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
-  };
-
-  const nextImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
-  };
-
-  const increment = () => setQuantity((q) => q + 1);
-  const decrement = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
+  const handleColorSelect = (color) => setSelectedColor(color);
+  const prevImage = () => setCurrentImageIndex(prev => prev === 0 ? images.length - 1 : prev - 1);
+  const nextImage = () => setCurrentImageIndex(prev => prev === images.length - 1 ? 0 : prev + 1);
+  const increment = () => setQuantity(q => q + 1);
+  const decrement = () => setQuantity(q => (q > 1 ? q - 1 : 1));
 
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 >= 0.25 && rating % 1 < 0.75;
-    const totalStars = 5;
-
     const stars = [];
 
-    for (let i = 0; i < fullStars; i++) {
-      stars.push(<FaStar key={`full-${i}`} color="#f6b01e" />);
-    }
-
-    if (hasHalfStar) {
-      stars.push(<FaStarHalfAlt key="half" color="#f6b01e" />);
-    }
-
-    const remaining = totalStars - stars.length;
-    for (let i = 0; i < remaining; i++) {
-      stars.push(<FaRegStar key={`empty-${i}`} color="#f6b01e" />);
-    }
-
+    for (let i = 0; i < fullStars; i++) stars.push(<FaStar key={`full-${i}`} color="#f6b01e" />);
+    if (hasHalfStar) stars.push(<FaStarHalfAlt key="half" color="#f6b01e" />);
+    while (stars.length < 5) stars.push(<FaRegStar key={`empty-${stars.length}`} color="#f6b01e" />);
     return stars;
   };
 
-  function hexToRgb(hex) {
-  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  hex = hex.replace(shorthandRegex, (_, r, g, b) =>
-    r + r + g + g + b + b
+  const renderReviews = () => (
+    <div className='main-review-container'>
+      <ReviewHeader
+        count={productTestimonials.length}
+        filter={filter}
+        setFilter={setFilter}
+        onWriteReview={handleWriteReview}
+      />
+      <div className="reviews-container">
+        {filteredTestimonials.length === 0 ? (
+          <p>No reviews yet for this product.</p>
+        ) : (
+          filteredTestimonials.map((review, index) => (
+            <div className="review-card" key={index}>
+              <div className="review-header">
+                <div className="review-stars">{renderStars(review.rating)}</div>
+                <strong> {review.name}</strong> <span className="verified"><GoVerified /></span>
+              </div>
+              <p className="review-message">"{review.message}"</p>
+              {review.publishedAt && (
+                <p className="review-date">Posted on {review.publishedAt}</p>
+              )}
+            </div>
+          ))
+        )}
+      </div>
+    </div>
   );
 
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result
-    ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`
-    : null;
-}
+  const renderRelatedProducts = () => (
+    <div className="related-products-section">
+      <h2 className="related-title">YOU MIGHT ALSO LIKE</h2>
+      <div className="related-products-list">
+        {relatedProducts.map((item) => (
+          <div key={item.id} className="related-product-card">
+            <img src={item.image || item.images?.[0]} alt={item.name} className="related-product-image" />
+            <h4 className="related-product-name">{item.name}</h4>
+            <div className="related-stars">{renderStars(item.rating)}</div>
+            <p className="related-price">
+              ${item.price}
+              {item.originalPrice && (
+                <>
+                  {" "}
+                  <span className="original-price">${item.originalPrice}</span>{" "}
+                  <span className="discount">
+                    -{Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)}%
+                  </span>
+                </>
+              )}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
 
   return (
     <div className='main-product-details-container'>
       <div className='main-product-details-header'>
         <h4>{product.category} <MdKeyboardArrowRight /> {product.dressStyle} </h4>
       </div>
+
       <div className="product-details-container">
         <div className="product-info">
           <h1>{product.name}</h1>
+
           <div className="product-price-rating">
             <p className="price">${product.price}</p>
             <div className="rating">
               <div className="stars">{renderStars(product.rating)}</div>
-              <span className="rating-number">{product.rating} / 5 ({product.reviewsCount} reviews)</span>
+              <span className="rating-number">
+                {product.rating} / 5 ({product.reviewsCount} reviews)
+              </span>
             </div>
-
           </div>
+
           <p className="desc">{product.description}</p>
 
           <div className="color-options">
@@ -112,22 +165,21 @@ export default function ProductDetails() {
               <span>{quantity}</span>
               <button onClick={increment}>+</button>
             </div>
-
             <button className="add-to-cart-btn">Add to Cart</button>
           </div>
+
           <p className="extra-info">
             {product.deliveryInfo} • Tool-free assembly • ↺ {product.returnPolicy}
           </p>
-          <p className="wishlist">
-            <BsHeart /> Add to Wishlist
-          </p>
+          <p className="wishlist"><BsHeart /> Add to Wishlist</p>
         </div>
 
         <div className="product-images">
           <div className="main-image-container">
             <div className="image-controls-wrapper">
               <div className="image-counter">
-                <span> {String(currentImageIndex + 1).padStart(2, '0')} </span> / {String(images.length).padStart(2, '0')}
+                <span>{String(currentImageIndex + 1).padStart(2, '0')}</span> /
+                {String(images.length).padStart(2, '0')}
               </div>
               <div className="arrow-controls">
                 <button onClick={prevImage}>‹</button>
@@ -140,13 +192,14 @@ export default function ProductDetails() {
               alt={`${product.name} view ${currentImageIndex + 1}`}
               className="main-image"
             />
-            <div className='shadow-appealing'
+            <div
+              className='shadow-appealing'
               style={{
                 background: `linear-gradient(to left, ${selectedColor}, transparent)`
               }}
             ></div>
-
           </div>
+
           <div className="thumbnail-container">
             {images.map((img, index) => (
               <img
@@ -159,6 +212,12 @@ export default function ProductDetails() {
             ))}
           </div>
         </div>
+      </div>
+
+      {renderReviews()}
+      {renderRelatedProducts()}
+      <div className='last-components'>
+        <Testimonials />
       </div>
     </div>
   );
