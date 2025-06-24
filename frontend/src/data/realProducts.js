@@ -79,7 +79,8 @@ export const products = [
     images: [poloWithTippingDetails],
     description: "Smart polo with classic tipping accents on the collar and sleeves. Made for semi-formal occasions.",
     shortDescription: "Classic red polo with tipping",
-    color: ["red", "white", "navy"],
+    color: "red",
+    availableColors: ["red", "white", "navy"],
     size: "Medium",
     category: "T-shirt",
     dressStyle: "Daily",
@@ -90,7 +91,33 @@ export const products = [
     isTrending: true,
     deliveryInfo: "Ships in 2-4 days",
     returnPolicy: "15-day return policy",
-    tags: ["polo", "daily", "smart"]
+    tags: ["polo", "daily", "smart"],
+    variants: {
+      red: {
+        images: [
+          poloWithTippingDetails,
+          "https://wrogn.com/cdn/shop/files/1_06977465-791b-45b2-a2e5-50ef82156856.jpg?v=1724937897",
+          "https://www.childrensalonoutlet.com/media/catalog/product/cache/0/image/1000x1000/9df78eab33525d08d6e5fb8d27136e95/e/m/emporio-armani-boys-red-polo-shirt-550055-cf4f7d8c4580a4bdb054dc2a2c49ab322384e29b.jpg",
+          "https://media-uk.landmarkshops.in/cdn-cgi/image/h=730,w=540,q=85,fit=cover/lifestyle/1000012540753-Red-Red-1000012540753_04-2100.jpg",
+
+        ]
+      },
+      white: {
+        images: [
+          "https://jackjones.in/cdn/shop/files/223201701_g6.jpg?v=1745330262&width=1080",
+          "https://images.hugoboss.com/is/image/boss/hbna50332503_105_14?$re_fullPageZoom$&qlt=85&fit=crop,1&align=1,1&lastModified=1588860470000&wid=1200&hei=1818",
+          "https://blankapparel.in/cdn/shop/files/0W2A9796.jpg?v=1714638525&width=1946"
+        ]
+      },
+      navy: {
+        images: [
+          "https://polos.in/wp-content/uploads/2021/11/NAVY-EDT-PLAYPOLOS-POLO-TSHIRT-IN-EDGE-TIPPING.jpg",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi7k4yL69QRPKl0r4CQw3kTh2L70X0IqYo0RQTjo701baJQ_mBM9Sk7dC03Mcov6cfZz8&usqp=CAU",
+          "https://blankapparel.in/cdn/shop/files/0W2A9768.jpg?v=1714638472&width=1946",
+          "https://blankapparel.in/cdn/shop/files/0W2A9773.jpg?v=1714638471&width=1946"
+        ]
+      },
+    }
   },
   {
     id: 3,
@@ -104,7 +131,8 @@ export const products = [
     images: [blackStrippedTshirt],
     description: "Sporty striped tee made from breathable fabric. Perfect for an active day out.",
     shortDescription: "Black and white striped tee",
-    color: ["black", "white"],
+    color: "black",
+    availableColors: ["black", "white"],
     size: "Large",
     category: "T-shirt",
     dressStyle: "Casual",
@@ -115,7 +143,25 @@ export const products = [
     isTrending: true,
     deliveryInfo: "Free express delivery",
     returnPolicy: "7-day return",
-    tags: ["stripes", "sport", "summer"]
+    tags: ["stripes", "sport", "summer"],
+    variants: {
+      black: {
+        images: [
+          blackStrippedTshirt,
+          "https://5.imimg.com/data5/TS/GK/MY-50396684/mens-trendy-striped-t-shirt.jpg",
+          "https://assets.ajio.com/medias/sys_master/root/20221019/GsOm/634f9b5ef997ddfdbd31e209/-473Wx593H-443000515-black-MODEL.jpg",
+          "https://assets.ajio.com/medias/sys_master/root/20230619/L4gj/649046a042f9e729d74c4bed/-288Wx360H-443015875-jetblack-MODEL.jpg",
+
+        ]
+      },
+      white: {
+        images: [
+          "https://assets.ajio.com/medias/sys_master/root/20230619/L4gj/649046a042f9e729d74c4bed/-288Wx360H-443015875-jetblack-MODEL.jpg",
+          "https://images.meesho.com/images/products/409152994/mrijl_512.webp",
+          "https://m.media-amazon.com/images/I/81tOtZmUY0L._AC_SX522_.jpg"
+        ]
+      },
+    }
   },
   {
     id: 4,
@@ -130,6 +176,7 @@ export const products = [
     description: "Classic skinny jeans with a snug fit. Made with stretchable denim for comfort.",
     shortDescription: "Stretch skinny denim",
     color: ["blue"],
+    availableColors: ["blue"],
     size: "Medium",
     category: "Jeans",
     dressStyle: "Event",
@@ -140,7 +187,18 @@ export const products = [
     isTrending: false,
     deliveryInfo: "Delivery in 4-6 days",
     returnPolicy: "Return within 10 days",
-    tags: ["denim", "skinny", "jeans"]
+    tags: ["denim", "skinny", "jeans"],
+    variants: {
+      blue: {
+        images: [
+          skinnyFitJeans,
+          "https://d118ps6mg0w7om.cloudfront.net/media/catalog/product/s/s/fit-in/1000x1333/ss-24_4000x5000-04-10-24_mft-29430-s-170-mid-blue_4_mft-29430-s-170-mid-blue.jpg",
+          "https://www.gingtto.com/cdn/shop/files/2_91c6397e-d8bc-48be-85ab-946c2826be48.jpg?v=1736835078&width=1445",
+          "https://images.meesho.com/images/products/471585367/4zjbb_512.webp",
+
+        ]
+      },
+    }
   },
   {
     id: 5,
@@ -154,7 +212,8 @@ export const products = [
     images: [checkeredShirt],
     description: "Classic checkered shirt for casual or semi-formal occasions. Soft brushed fabric for comfort.",
     shortDescription: "Check pattern cotton shirt",
-    color: ["red", "blue", "white"],
+    color: "red",
+    availableColors: ["red", "blue", "white"],
     size: "Large",
     category: "Shirt",
     dressStyle: "Casual",
@@ -165,7 +224,34 @@ export const products = [
     isTrending: true,
     deliveryInfo: "Ships in 3 days",
     returnPolicy: "30-day return policy",
-    tags: ["checkered", "soft", "casual"]
+    tags: ["checkered", "soft", "casual"],
+    variants: {
+      red: {
+        images: [
+          checkeredShirt,
+          "https://i.pinimg.com/236x/72/ce/09/72ce09ed5eec155610bd0b1f6a801275.jpg",
+          "https://img01.ztat.net/article/spp-media-p1/6cbe0a4a4e123e09abc05f1490d381c1/33f13fec40504bceb4254ba8e9b28c7e.jpg?imwidth=762",
+          "https://assets.ajio.com/medias/sys_master/root/20220323/rMy9/623a162df997dd03e2262514/-473Wx593H-469134651-black-MODEL2.jpg",
+
+        ]
+      },
+      blue: {
+        images: [
+          "https://imagescdn.peterengland.com/img/app/product/8/889533-10744013.jpg",
+          "https://imagescdn.peterengland.com/img/app/product/8/889533-10744011.jpg",
+          "https://assets.ajio.com/medias/sys_master/root/20210608/XHC1/60be69d0f997ddb312bbc4a1/-473Wx593H-460896648-teal-MODEL.jpg",
+
+        ]
+      },
+      white: {
+        images: [
+          "https://imagescdn.peterengland.com/img/app/product/3/39681311-14215716.jpg",
+          "https://ramrajcotton.in/cdn/shop/files/Back_675b14de-0ccb-4356-9946-f3fc34dd747f.jpg?v=1724062316&width=1080",
+          "https://d118ps6mg0w7om.cloudfront.net/media/catalog/product/s/s/fit-in/1000x1333/ss-24_4000x5000-04-10-24_mfs-14631-s-02-white_1_mfs-14631-s-02-white.jpg",
+
+        ]
+      },
+    }
   },
   {
     id: 6,
@@ -179,7 +265,8 @@ export const products = [
     images: [sleeveStrippedTshirt],
     description: "Eye-catching color-blocked t-shirt with sporty sleeve stripes. Casual yet stylish.",
     shortDescription: "Color-block sporty tee",
-    color: ["orange", "black", "white"],
+    color: "orange",
+    availableColors: ["orange", "black", "blue"],
     size: "Small",
     category: "T-shirt",
     dressStyle: "Daily",
@@ -190,7 +277,34 @@ export const products = [
     isTrending: true,
     deliveryInfo: "Same day shipping available",
     returnPolicy: "15-day return",
-    tags: ["daily", "sporty", "striped"]
+    tags: ["daily", "sporty", "striped"],
+    variants: {
+      orange: {
+        images: [
+          sleeveStrippedTshirt,
+          "https://www.riverwoods.net/media/catalog/product/cache/b83bbf37d16c5fefcf7c9d29faf48907/r/l/rl24s-c5002_a-000_owppy_d7.jpg",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyqLSzLOqvQz5B4XVVI74fGwAezSCvNhVw_SsOzDDcs7frti-zjzxsMaelDjKk7T7YETc&usqp=CAU",
+          "https://assets.ajio.com/medias/sys_master/root/20230112/UfDG/63bfae95aeb269c651d9fcbe/-473Wx593H-443002688-red-MODEL2.jpg",
+
+        ]
+      },
+      black: {
+        images: [
+          "https://images-cdn.ubuy.co.in/661ec6bea3c4bc163d299a55-long-sleeve-black-white-striped-men-s.jpg",
+          "https://xcdn.next.co.uk/common/items/default/default/itemimages/3_4Ratio/product/lge/817932s4.jpg?im=Resize,width=750",
+          "https://xcdn.next.co.uk/common/items/default/default/itemimages/3_4Ratio/product/lge/817932s4.jpg?im=Resize,width=750",
+
+        ]
+      },
+      blue: {
+        images: [
+          "https://i.etsystatic.com/18628324/r/il/778dd6/3505095741/il_570xN.3505095741_og31.jpg",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRus4HZQVZFpqHOY6yUc3IMJZRFEHBUZLhpF-S8jchw2fcLZXOkhwB9DfBxBsyyufaWhtE&usqp=CAU",
+          "https://i.ebayimg.com/images/g/SXYAAOSwSjpcakwi/s-l400.jpg",
+
+        ]
+      },
+    }
   },
   {
     id: 7,
@@ -204,7 +318,8 @@ export const products = [
     images: [verticalStrippedShirt],
     description: "Green striped shirt with classic vertical patterns. Tailored fit perfect for formal events.",
     shortDescription: "Formal green striped shirt",
-    color: ["green", "white"],
+    color: "green",
+    availableColors: ["green", "white"],
     size: "X-Large",
     category: "Shirt",
     dressStyle: "Event",
@@ -215,7 +330,26 @@ export const products = [
     isTrending: false,
     deliveryInfo: "Delivered in 3-5 business days",
     returnPolicy: "20-day return",
-    tags: ["formal", "striped", "linen"]
+    tags: ["formal", "striped", "linen"],
+    variants: {
+      green: {
+        images: [
+          verticalStrippedShirt,
+          "https://assets.ajio.com/medias/sys_master/root/20230907/L3Uv/64f9b731afa4cf41f5cf10b9/-473Wx593H-442295374-green-MODEL.jpg",
+          "https://assets.ajio.com/medias/sys_master/root/20240618/0IFr/6671b51c1d763220fac96cd9/-473Wx593H-700102630-blue-MODEL2.jpg",
+          "https://assets.ajio.com/medias/sys_master/root/20231203/TMFu/656c87cfddf7791519acf4e7/-473Wx593H-466846555-blue-MODEL3.jpg",
+
+        ]
+      },
+      white: {
+        images: [
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBy24RBUrjqzhsW2F3xGRBnbAmBdXdaH4Hmw&s",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBy24RBUrjqzhsW2F3xGRBnbAmBdXdaH4Hmw&s",
+          "https://5.imimg.com/data5/SELLER/Default/2023/7/321423758/SC/FR/WN/81729201/dp-500x500.JPG",
+
+        ]
+      },
+    }
   },
   {
     id: 8,
