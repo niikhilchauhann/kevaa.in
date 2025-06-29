@@ -7,18 +7,22 @@ import Layout from "./components/Layout"; // Import the Layout component
 import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
+import Login from "./pages/Auth/Login";
+import SignUp from "./pages/Auth/SignUp";
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path='/signup' element={<SignUp />} />
+        <Route path='/login' element={<Login />} />
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/product/:id" element={<ProductDetails />} />
           <Route path="protected" element={<PrivateRoute><Protected /></PrivateRoute>} />
         </Route>
-        <Route path="/cart" element={<Cart />}/>
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </Router>
   );

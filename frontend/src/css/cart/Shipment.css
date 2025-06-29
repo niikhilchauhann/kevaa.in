@@ -2,8 +2,8 @@
   font-family: 'Inter', sans-serif;
   background-color: #fff;
   padding: 1.5rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 0 1px #e5e7eb;
+  border-bottom: 2px solid #D1D1D8;
+;
   color: #111827;
   width: auto;
 }
@@ -16,17 +16,17 @@
 
 .shipment-option {
   display: flex;
-  justify-content: space-between;
+  border: 2px solid #D1D1D8;
   align-items: center;
-  border: 1px solid #e5e7eb;
+  justify-content:space-around;
   padding: 1rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
   margin-bottom: 0.75rem;
+  cursor: pointer;
   transition: border-color 0.3s ease;
 }
 
-/* Unselected state - white radio */
+
+
 .shipment-option input[type="radio"] {
   appearance: none;
   width: 1rem;
@@ -34,35 +34,34 @@
   border: 2px solid #d1d5db;
   border-radius: 9999px;
   background-color: white;
-  cursor: pointer;
   position: relative;
+  cursor: pointer;
+  margin-right: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .shipment-option input[type="radio"]::before {
   content: '';
   position: absolute;
-  top: 2px;
-  left: 2px;
+  top: 50%;
+  left: 50%;
   width: 0.5rem;
   height: 0.5rem;
   background-color: transparent;
-  border-radius: 9999px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
   transition: background-color 0.2s ease;
 }
 
-/* Selected state - green center */
-.shipment-option.selected input[type="radio"] {
-  display: flex;
-  
+.shipment-option input[type="radio"]:checked {
+  border-color: #10b981;
 }
 
-.shipment-option.selected input[type="radio"]::before {
+.shipment-option input[type="radio"]:checked::before {
   background-color: #10b981;
-}
-
-/* Hover effect */
-.shipment-option:hover {
-  border-color: #9ca3af;
 }
 
 .shipment-left {

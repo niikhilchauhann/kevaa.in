@@ -2,8 +2,7 @@
   font-family: 'Inter', sans-serif;
   background-color: #fff;
   padding: 1.5rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 0 1px #e5e7eb;
+  border-bottom: 2px solid #D1D1D8;
   color: #111827;
 }
 
@@ -17,16 +16,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid #e5e7eb;
+  /* border: 1px solid #e5e7eb; */
   padding: 1rem;
   border-radius: 0.5rem;
   margin-bottom: 0.75rem;
   cursor: pointer;
   transition: border-color 0.3s ease;
-}
-
-.type-box:hover {
-  border-color: #9ca3af;
 }
 
 .type-box input[type="radio"] {
@@ -39,25 +34,32 @@
   position: relative;
   cursor: pointer;
   margin-right: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .type-box input[type="radio"]::before {
   content: '';
   position: absolute;
-  top: 2px;
-  left: 2px;
+  top: 50%;
+  left: 50%;
   width: 0.5rem;
   height: 0.5rem;
   background-color: transparent;
   border-radius: 9999px;
+  transform: translate(-50%, -50%);
   transition: background-color 0.2s ease;
 }
 
-.type-box input[type="radio"]:checked::before {
-  background-color: #10b981; /* green */
-  
+.type-box input[type="radio"]:checked {
+  border-color: #3AA39F; /* green border */
 }
 
+.type-box input[type="radio"]:checked::before {
+  background-color: #3AA39F; /* green fill */
+}
 .type-info {
   display: flex;
   flex-direction: column;

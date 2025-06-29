@@ -1,21 +1,14 @@
-.cart-summary {
-  position: relative;
-  background-color: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.5rem;
-  padding: 1.5rem;
-  overflow: hidden;
-  box-sizing: border-box;
-  margin: 1rem 0;
-  height: auto;
+.summary-heading {
+  color: #17183B;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0;
+  width: 316px;
+  height: 32px;
 }
 
-.summary-heading {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #111827;
-  margin-bottom: 1.5rem;
-}
 
 .summary-breakdown {
   margin-bottom: 1.5rem;
