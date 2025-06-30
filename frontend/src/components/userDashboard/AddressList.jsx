@@ -1,4 +1,5 @@
-import React from "react";
+import { useEffect, useState } from 'react';
+import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 import "../../css/userDashboard/addressList.css";
 
 const addresses = [
@@ -20,7 +21,20 @@ const addresses = [
   }
 ];
 
-const AddressList = () => {
+const AddressList = ({ userId }) => {
+  const [addresses, setAddresses] = useState([]);
+  useEffect(() => {
+    if (!userId) return;
+    const fetchAddresses = async () => {
+      const db = getFirestore();
+      const q = query(collection(db, 'addresses'), where('userId', '==', userId));
+      const querySnapshot = await getDocs(q);
+      const addressesData = querySnapshot.docs.map(doc => doc.data());
+      setAddresses(addressesData);
+    };
+    fetchAddresses();
+  }, [userId]);
+
   return (
     <div className="address-wrapper">
       <h2>Your Addresses</h2>

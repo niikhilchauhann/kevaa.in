@@ -75,13 +75,13 @@
 
 .phone-row {
   display: grid;
-  grid-template-columns: 25% 71%;
+  grid-template-columns: 36% 60%;
   gap: 1rem;
 }
 
-.country-code {
+/* .country-code {
   width: 100%;
-}
+} */
 
 .phone-input {
   flex: 1;
@@ -317,19 +317,6 @@
     flex-direction: column;
 
   }
-
-  /* .footer-links {
-
-    width: 100%;
-     take full width of form wrapper 
-    max-width: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-size: 0.75rem;
-    text-align: center;
-  } */
 
 
   .signup-form-section {

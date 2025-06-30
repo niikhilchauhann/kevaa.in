@@ -1,17 +1,32 @@
 import React, { useState } from 'react';
+import useAuthStore from '../../store/authStore';
 import '../../css/Auth/Login.css';
 import keva from "../../assets/keva2.png"
+import { useNavigate } from 'react-router-dom';
 
 
 const LoginPage = () => {
+  const { login, error } = useAuthStore();
+  const googleLogin = useAuthStore(state => state.googleLogin);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [forgot,setForgot] = useState(false);
+  const [forgot, setForgot] = useState(false);
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log('Login attempted with:', email, password);
+    const res = await login({ email, password });
+    if (res) alert("Login Success ✅"), navigate('/');
+
   };
+
+  const handleGoogleLogin = async () => {
+  const res = await googleLogin();
+  if (res) {
+    alert("Google Login Success ✅");
+    navigate('/');
+  }
+};
 
   return (
     <div className="login-container">
@@ -52,10 +67,14 @@ const LoginPage = () => {
                   LOGIN ➜
                 </button>
 
-                <a href="#" className="forgot-password">
+                <a href="/resetpassword" className="forgot-password">
                   Forgot your password?
                 </a>
               </div>
+
+
+              <span >Or</span>
+              <button className='signin-with-google' onClick={handleGoogleLogin}> <img src="https://images.icon-icons.com/2699/PNG/512/google_logo_icon_169090.png" alt="" />Sign in with Google</button>
 
               <button type="button" className="create-account-button">
                 CREATE NEW ACCOUNT

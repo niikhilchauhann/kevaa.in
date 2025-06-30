@@ -1,36 +1,61 @@
 import React, { useState } from 'react';
 import '../../css/Auth/SetPassword.css';
 
-const SetPassword = () => {
+const SetPassword = ({ onBack, onSubmit }) => {
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (password !== confirm) {
+      setError('Passwords do not match');
+      return;
+    }
+    setError('');
+    if (onSubmit) {
+      onSubmit(password);
+    }
+  };
 
   return (
-    <div className="set-password-form">
-      <h2>Set your password</h2>
+    <div>
+      <div className="set-password-form">
+        <h2>Set your password</h2>
 
-      <div className={`spf-input-group ${password ? 'filled' : ''}`}>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <label>Password</label>
+        <form onSubmit={handleSubmit}>
+          <div className={`spf-input-group ${password ? 'filled' : ''}`}>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <label>Password</label>
+          </div>
+
+          <div className={`spf-input-group ${confirm ? 'filled' : ''}`}>
+            <input
+              type="password"
+              value={confirm}
+              onChange={(e) => setConfirm(e.target.value)}
+              required
+            />
+            <label>Confirm password</label>
+          </div>
+
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          <div className='register-buttons'>
+
+            <button type="submit" className="spf-signup-btn">SIGN UP</button>
+            <button type="button" className="spf-login-btn" onClick={onBack}>BACK TO LOGIN</button>
+          </div>
+        </form>
       </div>
 
-      <div className={`spf-input-group ${confirm ? 'filled' : ''}`}>
-        <input
-          type="password"
-          value={confirm}
-          onChange={(e) => setConfirm(e.target.value)}
-          required
-        />
-        <label>Confirm password</label>
-      </div>
+      <div className='right-container'>
 
-      <button className="spf-signup-btn">SIGN UP</button>
-      <button className="spf-login-btn">BACK TO LOGIN</button>
+      </div>
     </div>
   );
 };
