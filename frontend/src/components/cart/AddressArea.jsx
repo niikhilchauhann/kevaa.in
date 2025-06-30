@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../css/cart/addressArea.css";
+import "../../css/cart/addressAreas.css";
 
 const AddressArea = () => {
   const [selectedAddress, setSelectedAddress] = useState(1); // default selected id

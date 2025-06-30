@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../css/cart/shipment.css";
+import "../../css/cart/shipments.css";
 
 const Shipment = () => {
   const [selected, setSelected] = useState("free");

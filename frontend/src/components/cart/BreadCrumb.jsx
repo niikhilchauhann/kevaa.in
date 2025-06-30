@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../css/cart/breadcrumb.css';
+import '../../css/cart/breadCrumbs.css';
 
 function Breadcrumb() {
   return (
