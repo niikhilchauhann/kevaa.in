@@ -1,0 +1,130 @@
+.cart-page {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+
+.cart-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.cart-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Desktop grid layout: summary on right */
+@media (min-width: 1024px) {
+  .cart-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+  }
+
+  .cart-left-section {
+    order: 1;
+  }
+
+  .cart-summary-section {
+    order: 2;
+  }
+}
+
+.cart-left-section {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.cart-items-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.cart-box {
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0 0px #e5e7eb;
+  overflow: hidden;
+}
+
+.cart-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+}
+
+.cart-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.cart-count {
+  color: #6b7280;
+  font-size: 1rem;
+  margin-left: 0.5rem;
+  font-weight: 500;
+}
+
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #e5e7eb;
+}
+
+.cart-item-wrapper {
+  padding: 1.5rem;
+}
+
+.discount-banner-wrapper {
+  margin-top: 1rem;
+}
+
+.breadcrumb-wrapper {
+  margin-bottom: 1rem;
+}
+
+
+.payment-area-wrapper {
+  background: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0 0px #e5e7eb;
+  display: flex;
+  flex-direction: column; 
+  gap: 1rem;
+}
+
+/* Order Summary box */
+.cart-summary-section {
+  height: fit-content;
+  background: #fff;
+  padding: 32px;
+  border-radius: 1px;
+  box-shadow: 0 0 0 1px #e5e7eb;
+}
+@media (min-width: 1024px) {
+  .cart-summary-section {
+    position: sticky;
+    top: 2rem;
+    right: 3rem;
+    align-self: start; /* prevents height stretching in grid */
+  }
+}
+/* On mobile, push summary to bottom */
+@media (max-width: 1023px) {
+  .cart-summary-section {
+    order: 10;
+  }
+}
