@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import useAuthStore from '../../store/authStore';
-import '../../css/Auth/login.css';
+import '../../CSS/Auth/login.css';
 import keva from "../../assets/keva2.png"
 import { useNavigate } from 'react-router-dom';
 
