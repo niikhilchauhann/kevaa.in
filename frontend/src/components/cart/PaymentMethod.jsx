@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../css/cart/paymentMethod.css';
+import '../../css/cart/paymentMethods.css';
 
 function PaymentMethod() {
   const cards = [
