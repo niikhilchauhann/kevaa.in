@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import useAuthStore from '../../store/authStore';
-import '../../CSS/Auth/login.css';
+import '../../css/Auth/login.css';
 import keva from "../../assets/keva2.png"
 import { useNavigate } from 'react-router-dom';
 
@@ -23,7 +23,7 @@ const Login = () => {
   const handleGoogleLogin = async () => {
   const res = await googleLogin();
   if (res) {
-    alert("Google Login Success ✅");
+    alert("Google Login Successfully ✅");
     navigate('/');
   }
 };
