@@ -14,7 +14,7 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
-      title: 'Osmond Armchair',
+      title: 'Osmond Armchairs',
       color: 'Gunnared beige',
       price: 149.99,
       quantity: 1,
