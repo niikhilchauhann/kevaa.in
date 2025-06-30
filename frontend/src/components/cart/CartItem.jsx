@@ -1,6 +1,6 @@
 import React from 'react';
 import { Minus, Plus } from 'lucide-react';
-import '../../css/cart/cartItem.css'
+import '../../css/cart/cartItems.css'
 
 const CartItem = ({
   id,
