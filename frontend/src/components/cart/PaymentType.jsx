@@ -3,7 +3,7 @@ import '../../css/cart/paymentType.css';
 
 function PaymentType() {
   const types = [
-    { id: 1, label: 'Free', method: 'Online Payment', date: '01 Feb, 2023', price: '$0.00' },
+    { id: 1, label: 'Free', method: 'Online Payments', date: '01 Feb, 2023', price: '$0.00' },
     { id: 2, label: '$8.50', method: 'Cash on delivery', date: '28 Jan, 2023', price: '$8.50' }
   ];
 
