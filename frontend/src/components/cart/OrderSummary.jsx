@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../css/cart/OrderSummary.css';
+import '../../css/cart/orderSummary.css';
 
 const OrderSummary = ({ subtotal, discount, shipping, couponApplied }) => {
   const [couponCode, setCouponCode] = useState('');

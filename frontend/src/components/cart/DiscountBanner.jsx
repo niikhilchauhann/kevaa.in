@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../css/cart/DiscountBanner.css';
+import '../../css/cart/discountBanner.css';
 
 const DiscountBanner = () => {
   return (
