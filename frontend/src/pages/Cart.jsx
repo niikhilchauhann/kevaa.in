@@ -8,7 +8,7 @@ import PaymentMethod from '../components/cart/PaymentMethod';
 import PaymentType from '../components/cart/PaymentType';
 import Breadcrumb from '../components/cart/BreadCrumb';
 import Apple from '../assets/apple.jpg';
-import '../css/cart/cart.css';
+import '../css/Cart/cart.css';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([
