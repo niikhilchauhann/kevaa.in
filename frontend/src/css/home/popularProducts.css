@@ -7,17 +7,17 @@
 .popular-section h3 {
   font-size: 16px;
   color: red;
-  line-height: 0.4;
+  /* line-height: 4; */
 }
 
 .popular-section h2 {
   font-size: 32px;
   color: #0d1b2a;
-  line-height: 0.4;
+  line-height: 1;
 }
 
 .popular-section p {
-  line-height: 0.4;
+  line-height: 2;
   color: #7c8ba1;
   margin-bottom: 60px;
 }
