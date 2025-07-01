@@ -1,14 +1,27 @@
-import React from 'react';
-import '../../css/cart/breadCrumbs.css';
+import React from "react";
+import "../../css/cart/breadCrumbs.css";
 
-function Breadcrumb() {
+const steps = [
+  { id: 1, name: "Address" },
+  { id: 2, name: "Shipping" },
+  { id: 3, name: "Payment" },
+];
+
+function Breadcrumb({ step }) {
   return (
     <div className="breadcrumb-container">
-      <span className="step active">Address</span>
-      <span className="separator">{'>'}</span>
-      <span className="step">Shipping</span>
-      <span className="separator">{'>'}</span>
-      <span className="step">Payment</span>
+      {steps.map((item, index) => (
+        <React.Fragment key={item.id}>
+          <span
+            className={`step ${step >= item.id ? "active" : ""}`}
+          >
+            {item.name}
+          </span>
+          {index < steps.length - 1 && (
+            <span className="separator">{'>'}</span>
+          )}
+        </React.Fragment>
+      ))}
     </div>
   );
 }

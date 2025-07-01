@@ -52,7 +52,7 @@ function Navbar() {
         <div className='header-navbar-controller'>
             <header className="top-bar">
                 <p>
-                    Sign up and get 20% off your first order. <a href="#">Sign Up Now</a>
+                    Sign up and get 20% off your first order. <a href="/signup">Sign Up Now</a>
                 </p>
             </header>
             <nav className="navbar">
@@ -68,8 +68,8 @@ function Navbar() {
                     <li>Contact us</li>
                 </ul>
                 <div className="icons">
-                    <span><IoSearch className='icons-navigations'/></span>
-                    <span><BsCart2 className='icons-navigations'/></span>
+                    <span><IoSearch className='icons-navigations' /></span>
+                    <span><NavLink to='/cart'><BsCart2 className='icons-navigations' /></NavLink></span>
                     <span style={{ position: "relative", cursor: "pointer" }}>
                         <div onClick={toggleDropdown}>
                             {userPhoto ? (
@@ -84,25 +84,51 @@ function Navbar() {
                         </div>
                         {dropdownOpen && (
                             <div className="profile-dropdown">
-                                <button
-                                    onClick={() => {
-                                        setDropdownOpen(false);
-                                        navigate('/userdashboard');
-                                    }}
-                                    className="dropdown-button"
-                                >
-                                    Dashboard
-                                </button>
-                                <button
-                                    onClick={handleLogout}
-                                    className="dropdown-button"
-                                    style={{ color: "#f44336" }}
-                                >
-                                    Logout
-                                </button>
+                                {userPhoto ? (
+                                    <>
+                                        <button
+                                            onClick={() => {
+                                                setDropdownOpen(false);
+                                                navigate('/userdashboard');
+                                            }}
+                                            className="dropdown-button"
+                                        >
+                                            Dashboard
+                                        </button>
+                                        <button
+                                            onClick={handleLogout}
+                                            className="dropdown-button"
+                                            style={{ color: "#f44336" }}
+                                        >
+                                            Logout
+                                        </button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <button
+                                            onClick={() => {
+                                                setDropdownOpen(false);
+                                                navigate('/signup');
+                                            }}
+                                            className="dropdown-button"
+                                        >
+                                            Sign Up
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                setDropdownOpen(false);
+                                                navigate('/login');
+                                            }}
+                                            className="dropdown-button"
+                                        >
+                                            Login
+                                        </button>
+                                    </>
+                                )}
                             </div>
                         )}
                     </span>
+
                 </div>
             </nav>
         </div>

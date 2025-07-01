@@ -10,6 +10,7 @@ import gingeraleImg from '../assets/gingerale.png';
 import almondsImg from '../assets/almonds.png';
 import { IoStar } from 'react-icons/io5';
 import { FaArrowRight } from 'react-icons/fa6';
+import useCartStore from '../store/cartStore';
 
 
 const products =
@@ -215,6 +216,11 @@ const products =
     ]
 
 export default function CategoryGrid() {
+    const addToCart = useCartStore(state => state.addToCart);
+    const { items, removeFromCart, updateQuantity, loadCart } = useCartStore();
+    React.useEffect(() => {
+        loadCart(); // Load cart on mount or when user changes
+    }, []);
     const [selectedCategory, setSelectedCategory] = useState('Featured');
     const categories = ['Featured', 'Popular', 'New Added'];
 
@@ -285,7 +291,10 @@ export default function CategoryGrid() {
                                     <span className="current">${product.price}</span>
                                     <span className="original">${product.originalPrice}</span>
                                 </div>
-                                <button className="add-btn">
+                                <button
+                                    className="add-btn"
+                                    onClick={() => addToCart(product)}
+                                >
                                     <BsCart3 /> Add
                                 </button>
                             </div>

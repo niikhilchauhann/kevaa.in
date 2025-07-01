@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import useAuthStore from '../../store/authStore';
 import '../../css/Auth/login.css';
 import keva from "../../assets/keva2.png"
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
@@ -21,12 +21,12 @@ const Login = () => {
   };
 
   const handleGoogleLogin = async () => {
-  const res = await googleLogin();
-  if (res) {
-    alert("Google Login Successfully ✅");
-    navigate('/');
-  }
-};
+    const res = await googleLogin();
+    if (res) {
+      alert("Google Login Successfully ✅");
+      navigate('/');
+    }
+  };
 
   return (
     <div className="login-container">
@@ -76,16 +76,18 @@ const Login = () => {
               <span >Or</span>
               <button className='signin-with-google' onClick={handleGoogleLogin}> <img src="https://images.icon-icons.com/2699/PNG/512/google_logo_icon_169090.png" alt="" />Sign in with Google</button>
 
-              <button type="button" className="create-account-button">
-                CREATE NEW ACCOUNT
-              </button>
+              <NavLink to='/signup'>
+                <button type="button" className="create-account-button">
+                  CREATE NEW ACCOUNT
+                </button>
+              </NavLink>
             </form>
           </div>
 
           <div className="footer-links">
-            <a href="#">Terms and conditions</a>
+            <a href="/terms-condition">Terms and conditions</a>
             <span>•</span>
-            <a href="#">Privacy policy</a>
+            <a href="/privacy-policy">Privacy policy</a>
           </div>
         </div>
 
@@ -110,7 +112,7 @@ const Login = () => {
 
             <div className="cta-container">
               <div className="pink-line"></div>
-              <a href="#" className="try-now-button">
+              <a href="/signup" className="try-now-button">
                 Try now →
               </a>
             </div>

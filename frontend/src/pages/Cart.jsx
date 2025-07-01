@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CartItem from '../components/cart/CartItem';
 import OrderSummary from '../components/cart/OrderSummary';
 import DiscountBanner from '../components/cart/DiscountBanner';
@@ -7,45 +7,61 @@ import Shipment from '../components/cart/Shipment';
 import PaymentMethod from '../components/cart/PaymentMethod';
 import PaymentType from '../components/cart/PaymentType';
 import Breadcrumb from '../components/cart/BreadCrumb';
-import Apple from '../assets/apple.jpg';
+import useCartStore from '../store/cartStore'; // <-- import store
 import '../css/cart/carts.css';
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      title: 'Osmond Armchairs',
-      color: 'Gunnared beige',
-      price: 149.99,
-      quantity: 1,
-      image: Apple,
-    },
-    {
-      id: 2,
-      title: 'Meryl Lounge Chair',
-      color: 'Lysed bright green',
-      price: 169.99,
-      quantity: 1,
-      image: Apple,
-    },
-  ]);
+  const { items, loadCart, updateQuantity, removeFromCart, loading } = useCartStore();
+  const [currentStep, setCurrentStep] = useState(1);
+
+  useEffect(() => {
+    loadCart(); // Firestore se current user ka cart load karo
+  }, []);
 
   const handleQuantityChange = (id, newQuantity) => {
-    setCartItems(prev =>
-      prev.map(item =>
-        item.id === id ? { ...item, quantity: newQuantity } : item
-      )
-    );
+    updateQuantity(id, newQuantity);
   };
 
   const handleRemoveItem = (id) => {
-    setCartItems(prev => prev.filter(item => item.id !== id));
+    removeFromCart(id);
   };
 
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const handleNext = () => {
+    if (currentStep < 3) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
+  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const discount = 31.9;
   const shipping = 0;
   const couponApplied = 0;
+
+  let stepComponent;
+  switch (currentStep) {
+    case 1:
+      stepComponent = <AddressArea />;
+      break;
+    case 2:
+      stepComponent = <Shipment />;
+      break;
+    case 3:
+      stepComponent = (
+        <>
+          <PaymentMethod />
+          <PaymentType />
+        </>
+      );
+      break;
+    default:
+      stepComponent = <AddressArea />;
+  }
 
   return (
     <div className="cart-page">
@@ -57,19 +73,25 @@ const Cart = () => {
               <div className="cart-box">
                 <div className="cart-header">
                   <h1 className="cart-title">
-                    Cart <span className="cart-count">{cartItems.length} ITEMS</span>
+                    Cart <span className="cart-count">{items.length} ITEMS</span>
                   </h1>
                 </div>
                 <div className="cart-items">
-                  {cartItems.map(item => (
-                    <div key={item.id} className="cart-item-wrapper">
-                      <CartItem
-                        {...item}
-                        onQuantityChange={handleQuantityChange}
-                        onRemove={handleRemoveItem}
-                      />
-                    </div>
-                  ))}
+                  {loading ? (
+                    <div>Loading...</div>
+                  ) : items.length === 0 ? (
+                    <div>Your cart is empty.</div>
+                  ) : (
+                    items.map(item => (
+                      <div key={item.id} className="cart-item-wrapper">
+                        <CartItem
+                          {...item}
+                          onQuantityChange={handleQuantityChange}
+                          onRemove={handleRemoveItem}
+                        />
+                      </div>
+                    ))
+                  )}
                 </div>
               </div>
             </div>
@@ -79,17 +101,21 @@ const Cart = () => {
             </div>
 
             <div className="breadcrumb-wrapper">
-              <Breadcrumb />
+              <Breadcrumb step={currentStep} />
             </div>
 
             <div className="adress-area-wrapper">
-              <AddressArea />
-              <Shipment />
-            </div>
-
-            <div className="payment-area-wrapper">
-              <PaymentMethod />
-              <PaymentType />
+              {stepComponent}
+              <div className="step-controls">
+                {currentStep > 1 && (
+                  <button onClick={handlePrevious} className="step-btn">
+                    Previous
+                  </button>
+                )}
+                <button onClick={handleNext} className="step-btn">
+                  {currentStep === 3 ? 'Place Order' : 'Next'}
+                </button>
+              </div>
             </div>
           </div>
 

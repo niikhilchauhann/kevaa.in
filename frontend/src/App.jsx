@@ -14,8 +14,17 @@ import ResetPassword from "./pages/Auth/forgotPassword/ResetPassword";
 import SetPassword from "./pages/Auth/SetPassword";
 import RecoveryEmail from "./pages/Auth/forgotPassword/RecoveryEmail";
 import UserDashboard from "./pages/UserDashboard";
-
+import { useEffect } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './firebase';
+import useCartStore from './store/cartStore';
 function App() {
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, () => {
+      useCartStore.getState().loadCart();
+    });
+    return unsubscribe;
+  }, []);
   return (
     <Router>
       <Routes>
@@ -30,8 +39,8 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/products/product/:id" element={<ProductDetails />} />
           <Route path="protected" element={<PrivateRoute><Protected /></PrivateRoute>} />
+          <Route path="/cart" element={<Cart />} />
         </Route>
-        <Route path="/cart" element={<Cart />} />
       </Routes>
     </Router>
   );
