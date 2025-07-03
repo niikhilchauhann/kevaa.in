@@ -17,7 +17,7 @@ const SetPassword = ({ onBack, onSubmit }) => {
     setError('');
     if (onSubmit) {
       onSubmit(password);
-      navigate('/');
+      navigate('/login');
     }
   };
 
