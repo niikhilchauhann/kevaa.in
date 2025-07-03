@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import '../../css/Auth/SetPassword.css';
+import { useNavigate } from 'react-router-dom'
 
 const SetPassword = ({ onBack, onSubmit }) => {
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,6 +17,7 @@ const SetPassword = ({ onBack, onSubmit }) => {
     setError('');
     if (onSubmit) {
       onSubmit(password);
+      navigate('/');
     }
   };
 
