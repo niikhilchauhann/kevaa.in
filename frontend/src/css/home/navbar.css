@@ -299,8 +299,7 @@
 
 @media (max-width: 600px) {
   .search-dropdown {
-    left: 0;
-    right: 0;
+    right: -110px;
     min-width: unset;
     width: 90vw;
     margin: 0 auto;
@@ -318,9 +317,9 @@
     min-width: 18px;
     height: 18px;
     font-size: 0.78rem;
-    padding: 0 4px;
-    top: -5px;
-    right: -5px;
+    padding: 5px 8px;
+    top: -20px;
+    right: 10px;
   }
 }
 
@@ -338,6 +337,21 @@
     top: 120px;
     width: 160px;
     gap: 20px;
+  }
+  .search-dropdown {
+    right: -120px;
+  }
+}
+
+@media (max-width: 310px){
+  .search-dropdown {
+    right: -100px;
+    min-width: 200px;
+  }
+  .cart-badge {
+    padding: 5px 8px;
+    top: -46px;
+    right: -22px;
   }
 }
 
