@@ -24,33 +24,32 @@ const useCartStore = create((set, get) => ({
   },
 
   // Add or update item in cart
-  addToCart: async (product) => {
-    const user = auth.currentUser;
-    if (!user) return set({ error: "Not logged in" });
-    set({ loading: true });
-    try {
-      const itemRef = doc(db, 'carts', user.uid, 'items', String(product.id));
-      // Check if item already exists in local state
-      const existing = get().items.find(item => item.id === product.id);
-      const newItem = existing
-        ? { ...existing, quantity: existing.quantity + 1 }
-        : { ...product, quantity: 1 };
-      await setDoc(itemRef, newItem);
-      // Update local state
-      if (existing) {
-        set({
-          items: get().items.map(item =>
-            item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-          ),
-          loading: false
-        });
-      } else {
-        set({ items: [...get().items, newItem], loading: false });
-      }
-    } catch (err) {
-      set({ error: err.message, loading: false });
-    }
-  },
+ addToCart: async (product) => {
+  const user = auth.currentUser;
+  if (!user) return set({ error: "Not logged in" });
+  set({ loading: true });
+  try {
+    const itemRef = doc(db, 'carts', user.uid, 'items', String(product.id));
+    // Check if item already exists in local state
+    const existing = get().items.find(item => item.id === product.id);
+    const newItem = existing
+      ? { ...existing, quantity: (existing.quantity || 1) + (product.quantity || 1) }
+      : { ...product, quantity: product.quantity || 1 };
+    await setDoc(itemRef, newItem);
+    set({
+      items: existing
+        ? get().items.map(item =>
+            item.id === product.id
+              ? { ...item, quantity: item.quantity + (product.quantity || 1) }
+              : item
+          )
+        : [...get().items, newItem],
+      loading: false
+    });
+  } catch (err) {
+    set({ error: err.message, loading: false });
+  }
+},
 
   // Remove item from cart
   removeFromCart: async (productId) => {

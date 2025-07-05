@@ -8,6 +8,10 @@ html {
   overflow-x: hidden;
 }
 
+::selection{
+  background-color: #f9afc5;
+}
+
 ::-webkit-scrollbar {
   scrollbar-width: none;
 }

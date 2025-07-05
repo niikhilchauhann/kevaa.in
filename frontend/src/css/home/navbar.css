@@ -58,11 +58,18 @@
 }
 
 .navbar ul li {
+  color: #1b0712;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 10px;
   font-weight: 500;
+  transition: color 0.5s ease-in-out;
+}
+
+.navbar ul li:hover {
+  color: #d81b60;
+  text-shadow: 0px 0px 40px rgb(232, 50, 123);
 }
 
 .icons {
@@ -74,10 +81,12 @@
 }
 
 .icons span {
+
   cursor: pointer;
 }
 
-.icons .icons-navigations{
+
+.icons .icons-navigations {
   color: #1b0712;
   font-size: 30px;
   transition: transform 0.2s ease;
@@ -89,30 +98,144 @@
 }
 
 .profile-dropdown {
-    position: absolute;
-    right: 0;
-    top: 100%;
-    background: #fff;
-    /* border: 1px solid #ddd; */
-    border: 1px solid red;
-    border-radius: 4px;
-    padding: 12px;
-    z-index: 1000;
-    min-width: 120px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: #fff;
+  /* border: 1px solid #ddd; */
+  border: 1px solid red;
+  border-radius: 4px;
+  padding: 12px;
+  z-index: 1000;
+  min-width: 120px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
+
 .dropdown-button {
-    color: black;
-    width: 100%;
-    text-align: left;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px 8px;
-    font-size: 16px;
+  color: black;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 16px;
 }
+
 .dropdown-button:hover {
-    background: #f5f5f5;
+  background: #f5f5f5;
+}
+
+/* Search Icon Wrapper */
+.search-icon-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Style */
+.search-dropdown {
+  position: absolute;
+  top: 120%;
+  /* below the icon */
+  right: 0;
+  z-index: 100;
+  background: #fff;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+  border-radius: 8px;
+  padding: 10px 16px;
+  min-width: 260px;
+  display: flex;
+  align-items: center;
+  animation: fadeInSearch 0.2s;
+}
+
+@keyframes fadeInSearch {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-dropdown form {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.search-input {
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 1rem;
+  width: 180px;
+  outline: none;
+  transition: border 0.2s;
+  background: #fafafa;
+  color: black;
+}
+
+.search-input:focus {
+  border: 1.5px solid #e91e63;
+  background: #fff;
+}
+
+.search-submit-btn {
+  background: #e91e63;
+  border: none;
+  color: #fff;
+  margin-left: 8px;
+  border-radius: 6px;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.search-submit-btn:hover {
+  background: #d81b60;
+}
+
+
+.cart-icon-wrapper {
+  /* border: 1px solid green; */
+  position: relative;
+  display: inline-block;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -24px;
+  right: 8px;
+  background: #e91e63;
+  color: #fff;
+  border-radius: 50%;
+  min-width: 20px;
+  /* height: 30px; */
+  font-size: 0.85rem;
+  font-weight: 600;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  padding: 4px 8px;
+  box-shadow: 0 2px 8px rgba(233, 30, 99, 0.15);
+  z-index: 2;
+  border: 2px solid #fff;
+  transition: background-color color 0.5s ease-in-out;
+}
+
+
+
+.icons .cart-icon-wrapper:hover {
+  color: #d81b60;
+  background-color: white;
+  text-shadow: 0px 0px 40px rgb(232, 50, 123);
 }
 
 
@@ -141,7 +264,7 @@
 
   .nav-links {
     position: fixed;
-    top: 60px;
+    top: 100px;
     left: -250px;
     height: 100vh;
     width: 250px;
@@ -174,6 +297,34 @@
   }
 }
 
+@media (max-width: 600px) {
+  .search-dropdown {
+    left: 0;
+    right: 0;
+    min-width: unset;
+    width: 90vw;
+    margin: 0 auto;
+    top: 110%;
+    border-radius: 10px;
+    padding: 12px;
+  }
+
+  .search-input {
+    width: 100%;
+    font-size: 1.1rem;
+  }
+
+  .cart-badge {
+    min-width: 18px;
+    height: 18px;
+    font-size: 0.78rem;
+    padding: 0 4px;
+    top: -5px;
+    right: -5px;
+  }
+}
+
+
 @media (max-width: 480px) {
   .top-bar {
     font-size: 12px;
@@ -184,8 +335,14 @@
   }
 
   .navbar ul {
-    top: 100px;
+    top: 120px;
     width: 160px;
     gap: 20px;
+  }
+}
+
+@media (max-width:164px) {
+  .navbar ul {
+    top: 140px;
   }
 }

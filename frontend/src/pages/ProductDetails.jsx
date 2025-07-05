@@ -11,8 +11,10 @@ import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { BsHeart } from 'react-icons/bs';
 import { GoVerified } from 'react-icons/go';
 import Testimonials from '../components/Testimonials.jsx';
+import useCartStore from '../store/cartStore.js';
 
 export default function ProductDetails() {
+  const addToCart = useCartStore(state => state.addToCart);
   const { id } = useParams();
   const product = allProducts.find(p => p.id === parseInt(id));
 
@@ -24,14 +26,14 @@ export default function ProductDetails() {
   if (!product) return <p>Product not found!</p>;
 
   // reviews filteration
-const productReviews = Array.isArray(product.reviews) ? product.reviews : [];
+  const productReviews = Array.isArray(product.reviews) ? product.reviews : [];
 
 
- const filteredReviews = [...productReviews].sort((a, b) => {
-  if (filter === 'highest') return b.rating - a.rating;
-  if (filter === 'lowest') return a.rating - b.rating;
-  return 0; // Default: latest
-})
+  const filteredReviews = [...productReviews].sort((a, b) => {
+    if (filter === 'highest') return b.rating - a.rating;
+    if (filter === 'lowest') return a.rating - b.rating;
+    return 0; // Default: latest
+  })
 
   const handleWriteReview = () => {
     alert("Redirect to review form or open modal.");
@@ -165,7 +167,12 @@ const productReviews = Array.isArray(product.reviews) ? product.reviews : [];
               <span>{quantity}</span>
               <button onClick={increment}>+</button>
             </div>
-            <button className="add-to-cart-btn">Add to Cart</button>
+            <button className="add-to-cart-btn"
+              onClick={() => {
+                addToCart({ ...product, quantity });
+                alert("Added to cart!");
+              }}
+            >Add to Cart</button>
           </div>
 
           <p className="extra-info">

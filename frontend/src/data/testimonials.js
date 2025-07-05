@@ -11,7 +11,11 @@ export const testimonials = [
   },
   {
     productId: allProducts[1].id,
-   
+    name: "Sarah M.",
+    message:
+      "I’m absolutely in love with the material and fit. Definitely ordering more soon!",
+    rating: 5,
+    publishedAt: "10/02/2025"
   },
   {
     productId: allProducts[2].id,

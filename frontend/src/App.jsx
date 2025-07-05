@@ -5,6 +5,8 @@ import Protected from "./pages/Protected";
 import PrivateRoute from "./utils/PrivateRoute";
 import Layout from "./components/Layout"; // Import the Layout component
 import Products from "./pages/Products";
+import About from "./pages/About";
+import ContactUs from "./pages/ContactUs";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Login from "./pages/Auth/Login";
@@ -18,6 +20,7 @@ import { useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
 import useCartStore from './store/cartStore';
+import PageNotFound from "./pages/PageNotFound";
 function App() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, () => {
@@ -35,7 +38,10 @@ function App() {
         <Route path="/recoveryemail" element={<RecoveryEmail />} />
         <Route path="/userDashboard" element={<UserDashboard />} />
         <Route path="/" element={<Layout />}>
+          <Route path="*" element={<PageNotFound />} />
           <Route index element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/product/:id" element={<ProductDetails />} />
           <Route path="protected" element={<PrivateRoute><Protected /></PrivateRoute>} />

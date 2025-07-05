@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
+import useSearchStore from '../../store/searchStore';
 import "../../css/products/productList.css";
 
-const ITEMS_PER_PAGE = 8;
+const ITEMS_PER_PAGE = 10;
 
 const ProductList = ({ products, filters }) => {
+     const searchQuery = useSearchStore((state) => state.searchQuery);
     const [sortOption, setSortOption] = useState('Most Popular');
     const [currentPage, setCurrentPage] = useState(1);
     const [filteredProducts, setFilteredProducts] = useState([]);
+
 
     useEffect(() => {
         setCurrentPage(1);
 
         const filtered = products.filter(product => {
+            //search filter 
+            const matchSearch =
+                ( product.name.toLowerCase().includes(searchQuery.toLowerCase()));
             const matchStyle =
                 (filters?.dressStyles ?? []).length === 0 || (filters?.dressStyles ?? []).includes(product.dressStyle);
             const matchCategory =
@@ -24,7 +30,7 @@ const ProductList = ({ products, filters }) => {
             const matchPrice =
                 product.price >= 50 && product.price <= (filters?.priceRange ?? 500);
 
-            return matchStyle && matchCategory && matchColor && matchSize && matchPrice;
+            return  matchSearch && matchStyle && matchCategory && matchColor && matchSize && matchPrice;
         });
 
         const sorted = [...filtered].sort((a, b) => {
@@ -35,7 +41,7 @@ const ProductList = ({ products, filters }) => {
         });
 
         setFilteredProducts(sorted);
-    }, [filters, products, sortOption]);
+    }, [filters, products, sortOption, searchQuery]);
 
     const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
     const paginatedProducts = filteredProducts.slice(
@@ -45,16 +51,12 @@ const ProductList = ({ products, filters }) => {
 
     return (
         <div className="product-list-wrapper">
-
-
             <div className="product-list-header">
                 <div className="left-info">
                     <h2>
                         {filters?.category?.length > 0 ? filters.category.join(', ') : "All Categories"} —
                         {filters?.dressStyles?.length > 0 ? filters.dressStyles.join(', ') : "All Styles"}
                     </h2>
-
-
                 </div>
                 <div className="right-sort">
                     <span className="product-count">
