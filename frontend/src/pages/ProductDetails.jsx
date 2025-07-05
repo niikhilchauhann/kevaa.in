@@ -170,7 +170,7 @@ export default function ProductDetails() {
             <button className="add-to-cart-btn"
               onClick={() => {
                 addToCart({ ...product, quantity });
-                alert("Added to cart!");
+                // alert("Added to cart!");
               }}
             >Add to Cart</button>
           </div>
