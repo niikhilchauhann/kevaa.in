@@ -52,30 +52,31 @@ function UserDashboard() {
   };
 
   return (
-    <div className='user-dashboard-container'>
-      <div className="sidebar">
-        <h3>Dashboard</h3>
-        <ul>
-          <li className={activeComponent === "profile" ? "active" : ""} onClick={() => setActiveComponent("profile")}>
-            <FaUser /> <span>Profile</span>
-          </li>
-          <li className={activeComponent === "orders" ? "active" : ""} onClick={() => setActiveComponent("orders")}>
-            <FaBox /> <span>Recent Orders</span>
-          </li>
-          <li className={activeComponent === "addresses" ? "active" : ""} onClick={() => setActiveComponent("addresses")}>
-            <FaAddressBook /> <span>Addresses</span>
-          </li>
-          <li className={activeComponent === "track" ? "active" : ""} onClick={() => setActiveComponent("track")}>
-            <FaTruck /> <span>Track Order</span>
-          </li>
-          <li className={activeComponent === "faqs" ? "active" : ""} onClick={() => setActiveComponent("faqs")}>
-            <FaQuestionCircle /> <span>FAQs</span>
-          </li>
-        </ul>
-      </div>
-
+    <div className='main-user-dashboard-container'>
+      <h3 className='dashboard-heading'>Dashboard</h3>
+      <div className='user-dashboard-container'>
+        <div className="sidebar">
+          <ul>
+            <li className={activeComponent === "profile" ? "active" : ""} onClick={() => setActiveComponent("profile")}>
+              <FaUser /> <span>Profile</span>
+            </li>
+            <li className={activeComponent === "orders" ? "active" : ""} onClick={() => setActiveComponent("orders")}>
+              <FaBox /> <span>Recent Orders</span>
+            </li>
+            <li className={activeComponent === "addresses" ? "active" : ""} onClick={() => setActiveComponent("addresses")}>
+              <FaAddressBook /> <span>Addresses</span>
+            </li>
+            <li className={activeComponent === "track" ? "active" : ""} onClick={() => setActiveComponent("track")}>
+              <FaTruck /> <span>Track Order</span>
+            </li>
+            <li className={activeComponent === "faqs" ? "active" : ""} onClick={() => setActiveComponent("faqs")}>
+              <FaQuestionCircle /> <span>FAQs</span>
+            </li>
+          </ul>
+        </div>
       <div className="content">
         {renderComponent()}
+      </div>
       </div>
     </div>
   );

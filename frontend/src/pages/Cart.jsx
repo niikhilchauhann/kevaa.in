@@ -9,13 +9,30 @@ import PaymentType from '../components/cart/PaymentType';
 import Breadcrumb from '../components/cart/BreadCrumb';
 import useCartStore from '../store/cartStore'; // <-- import store
 import '../css/cart/carts.css';
+import OrderReceiptModal from '../components/cart/OrderReceiptModal';
+import { auth } from '../firebase';
 
 const Cart = () => {
   const { items, loadCart, updateQuantity, removeFromCart, loading } = useCartStore();
   const [currentStep, setCurrentStep] = useState(1);
 
+  const [showOrderModal, setShowOrderModal] = useState(false);
+  const [payLoading, setPayLoading] = useState(false);
+
+  const [selectedAddress, setSelectedAddress] = useState(null);
   useEffect(() => {
     loadCart(); // Firestore se current user ka cart load karo
+  }, []);
+
+  const [userId, setUserId] = useState(null);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if (user) setUserId(user.uid);
+      else setUserId(null);
+    });
+    return () => unsubscribe();
   }, []);
 
   const handleQuantityChange = (id, newQuantity) => {
@@ -46,22 +63,77 @@ const Cart = () => {
   let stepComponent;
   switch (currentStep) {
     case 1:
-      stepComponent = <AddressArea />;
+      stepComponent = <AddressArea userId={userId}  onSelectAddress={setSelectedAddress} />;
       break;
     case 2:
       stepComponent = <Shipment />;
       break;
     case 3:
-      stepComponent = (
+     stepComponent = (
         <>
           <PaymentMethod />
           <PaymentType />
+          <button
+            className="show-order-modal-btn"
+            onClick={() => setShowOrderModal(true)}
+            style={{marginTop: 24}}
+          >
+            Review & Place Order
+          </button>
         </>
       );
       break;
     default:
       stepComponent = <AddressArea />;
   }
+
+  // Razorpay payment handler
+  const handlePlaceOrder = () => {
+    setPayLoading(true);
+    handleRazorpayPayment({
+      amount: subtotal - discount + shipping - couponApplied,
+      user,
+      address: selectedAddress,
+      items,
+      onSuccess: (paymentResponse) => {
+        setPayLoading(false);
+        setShowOrderModal(false);
+        // TODO: Save order to Firestore here
+        alert("Payment successful! Payment ID: " + paymentResponse.razorpay_payment_id);
+      },
+      onFailure: () => {
+        setPayLoading(false);
+        alert("Payment cancelled.");
+      },
+    });
+  };
+
+  
+  // 1️⃣ Paste the function here:
+  const handleRazorpayPayment = async ({ amount, user, address, items, onSuccess, onFailure }) => {
+    const options = {
+      key: "rzp_test_aNekzbf3DEXHpA", // Replace with your Razorpay key
+      amount: amount * 100, // paise
+      currency: "INR",
+      name: "Your Shop Name",
+      description: "Order Payment",
+      handler: function (response) {
+        onSuccess(response);
+      },
+      prefill: {
+        name: user?.name || "",
+        email: user?.email || "",
+        contact: address?.contact || "",
+      },
+      notes: {
+        address: `${address?.houseNo}, ${address?.streetName}, ${address?.city}`,
+      },
+      theme: { color: "#9a155a" },
+      modal: { ondismiss: onFailure },
+    };
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  };
 
   return (
     <div className="cart-page">
@@ -104,7 +176,7 @@ const Cart = () => {
               <Breadcrumb step={currentStep} />
             </div>
 
-            <div className="adress-area-wrapper">
+            <div className="address-area-wrapper">
               {stepComponent}
               <div className="step-controls">
                 {currentStep > 1 && (
@@ -112,9 +184,11 @@ const Cart = () => {
                     Previous
                   </button>
                 )}
-                <button onClick={handleNext} className="step-btn">
-                  {currentStep === 3 ? 'Place Order' : 'Next'}
-                </button>
+                {currentStep < 3 && (
+                  <button onClick={handleNext} className="step-btn">
+                    Next
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -130,6 +204,16 @@ const Cart = () => {
           </div>
         </div>
       </div>
+      <OrderReceiptModal
+        isOpen={showOrderModal}
+        onClose={() => setShowOrderModal(false)}
+        user={user}
+        address={selectedAddress}
+        items={items}
+        total={subtotal - discount + shipping - couponApplied}
+        onPlaceOrder={handlePlaceOrder}
+        loading={payLoading}
+      />
     </div>
   );
 };

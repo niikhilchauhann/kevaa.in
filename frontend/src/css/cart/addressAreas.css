@@ -16,6 +16,10 @@
   transition: border-color 0.3s ease, box-shadow 0.2s ease;
 }
 
+.address-card.selected {
+  border: 2px solid #27ae60;
+  background: #f6fff9;
+}
 /* Optional hover styling */
 
 .address-info {
