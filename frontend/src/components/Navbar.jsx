@@ -8,24 +8,28 @@ import { IoSearch } from 'react-icons/io5';
 import { IoIosArrowDown } from 'react-icons/io';
 import '../css/home/home.css';
 import '../css/home/navbar.css';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { onAuthStateChanged, signOut, getAuth } from 'firebase/auth';
 import { auth } from '../firebase';
 import useSearchStore from '../store/searchStore';
 import useCartStore from '../store/cartStore';
 
 function Navbar() {
+    const navigate = useNavigate();
+    const authInstance = getAuth();
+
+    const [user, setUser] = useState(null);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [showSearchBox, setShowSearchBox] = useState(false);
+
+      const searchRef = useRef(null);
     const cartItems = useCartStore(state => state.items);
     const cartCount = cartItems.length;
     // const cartCount = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
-
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [user, setUser] = useState(null);
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [showSearchBox, setShowSearchBox] = useState(false);
     const searchQuery = useSearchStore((state) => state.searchQuery);
     const setSearchQuery = useSearchStore((state) => state.setSearchQuery);
-    const navigate = useNavigate();
     const searchBoxRef = useRef(null);
+    
 
     // Hide search box on outside click
     useEffect(() => {
@@ -125,9 +129,9 @@ function Navbar() {
                     <span style={{ position: "relative", cursor: "pointer" }}>
                         <div onClick={() => setDropdownOpen(!dropdownOpen)}>
                             {user ? (
-                                user.photoURL ? (
+                                user?.photoURL ? (
                                     <img
-                                        src={user.photoURL}
+                                        src={user?.photoURL}
                                         alt="User"
                                         style={{ width: 28, height: 28, borderRadius: '50%', objectFit: 'cover' }}
                                     />

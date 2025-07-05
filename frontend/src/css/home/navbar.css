@@ -343,15 +343,15 @@
   }
 }
 
-@media (max-width: 310px){
+@media (max-width: 320px){
   .search-dropdown {
-    right: -100px;
+    right: -110px;
     min-width: 200px;
   }
   .cart-badge {
     padding: 5px 8px;
-    top: -46px;
-    right: -22px;
+    top: -25px;
+    right: 10px;
   }
 }
 
