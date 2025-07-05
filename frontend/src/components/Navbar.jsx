@@ -39,7 +39,7 @@ function Navbar() {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
-                setUserPhoto(user.photoURL);
+                setUserPhoto(user.photoURL || "https://ui-avatars.com/api/?name=User");
                 console.log('current user', user.displayName, ' is having ', user.photoURL);
             } else {
                 setUserPhoto(null);

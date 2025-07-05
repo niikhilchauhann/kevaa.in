@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../../css/userDashboard/profile.css';
 import { Timestamp } from 'firebase/firestore'; // Import if needed
 
 const Profile = ({ user }) => {
+    const [imgError, setImgError] = useState(false);
   const displayName = user?.displayName || user?.firstName || "User";
   const email = user?.email || "";
-  const userPhotoURL = user?.photoURL || user?.imageUrl || "https://i.pravatar.cc/100";
+  const userPhotoURL = user?.photoURL || user?.imageUrl;
   const gender = user?.gender || "Not specified";
   const phone = user?.phone || "Not specified";
   const fullName = [user?.firstName, user?.lastName].filter(Boolean).join(" ") || displayName;
@@ -38,6 +39,8 @@ const Profile = ({ user }) => {
     }
   }
 
+   const initial = displayName[0] || "U";
+
   return (
     <div className="profile-container">
       <h2>Welcome, {displayName}</h2>
@@ -53,10 +56,16 @@ const Profile = ({ user }) => {
       <div className="profile-card">
         <div className="profile-header"></div>
         <div className="profile-content">
-          <img className="avatar" src={`${userPhotoURL}`} alt="User"
-            onError={(e) => {
-              e.target.src = "https://i.pravatar.cc/100";
-            }} />
+          {userPhotoURL && !imgError ? (
+            <img
+              className="avatar"
+              src={userPhotoURL}
+              alt={displayName}
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            <h1 className="avatar-initial">{initial}</h1>
+          )}
           <div className="user-info">
             <h3>{displayName}</h3>
             <p>{email}</p>

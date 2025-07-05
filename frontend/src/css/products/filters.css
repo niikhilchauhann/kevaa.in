@@ -5,6 +5,7 @@
   border-radius: 8px;
   max-width: 300px;
   background-color: #fff;
+  /* border: 1px solid green; */
   flex-shrink: 0;
 }
 
@@ -189,15 +190,14 @@
 @media (max-width: 1024px) {
   .filter-panel {
     max-width: 100%;
-    width: 90%;
-    padding: 14px 18px;
   }
 }
 
 /* Mobile */
 @media (max-width: 768px) {
   .filter-panel {
-    padding: 12px 14px;
+    max-width: 240px;
+    padding: 12px 10px;
     margin-bottom: 24px;
   }
 
@@ -231,9 +231,18 @@
   }
 }
 
+@media (max-width: 658px) {
+  .filter-panel {
+    max-width: 92%;
+    /* padding: 12px 10px; */
+
+  }
+
+}
 /* Extra Small Screens */
 @media (max-width: 480px) {
   .filter-panel {
+    max-width: 100%;
     padding: 10px;
   }
 

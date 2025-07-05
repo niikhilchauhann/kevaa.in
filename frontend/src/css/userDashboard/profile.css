@@ -29,6 +29,17 @@
   position: relative;
 }
 
+.profile-content .avatar-initial{
+  width: 60px; 
+  border: 1px solid rgb(186, 186, 186);
+  margin-right: 10px; 
+  display: flex;
+  padding: 1px;
+  align-content: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
 .avatar {
   width: 70px;
   height: 70px;
