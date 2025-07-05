@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { products as allProducts } from '../data/realProducts.js';
-import { testimonials } from '../data/testimonials.js'; // adjust path if needed
+// import { testimonials } from '../data/testimonials.js'; // adjust path if needed
 import ReviewHeader from '../components/productsDetails/ReviewHeader.jsx'; // make sure the path is correct
 import '../css/productDescription/productsDetails.css';
 import '../css/productDescription/reviewProducts.css'
@@ -24,14 +24,14 @@ export default function ProductDetails() {
   if (!product) return <p>Product not found!</p>;
 
   // reviews filteration
-  const productTestimonials = testimonials.filter(t => t.productId === product.id);
+const productReviews = Array.isArray(product.reviews) ? product.reviews : [];
 
 
-  const filteredTestimonials = [...productTestimonials].sort((a, b) => {
-    if (filter === 'highest') return b.rating - a.rating;
-    if (filter === 'lowest') return a.rating - b.rating;
-    return 0; // Default: latest (assuming already sorted)
-  });
+ const filteredReviews = [...productReviews].sort((a, b) => {
+  if (filter === 'highest') return b.rating - a.rating;
+  if (filter === 'lowest') return a.rating - b.rating;
+  return 0; // Default: latest
+})
 
   const handleWriteReview = () => {
     alert("Redirect to review form or open modal.");
@@ -71,16 +71,16 @@ export default function ProductDetails() {
   const renderReviews = () => (
     <div className='main-review-container'>
       <ReviewHeader
-        count={productTestimonials.length}
+        count={productReviews.length}
         filter={filter}
         setFilter={setFilter}
         onWriteReview={handleWriteReview}
       />
       <div className="reviews-container">
-        {filteredTestimonials.length === 0 ? (
+        {filteredReviews.length === 0 ? (
           <p>No reviews yet for this product.</p>
         ) : (
-          filteredTestimonials.map((review, index) => (
+          filteredReviews.map((review, index) => (
             <div className="review-card" key={index}>
               <div className="review-header">
                 <div className="review-stars">{renderStars(review.rating)}</div>

@@ -36,7 +36,22 @@ export const products = [
     deliveryInfo: "Free delivery in 3-5 days",
     returnPolicy: "30-day easy returns",
     tags: ["casual", "summer", "cotton"],
-
+    reviews: [
+      {
+        name: "John Doe",
+        message:
+          "I'm blown away by the quality and style of the clothes I received from Shop.co. From casual wear to elegant dresses, every piece I've bought has exceeded my expectations.",
+        rating: 5,
+        publishedAt: "20/04/2025"
+      },
+      {
+        name: "Neha D.",
+        message:
+          "The color and fabric were just perfect. Will recommend to friends!",
+        rating: 4,
+        publishedAt: "18/06/2025"
+      },
+    ],
     variants: {
       white: {
         images: [
@@ -67,6 +82,7 @@ export const products = [
     }
 
   },
+  
   {
     id: 2,
     name: "Polo with Tipping Details",
@@ -92,6 +108,22 @@ export const products = [
     deliveryInfo: "Ships in 2-4 days",
     returnPolicy: "15-day return policy",
     tags: ["polo", "daily", "smart"],
+    reviews: [
+      {
+        name: "Sarah M.",
+        message:
+          "I’m absolutely in love with the material and fit. Definitely ordering more soon!",
+        rating: 5,
+        publishedAt: "10/02/2025"
+      },
+      {
+        name: "Amit V.",
+        message:
+          "Fit was great and the cloth quality exceeded expectations.",
+        rating: 5,
+        publishedAt: "09/04/2025"
+      },
+    ],
     variants: {
       red: {
         images: [
@@ -144,6 +176,22 @@ export const products = [
     deliveryInfo: "Free express delivery",
     returnPolicy: "7-day return",
     tags: ["stripes", "sport", "summer"],
+    reviews: [
+      {
+        name: "Alex K.",
+        message:
+          "Finding clothes that align with my personal style used to be a challenge until I discovered Shop.co. The range of options they offer is truly remarkable.",
+        rating: 5,
+        publishedAt: "04/05/2025"
+      },
+      {
+        name: "Sana P.",
+        message:
+          "Comfortable, stylish, and came in beautiful packaging.",
+        rating: 5,
+        publishedAt: "03/03/2024"
+      },
+    ],
     variants: {
       black: {
         images: [
@@ -188,6 +236,15 @@ export const products = [
     deliveryInfo: "Delivery in 4-6 days",
     returnPolicy: "Return within 10 days",
     tags: ["denim", "skinny", "jeans"],
+    reviews: [
+      {
+        name: "James L.",
+        message:
+          "I'm thrilled to have stumbled upon Shop.co. The selection of clothes is not only diverse but also on-point with the latest trends.",
+        rating: 5,
+        publishedAt: "10/01/2024"
+      },
+    ],
     variants: {
       blue: {
         images: [
@@ -225,6 +282,22 @@ export const products = [
     deliveryInfo: "Ships in 3 days",
     returnPolicy: "30-day return policy",
     tags: ["checkered", "soft", "casual"],
+    reviews: [
+      {
+        name: "Moona B.",
+        message:
+          "The selection of clothes is not only diverse but also on-point with the latest trends. Love this site!",
+        rating: 5,
+        publishedAt: "21/07/2024"
+      },
+      {
+        name: "Tarun S.",
+        message:
+          "I ordered this for my sister and she loved it. Great quality!",
+        rating: 5,
+        publishedAt: "22/07/2024"
+      },
+    ],
     variants: {
       red: {
         images: [
@@ -278,6 +351,15 @@ export const products = [
     deliveryInfo: "Same day shipping available",
     returnPolicy: "15-day return",
     tags: ["daily", "sporty", "striped"],
+    reviews: [
+      {
+        name: "Priya S.",
+        message:
+          "Stylish and affordable. Delivery was super fast. Definitely recommended!",
+        rating: 4,
+        publishedAt: "28/03/2024"
+      },
+    ],
     variants: {
       orange: {
         images: [
@@ -331,6 +413,15 @@ export const products = [
     deliveryInfo: "Delivered in 3-5 business days",
     returnPolicy: "20-day return",
     tags: ["formal", "striped", "linen"],
+    reviews: [
+      {
+        name: "Ravi K.",
+        message:
+          "I bought a jacket and it’s exactly how it looked in the pictures. Loved it!",
+        rating: 5,
+        publishedAt: "12/12/2023"
+      },
+    ],
     variants: {
       green: {
         images: [
@@ -376,6 +467,15 @@ export const products = [
     deliveryInfo: "Free shipping",
     returnPolicy: "30 days return window",
     tags: ["graphic", "motivational", "orange"],
+    reviews: [
+      {
+        name: "Emma W.",
+        message:
+          "Customer service was quick and helpful. The product fits really well.",
+        rating: 4,
+        publishedAt: "02/08/2024"
+      },
+    ],
     variants: {
       orange: {
         images: [
@@ -411,6 +511,15 @@ export const products = [
     deliveryInfo: "Standard delivery in 4-6 days",
     returnPolicy: "Returnable within 10 days",
     tags: ["shorts", "denim", "summer"],
+    reviews: [
+      {
+        name: "Karan P.",
+        message:
+          "The packaging was so good and the product quality is premium. I’ll be coming back for sure.",
+        rating: 5,
+        publishedAt: "15/01/2025"
+      },
+    ],
     variants: {
       blue: {
         images: [
@@ -481,6 +590,15 @@ export const products = [
     deliveryInfo: "Ships in 1-2 days",
     returnPolicy: "10-day return",
     tags: ["formal", "navy", "office"],
+       reviews: [
+      {
+        name: "Ananya R.",
+        message:
+          "Clothes are trendy and true to size. Loved the shopping experience!",
+        rating: 5,
+        publishedAt: "05/06/2024"
+      },
+    ],
     variants: {
       blue: {
         images: [
@@ -516,7 +634,7 @@ export const products = [
     deliveryInfo: "Delivered in 2-4 business days",
     returnPolicy: "15-day return policy",
     tags: ["orange", "striped", "daily"],
-     variants: {
+    variants: {
       blue: {
         images: [
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaYgqCq-KpasjQQs4wtJz7pfU9rwZsDOKGrA&s",
