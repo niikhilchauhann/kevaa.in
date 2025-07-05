@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import useAuthStore from '../store/authStore';
 import Profile from '../components/userDashboard/Profile';
 import RecentOrders from '../components/userDashboard/RecentOrders';
 import AddressList from '../components/userDashboard/AddressList';
@@ -12,6 +13,7 @@ import {
 } from 'react-icons/fa';
 
 function UserDashboard() {
+  const [firestoreUser, setFirestoreUser] = useState(null);
   const [activeComponent, setActiveComponent] = useState("profile");
   const [user, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
@@ -23,7 +25,9 @@ function UserDashboard() {
         const db = getFirestore();
         const userDoc = await getDoc(doc(db, 'users', user.uid));
         if (userDoc.exists()) {
-          setUserData(userDoc.data());
+          const firestoreUser = { uid: user.uid, ...userDoc.data() };
+          setUserData(firestoreUser);
+          useAuthStore.getState().setUser(firestoreUser); // <-- Put this here!
         }
       }
     });
@@ -33,7 +37,7 @@ function UserDashboard() {
   const renderComponent = () => {
     switch (activeComponent) {
       case "profile":
-        return <Profile user={userData || user} />;
+        return <Profile user={userData} />;
       case "orders":
         return <RecentOrders userId={user?.uid} />;
       case "addresses":

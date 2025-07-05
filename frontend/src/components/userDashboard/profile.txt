@@ -14,13 +14,15 @@ const COUNTRY_OPTIONS = [
 
 const Profile = ({ user }) => {
   const [imgError, setImgError] = useState(false);
-  const { loading, error } = useAuthStore();
   const displayName = user?.displayName || user?.firstName || "User";
   const email = user?.email || "";
   const userPhotoURL = user?.photoURL || user?.imageUrl;
 
-  // Initial country code
-  const [editCountryCode, setEditCountryCode] = useState(user?.countryCode || "+91");
+  // Initial country logic
+  const initialCountry = COUNTRY_OPTIONS.find(
+    c => c.code === (user?.countryCode || "+91")
+  ) || COUNTRY_OPTIONS[0];
+
   const [editMode, setEditMode] = useState(false);
   const [editName, setEditName] = useState(
     [user?.firstName, user?.lastName].filter(Boolean).join(" ") ||
@@ -29,28 +31,34 @@ const Profile = ({ user }) => {
   );
   const [editGender, setEditGender] = useState(user?.gender || "Not specified");
   const [editPhone, setEditPhone] = useState(user?.phone || "");
+  const [editCountryCode, setEditCountryCode] = useState(initialCountry.code);
+  const [editCountryName, setEditCountryName] = useState(user?.countryName || initialCountry.name);
 
   const updateProfile = useAuthStore(state => state.updateProfile);
+
+  // Country code change handler
+  const handleCountryCodeChange = (e) => {
+    const selectedCode = e.target.value;
+    setEditCountryCode(selectedCode);
+    const country = COUNTRY_OPTIONS.find(c => c.code === selectedCode);
+    setEditCountryName(country ? country.name : "");
+  };
 
   const handleSave = async () => {
     const [firstName, ...rest] = editName.split(" ");
     const lastName = rest.join(" ");
 
-    try {
-      const success = await updateProfile({
-        firstName,
-        lastName,
-        gender: editGender,
-        phone: editPhone,
-        countryCode: editCountryCode,
-      });
+    const success = await updateProfile({
+      firstName,
+      lastName,
+      gender: editGender,
+      phone: editPhone,
+      countryCode: editCountryCode,
+      countryName: editCountryName,
+    });
 
-      if (success) setEditMode(false);
-      else alert("Profile update failed. Check console for details.");
-    } catch (err) {
-      alert("Error: " + err.message);
-      console.error("Save error:", err);
-    }
+    if (success) setEditMode(false);
+    // Optionally show a toast or message
   };
 
   let createdAtDisplay = "";
@@ -80,9 +88,6 @@ const Profile = ({ user }) => {
   }
 
   const initial = displayName[0] || "U";
-
-  // Find the selected country for displaying flag and name in view mode
-  const selectedCountry = COUNTRY_OPTIONS.find(c => c.code === (user?.countryCode || "+91")) || COUNTRY_OPTIONS[0];
 
   return (
     <div className="profile-container">
@@ -146,7 +151,7 @@ const Profile = ({ user }) => {
           <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
             <select
               value={editCountryCode}
-              onChange={e => setEditCountryCode(e.target.value)}
+              onChange={handleCountryCodeChange}
               disabled={!editMode}
               style={{ width: "180px" }}
             >
@@ -166,12 +171,7 @@ const Profile = ({ user }) => {
             />
           </div>
           <div style={{ marginTop: 4, color: "#555" }}>
-            Country Code: <b>
-              {editMode
-                ? editCountryCode
-                : (user?.countryCode || selectedCountry.code)
-              }
-            </b>
+            Country: <b>{editMode ? editCountryName : (user?.countryName || initialCountry.name)}</b>
           </div>
 
           <label>My email Address</label>
