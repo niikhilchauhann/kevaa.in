@@ -416,7 +416,7 @@ export const products = [
     reviews: [
       {
         name: "Ravi K.",
-        message:
+        message:  
           "I bought a jacket and it’s exactly how it looked in the pictures. Loved it!",
         rating: 5,
         publishedAt: "12/12/2023"

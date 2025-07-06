@@ -83,6 +83,9 @@
   display: flex;
   flex-direction: column;
   border-top: 1px solid #e5e7eb;
+  /* border: 1px solid green; */
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 .cart-item-wrapper {
@@ -104,15 +107,7 @@
   padding: 10px 40px;
   display: flex;
   gap: 20px;
-  /* border: 1px solid green; */
 }
-
-/* .address-area-wrapper .step-controls {
-  display: flex;
-  gap: 18px;
-  margin-top: 24px;
-  justify-content: flex-end;
-} */
 
 .address-area-wrapper .step-controls .step-btn {
   padding: 10px 32px;
