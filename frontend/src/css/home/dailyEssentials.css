@@ -105,12 +105,13 @@
   font-size: 14px;
 }
 
-.card .content .add-btn {
+.grid .card .content .add-btn {
   position: absolute;
   bottom: 15px;
   right: 15px;
   background: #f92b72;
   color: white;
+  width: 35px;
   border: none;
   padding: 4px 12px;
   font-weight: bold;
@@ -123,8 +124,8 @@
   margin-top: 30px;
 }
 
-.pagination .dot {
-  height: 10px;
+.daily-section .pagination .dot {
+  height: 20px;
   width: 10px;
   margin: 0 6px;
   background-color: #c4c4c4;
@@ -152,6 +153,9 @@
   .grid {
     grid-template-columns: repeat(3, 1fr);
     /* 3 columns on medium screens */
+  }
+  .daily-section .grid .card .content .add-btn {
+     width: 35px;
   }
 }
 
@@ -183,11 +187,11 @@
     /* Decrease price font size */
   }
 
-  .add-btn {
+  .daily-section .grid .card .content .add-btn {
     padding: 4px 8px;
-    /* Adjust button size */
     font-size: 18px;
-    /* Decrease button font size */
+     width: 30px;
+    border-radius: 50%;
   }
 }
 
@@ -207,9 +211,9 @@
     /* Further decrease price font size */
   }
 
-  .add-btn {
+  .grid .card .content .add-btn {
     padding: 4px 6px;
-    /* Adjust button size */
+    width: 30px;
     font-size: 16px;
     /* Decrease button font size */
   }

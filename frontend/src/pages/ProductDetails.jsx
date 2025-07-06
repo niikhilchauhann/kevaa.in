@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { products as allProducts } from '../data/realProducts.js';
 // import { testimonials } from '../data/testimonials.js'; // adjust path if needed
 import ReviewHeader from '../components/productsDetails/ReviewHeader.jsx'; // make sure the path is correct
@@ -104,23 +104,28 @@ export default function ProductDetails() {
       <h2 className="related-title">YOU MIGHT ALSO LIKE</h2>
       <div className="related-products-list">
         {relatedProducts.map((item) => (
-          <div key={item.id} className="related-product-card">
-            <img src={item.image || item.images?.[0]} alt={item.name} className="related-product-image" />
-            <h4 className="related-product-name">{item.name}</h4>
-            <div className="related-stars">{renderStars(item.rating)}</div>
-            <p className="related-price">
-              ${item.price}
-              {item.originalPrice && (
-                <>
-                  {" "}
-                  <span className="original-price">${item.originalPrice}</span>{" "}
-                  <span className="discount">
-                    -{Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)}%
-                  </span>
-                </>
-              )}
-            </p>
-          </div>
+        <Link
+      key={item.id}
+      to={`/products/product/${item.id}`}
+      className="related-product-card"
+      style={{ textDecoration: "none", color: "inherit" }}
+    >
+      <img src={item.image || item.images?.[0]} alt={item.name} className="related-product-image" />
+      <h4 className="related-product-name">{item.name}</h4>
+      <div className="related-stars">{renderStars(item.rating)}</div>
+      <p className="related-price">
+        ${item.price}
+        {item.originalPrice && (
+          <>
+            {" "}
+            <span className="original-price">${item.originalPrice}</span>{" "}
+            <span className="discount">
+              -{Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)}%
+            </span>
+          </>
+        )}
+      </p>
+    </Link>
         ))}
       </div>
     </div>
