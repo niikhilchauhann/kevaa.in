@@ -12,8 +12,9 @@ import '../css/cart/carts.css';
 import OrderReceiptModal from '../components/cart/OrderReceiptModal';
 import { auth } from '../firebase';
 
+
 const Cart = () => {
-  const { items, loadCart, updateQuantity, removeFromCart, loading } = useCartStore();
+  const { items, loadCart, updateQuantity, removeFromCart, loading, placeOrder, clearCart } = useCartStore();
   const [currentStep, setCurrentStep] = useState(1);
 
   const [showOrderModal, setShowOrderModal] = useState(false);
@@ -63,22 +64,43 @@ const Cart = () => {
   let stepComponent;
   switch (currentStep) {
     case 1:
-      stepComponent = <AddressArea userId={userId}  onSelectAddress={setSelectedAddress} />;
+      stepComponent = <AddressArea userId={userId} onSelectAddress={setSelectedAddress} />;
       break;
     case 2:
       stepComponent = <Shipment />;
       break;
     case 3:
-     stepComponent = (
+      stepComponent = (
         <>
           <PaymentMethod />
           <PaymentType />
           <button
             className="show-order-modal-btn"
             onClick={() => setShowOrderModal(true)}
-            style={{marginTop: 24}}
+            style={{ marginTop: 24 }}
           >
             Review & Place Order
+          </button>
+          <button
+            className="show-order-modal-btn"
+            onClick={async () => {
+              if (!selectedAddress) {
+                alert("Please select address first");
+                return;
+              }
+
+              await placeOrder({
+                address: selectedAddress,
+                amount: subtotal - discount + shipping - couponApplied,
+                paymentId: "test_bypass_" + Date.now(), // mock payment ID
+              });
+
+              await clearCart();
+              alert("Test Order Placed Without Payment!");
+            }}
+            style={{ marginTop: 12, backgroundColor: "#ddd", color: "#000" }}
+          >
+            🚧 Bypass & Place Order (Test)
           </button>
         </>
       );
@@ -90,25 +112,45 @@ const Cart = () => {
   // Razorpay payment handler
   const handlePlaceOrder = () => {
     setPayLoading(true);
+
+    const amount = subtotal - discount + shipping - couponApplied;
+
+    const handleSuccess = async (paymentResponse) => {
+      try {
+        await placeOrder({
+          address: selectedAddress,
+          amount,
+          paymentId: paymentResponse.razorpay_payment_id,
+        });
+
+        await clearCart();
+
+        alert("Payment successful! Payment ID: " + paymentResponse.razorpay_payment_id);
+      } catch (err) {
+        console.error("Error placing order:", err.message);
+        alert("Something went wrong while placing the order.");
+      } finally {
+        setPayLoading(false);
+        setShowOrderModal(false);
+      }
+    };
+
+    const handleFailure = () => {
+      setPayLoading(false);
+      alert("Payment cancelled.");
+    };
+
     handleRazorpayPayment({
-      amount: subtotal - discount + shipping - couponApplied,
+      amount,
       user,
       address: selectedAddress,
       items,
-      onSuccess: (paymentResponse) => {
-        setPayLoading(false);
-        setShowOrderModal(false);
-        // TODO: Save order to Firestore here
-        alert("Payment successful! Payment ID: " + paymentResponse.razorpay_payment_id);
-      },
-      onFailure: () => {
-        setPayLoading(false);
-        alert("Payment cancelled.");
-      },
+      onSuccess: handleSuccess,
+      onFailure: handleFailure,
     });
   };
 
-  
+
   // 1️⃣ Paste the function here:
   const handleRazorpayPayment = async ({ amount, user, address, items, onSuccess, onFailure }) => {
     const options = {

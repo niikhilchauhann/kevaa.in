@@ -1,31 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/userDashboard/recentorders.css";
+import useCartStore from "../../store/cartStore";
 
-const orders = [
-  {
-    id: 1,
-    time: "11 minutes",
-    amount: "₹203",
-    dateTime: "08 Jun, 10:31 pm",
-    images: [
-      "https://m.media-amazon.com/images/I/91ZpjZkG+6L.jpg",
-      "https://via.placeholder.com/60x80?text=Item"
-    ]
-  },
-  {
-    id: 2,
-    time: "12 minutes",
-    amount: "₹49",
-    dateTime: "08 Jun, 12:03 pm",
-    images: [
-      "https://via.placeholder.com/60x80?text=1",
-      "https://via.placeholder.com/60x80?text=2",
-      "https://via.placeholder.com/60x80?text=3"
-    ]
-  }
-];
 
 const RecentOrders = () => {
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchOrders = useCartStore.getState().fetchOrders;
+
+  useEffect(() => {
+    const loadOrders = async()=>{
+      const data = await fetchOrders();
+      setOrders(data);
+      setLoading(false);
+    };
+
+    loadOrders();
+  }, []);
+  
   return (
     <div className="orders-container">
       <h2>Recent Orders</h2>
@@ -40,6 +33,7 @@ const RecentOrders = () => {
             </span>
             <span className="arrow-icon">→</span>
           </div>
+          {/* make sure img is provided in orders store */}
           <div className="order-items">
             {order.images.map((img, index) => (
               <div key={index} className="item-img">

@@ -10,7 +10,7 @@
 }
 @keyframes popupIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 .order-modal-close {
-  position: absolute; right: 16px; top: 12px; background: none; border: none; font-size: 28px; cursor: pointer;
+  position: absolute; right: 18px; top: 12px; background: none; border: none; font-size: 28px; cursor: pointer;color: black;
 }
 .order-modal-section { margin: 12px 0; }
 .order-modal-place-btn {
