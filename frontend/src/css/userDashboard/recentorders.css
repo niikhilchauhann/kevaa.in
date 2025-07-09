@@ -1,50 +1,25 @@
 .orders-container {
-  padding: 20px;
-  font-family: sans-serif;
+  max-width: 960px;
+  margin-left: 3rem;
+  margin-right: 3rem; 
+  padding: 2rem;
+  background-color: #dddde0;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.order-card {
-  background-color: #f8f9ff;
-  border-radius: 10px;
-  margin: 15px 0;
-  padding: 15px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+.orders-title {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #2b2b2b;
 }
 
-.order-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.check-icon {
-  font-size: 20px;
-  color: green;
-  margin-right: 10px;
-}
-
-.arrow-icon {
-  font-size: 20px;
-  color: #555;
-}
-
-.order-items {
-  display: flex;
-  margin-top: 10px;
-  gap: 10px;
-}
-
-.item-img {
-  width: 60px;
-  height: 80px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  overflow: hidden;
-  background-color: white;
-}
-
-.item-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.orders-loading,
+.no-orders {
+  text-align: center;
+  color: #999;
+  font-size: 1.1rem;
+  margin: 3rem 0;
 }

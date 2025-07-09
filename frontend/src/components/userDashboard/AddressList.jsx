@@ -111,7 +111,7 @@ const AddressList = ({ userId }) => {
       postalCode: '',
     });
     setEditId(null);
-    setShowForm(true);
+    setShowForm(!showForm);
   };
 
   // Close form
@@ -125,7 +125,7 @@ const AddressList = ({ userId }) => {
       <h2>Your Addresses</h2>
       <div className="address-box">
         <div className="address-header">
-          <h3>My addresses</h3>
+          <h3>My Address</h3>
           <button className="add-address" onClick={handleAddNew}>
             ➕ Add new address
           </button>
@@ -145,11 +145,11 @@ const AddressList = ({ userId }) => {
             <input name="city" placeholder="City" value={form.city} onChange={handleChange} required />
             <input name="state" placeholder="State" value={form.state} onChange={handleChange} required />
             <input name="postalCode" placeholder="Postal Code" value={form.postalCode} onChange={handleChange} required />
-            <div style={{display: "flex", gap: "8px", marginTop: "8px"}}>
+            <div style={{ display: "flex", gap: "8px", marginTop: "8px" }}>
               <button type="submit" disabled={loading}>
                 {loading ? (editId ? "Updating..." : "Saving...") : (editId ? "Update" : "Save Address")}
               </button>
-              <button type="button" onClick={handleCancel} style={{background:'#eee', color:'#333'}}>Cancel</button>
+              <button type="button" onClick={handleCancel} style={{ background: '#eee', color: '#333' }}>Cancel</button>
             </div>
           </form>
         )}
@@ -157,7 +157,7 @@ const AddressList = ({ userId }) => {
         {/* Address List */}
         <div className="address-list">
           {addresses.map((item) => (
-            <div key={item.id} className="address-item" style={{position:"relative"}}>
+            <div key={item.id} className="address-item" style={{ position: "relative" }}>
               <div className="icon">🏠</div>
               <div className="details">
                 <strong>{item.type}</strong>
@@ -168,14 +168,14 @@ const AddressList = ({ userId }) => {
                 </p>
               </div>
               <div className="options" onClick={() => setMenuOpenId(menuOpenId === item.id ? null : item.id)}>⋮</div>
-              
+
               {/* Slide-in menu */}
               <div
                 className={`address-actions-menu${menuOpenId === item.id ? " open" : ""}`}
                 onClick={e => e.stopPropagation()}
               >
                 <button onClick={() => handleEdit(item)}>✏️ Edit</button>
-                <button onClick={() => handleRemove(item.id)} style={{color: "red"}}>🗑️ Remove</button>
+                <button onClick={() => handleRemove(item.id)} style={{ color: "red" }}>🗑️ Remove</button>
               </div>
             </div>
           ))}
