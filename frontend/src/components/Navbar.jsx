@@ -22,14 +22,14 @@ function Navbar() {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [showSearchBox, setShowSearchBox] = useState(false);
 
-      const searchRef = useRef(null);
+    const searchRef = useRef(null);
     const cartItems = useCartStore(state => state.items);
     const cartCount = cartItems.length;
     // const cartCount = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
     const searchQuery = useSearchStore((state) => state.searchQuery);
     const setSearchQuery = useSearchStore((state) => state.setSearchQuery);
     const searchBoxRef = useRef(null);
-    
+
 
     // Hide search box on outside click
     useEffect(() => {
@@ -70,11 +70,11 @@ function Navbar() {
     };
 
     useEffect(() => {
-  const unsubscribe = onAuthStateChanged(auth, (user) => {
-    setUser(user || null);
-  });
-  return () => unsubscribe();
-}, []);
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            setUser(user || null);
+        });
+        return () => unsubscribe();
+    }, []);
     // ...rest of your code (user, menu, etc.)
 
     return (

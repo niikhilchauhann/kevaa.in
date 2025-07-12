@@ -28,7 +28,7 @@ const RecentOrders = () => {
       {orders.length === 0 ? (
         <p className="no-orders">No recent orders found.</p>
       ) : (
-        orders.map((order) => <OrderCard key={order.id} order={order} />)
+        [...orders].reverse().map((order) => <OrderCard key={order.id} order={order} />)
       )}
     </section>
   );

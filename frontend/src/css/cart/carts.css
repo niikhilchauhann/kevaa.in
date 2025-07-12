@@ -8,6 +8,47 @@
   padding: 2rem 1rem;
   box-sizing: border-box;
 }
+.cart-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh; /* or 100vh if you want full screen */
+  padding: 1rem;
+  background-color: #f9f9f9; /* optional light background */
+}
+
+.empty-cart-message {
+  text-align: center;
+  background: #fff;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-width: 500px;
+  width: 100%;
+}
+
+.empty-cart-message h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #444;
+}
+
+.go-back-link {
+  display: inline-block;
+  margin-top: 1rem;
+  text-decoration: none;
+  color: #fff;
+  background-color: #9a155a;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.go-back-link:hover {
+  background-color: #7c1049;
+}
+
 
 
 .cart-container {

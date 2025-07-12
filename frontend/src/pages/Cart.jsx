@@ -81,27 +81,6 @@ const Cart = () => {
           >
             Review & Place Order
           </button>
-          <button
-            className="show-order-modal-btn"
-            onClick={async () => {
-              if (!selectedAddress) {
-                alert("Please select address first");
-                return;
-              }
-
-              await placeOrder({
-                address: selectedAddress,
-                amount: subtotal - discount + shipping - couponApplied,
-                paymentId: "test_bypass_" + Date.now(), // mock payment ID
-              });
-
-              await clearCart();
-              alert("Test Order Placed Without Payment!");
-            }}
-            style={{ marginTop: 12, backgroundColor: "#ddd", color: "#000" }}
-          >
-            🚧 Bypass & Place Order (Test)
-          </button>
         </>
       );
       break;
@@ -117,11 +96,14 @@ const Cart = () => {
 
     const handleSuccess = async (paymentResponse) => {
       try {
-        await placeOrder({
+        const orderDetails = {
           address: selectedAddress,
           amount,
           paymentId: paymentResponse.razorpay_payment_id,
-        });
+          items,
+        };
+
+        await placeOrder(orderDetails);
 
         await clearCart();
 
@@ -176,6 +158,16 @@ const Cart = () => {
     const rzp = new window.Razorpay(options);
     rzp.open();
   };
+  if (!loading && items.length === 0) {
+    return (
+      <div className="cart-page">
+        <div className="empty-cart-message">
+          <h2>Your cart is empty 🛒</h2>
+          <a href="/products" className="go-back-link">← Continue Shopping</a>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="cart-page">

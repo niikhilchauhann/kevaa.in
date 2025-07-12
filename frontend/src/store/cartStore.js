@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { doc, setDoc, getDoc, updateDoc, deleteDoc, collection, getDocs, addDoc, serverTimestamp, query, where, orderBy } from 'firebase/firestore';
+import { doc, setDoc, getDoc, updateDoc, deleteDoc, collection, getDocs, addDoc, serverTimestamp, query, where, orderBy,writeBatch } from 'firebase/firestore';
 import { db } from '../firebase'; // make sure you have db exported from your firebase.js
 import { auth } from '../firebase';
 
@@ -92,16 +92,24 @@ const useCartStore = create((set, get) => ({
   clearCart: async () => {
     const user = auth.currentUser;
     if (!user) return set({ error: "Not logged in" });
+
     set({ loading: true });
+
     try {
-      // Delete all items from Firestore
-      const itemsCol = collection(db, 'carts', user.uid, 'items');
+      const itemsCol = collection(db, "carts", user.uid, "items");
       const snapshot = await getDocs(itemsCol);
-      const batch = db.batch();
-      snapshot.docs.forEach(docSnap => batch.delete(docSnap.ref));
+
+      const batch = writeBatch(db); // ✅ use writeBatch here
+
+      snapshot.docs.forEach((docSnap) => {
+        batch.delete(docSnap.ref);
+      });
+
       await batch.commit();
+
       set({ items: [], loading: false });
     } catch (err) {
+      console.error("Error clearing cart:", err.message);
       set({ error: err.message, loading: false });
     }
   },
