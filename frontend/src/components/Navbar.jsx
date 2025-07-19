@@ -75,6 +75,10 @@ function Navbar() {
         });
         return () => unsubscribe();
     }, []);
+    
+    useEffect(() => {
+        document.body.style.overflow = menuOpen ? "hidden" : "auto";
+    }, [menuOpen]);
     // ...rest of your code (user, menu, etc.)
 
     return (
