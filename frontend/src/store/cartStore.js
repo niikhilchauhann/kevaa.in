@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { doc, setDoc, getDoc, updateDoc, deleteDoc, collection, getDocs, addDoc, serverTimestamp, query, where, orderBy,writeBatch } from 'firebase/firestore';
+import { doc, setDoc, getDoc, updateDoc, deleteDoc, collection, getDocs, addDoc, serverTimestamp, query, where, orderBy, writeBatch } from 'firebase/firestore';
 import { db } from '../firebase'; // make sure you have db exported from your firebase.js
 import { auth } from '../firebase';
 
@@ -142,23 +142,29 @@ const useCartStore = create((set, get) => ({
 
     try {
       const ordersRef = collection(db, 'orders');
-      // NOTE: To fetch orders in descending order of creation time, 
-      // This requires creating a composite Firestore index manually.
-      // For now, i'm using where to fetch the orders 
-      //use this to get orders in to get orders in desc
-      // const q = query(ordersRef, where('userId', '==', user.uid), orderBy('createdAt', 'desc'));
-      const q = query(ordersRef, where('userId', '==', user.uid));
+
+      // Create a query to filter by userId and order by createdAt descending
+      console.log("Current user ID:", user.uid);
+
+      const q = query(
+        ordersRef,
+        where('userId', '==', user.uid),
+        orderBy('createdAt', 'desc') // This line sorts the results by newest first
+      );
+
       const snapshot = await getDocs(q);
       const orders = snapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
       }));
+
       return orders;
     } catch (err) {
       console.error("Failed to fetch orders:", err.message);
       return [];
     }
   }
+
 
 
 }));
