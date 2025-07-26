@@ -158,6 +158,8 @@ const Cart = () => {
     const rzp = new window.Razorpay(options);
     rzp.open();
   };
+
+  
   if (!loading && items.length === 0) {
     return (
       <div className="cart-page">

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getFirestore, collection, query, where, getDocs, addDoc, doc, deleteDoc, updateDoc } from 'firebase/firestore';
+import { getFirestore, getDoc, doc, updateDoc } from 'firebase/firestore';
 import "../../css/userDashboard/addressList.css";
 
 const AddressList = ({ userId }) => {
@@ -18,15 +18,25 @@ const AddressList = ({ userId }) => {
   const [menuOpenId, setMenuOpenId] = useState(null); // for 3-dot menu
   const [editId, setEditId] = useState(null); // for editing
 
+ const db = getFirestore();
+  const userRef = doc(db, 'users', userId);
   // Fetch addresses from Firestore
-  const fetchAddresses = async () => {
+ const fetchAddresses = async () => {
     if (!userId) return;
-    const db = getFirestore();
-    const q = query(collection(db, 'addresses'), where('userId', '==', userId));
-    const querySnapshot = await getDocs(q);
-    const addressesData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    setAddresses(addressesData);
+    try {
+      const userSnap = await getDoc(userRef);
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+        setAddresses(Array.isArray(userData.addresses) ? userData.addresses : []);
+      } else {
+        setAddresses([]);
+      }
+    } catch (error) {
+      console.error("Error fetching user's addresses:", error);
+      alert("Failed to fetch addresses.");
+    }
   };
+
 
   useEffect(() => {
     fetchAddresses();
@@ -43,19 +53,32 @@ const AddressList = ({ userId }) => {
     e.preventDefault();
     if (!userId) return;
     setLoading(true);
-    const db = getFirestore();
     try {
-      if (editId) {
-        // Update
-        const docRef = doc(db, 'addresses', editId);
-        await updateDoc(docRef, { ...form });
-      } else {
-        // Add
-        await addDoc(collection(db, 'addresses'), {
-          ...form,
-          userId,
-        });
+      // Get current addresses array
+      const userSnap = await getDoc(userRef);
+      let currentAddresses = [];
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+        currentAddresses = Array.isArray(userData.addresses) ? userData.addresses : [];
       }
+
+      if (editId) {
+        // Update existing address by id
+        currentAddresses = currentAddresses.map(addr =>
+          addr.id === editId ? { ...addr, ...form } : addr
+        );
+      } else {
+        // Add new address with unique id
+        const newAddress = {
+          id: Date.now().toString(),
+          ...form,
+        };
+        currentAddresses.push(newAddress);
+      }
+
+      // Update user document's addresses field
+      await updateDoc(userRef, { addresses: currentAddresses });
+      setAddresses(currentAddresses);
       setForm({
         type: 'Home',
         houseNo: '',
@@ -69,18 +92,36 @@ const AddressList = ({ userId }) => {
       setEditId(null);
       fetchAddresses();
     } catch (err) {
-      alert('Error: ' + err.message);
+      console.error("Error saving address:", err);
+      alert("Error saving address: " + err.message);
     }
     setLoading(false);
   };
 
   // Remove Address
   const handleRemove = async (id) => {
+    if (!userId || !id) return;
     if (!window.confirm('Are you sure you want to delete this address?')) return;
-    const db = getFirestore();
-    await deleteDoc(doc(db, 'addresses', id));
-    setMenuOpenId(null);
-    fetchAddresses();
+
+    try {
+      const userSnap = await getDoc(userRef);
+      if (!userSnap.exists()) return;
+
+      const userData = userSnap.data();
+      const currentAddresses = Array.isArray(userData.addresses) ? userData.addresses : [];
+
+      // Filter out the address to delete
+      const filteredAddresses = currentAddresses.filter(addr => addr.id !== id);
+
+      // Update user document with filtered addresses
+      await updateDoc(userRef, { addresses: filteredAddresses });
+
+      setAddresses(filteredAddresses);
+      setMenuOpenId(null);
+    } catch (error) {
+      console.error("Error deleting address:", error);
+      alert("Error deleting address: " + error.message);
+    }
   };
 
   // Edit Address
@@ -111,7 +152,7 @@ const AddressList = ({ userId }) => {
       postalCode: '',
     });
     setEditId(null);
-    setShowForm(!showForm);
+    setShowForm(prev => !prev);
   };
 
   // Close form

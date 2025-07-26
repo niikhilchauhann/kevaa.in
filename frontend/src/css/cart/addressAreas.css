@@ -14,11 +14,11 @@
   background-color: #fff;
   border-radius: 0.5rem;
   transition: border-color 0.3s ease, box-shadow 0.2s ease;
-  box-shadow: 0 2px 8px rgba(5, 0, 1, 1);
+  box-shadow: 0 2px 8px rgb(3, 150, 99);
 }
 
 .address-card.selected {
-  border: 2px solid #27ae60;
+  border: 2px solid #198a62;
   background: #f6fff9;
 }
 /* Optional hover styling */

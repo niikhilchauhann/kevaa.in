@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
-import { auth } from "../../firebase"; // Make sure you have this import
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+// import { auth } from "../../firebase"; // Make sure you have this import
 import "../../css/cart/addressAreas.css";
 
 const AddressArea = ({ userId, onSelectAddress }) => {
   const [addresses, setAddresses] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [loading, setLoading] = useState(true);
-
 
   // const addresses = [
   //   {
@@ -25,36 +25,57 @@ const AddressArea = ({ userId, onSelectAddress }) => {
   //     contact: "(936) 361-0310",
   //   }
   // ];
-    useEffect(() => {
-    if (selectedAddress && onSelectAddress) {
-      const addrObj = addresses.find(a => a.id === selectedAddress);
-      onSelectAddress(addrObj);
-    }
-  }, [selectedAddress, addresses, onSelectAddress]);
 
+  // const db = getFirestore();
+  // const userRef = doc(db, "users", userId);
+
+  // Fetch addresses from user's document inside "addresses" field
   useEffect(() => {
     const fetchAddresses = async () => {
-      setLoading(true);
+      if (!userId) {
+      setAddresses([]);
+      setSelectedAddress(null);
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
+    const db = getFirestore();
+    const userRef = doc(db, "users", userId);
+
       try {
-        const db = getFirestore();
-        const q = query(collection(db, "addresses"), where("userId", "==", userId));
-        const snapshot = await getDocs(q);
-        const data = snapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setAddresses(data);
-        if (data.length > 0) setSelectedAddress(data[0].id); // Default select first address
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists()) {
+          const userData = userSnap.data();
+          const userAddresses = Array.isArray(userData.addresses) ? userData.addresses : [];
+          setAddresses(userAddresses);
+          if (userAddresses.length > 0 && userAddresses[0].id != null) {
+            setSelectedAddress(String(userAddresses[0].id));
+          }
+          else {
+            setSelectedAddress(null);
+          }
+        } else {
+          setAddresses([]);
+          setSelectedAddress(null);
+        }
       } catch (err) {
         console.error("Error fetching addresses:", err);
       }
       setLoading(false);
     };
 
-    if (userId) {
-      fetchAddresses();
+    fetchAddresses();
+
+  }, [userId]); // refetch on userId change
+
+  // Notify parent about selected address change
+  useEffect(() => {
+    if (selectedAddress && onSelectAddress) {
+      const addrObj = addresses.find((a) => a.id === String(selectedAddress));
+      onSelectAddress(addrObj);
     }
-  }, [userId]);
+  }, [selectedAddress, addresses, onSelectAddress]);
 
   if (loading) return <div>Loading addresses...</div>;
   if (addresses.length === 0) return <div>No saved addresses found.</div>;
@@ -63,15 +84,15 @@ const AddressArea = ({ userId, onSelectAddress }) => {
       <div className="address-wrapper">
         {addresses.map((address) => (
           <div
-            className={`address-card ${selectedAddress === address.id ? "selected" : ""}`}
+            className={`address-card ${String(selectedAddress)=== String(address.id)? "selected" : ""}`}
             key={address.id}
           >
             <div className="address-info">
               <input
                 type="radio"
                 name="address"
-                checked={selectedAddress === address.id}
-                onChange={() => setSelectedAddress(address.id)}
+                checked={String(selectedAddress) === String(address.id)}
+                onChange={() => setSelectedAddress(String(address.id))}
               />
               <div>
                 <div className="name-badge">

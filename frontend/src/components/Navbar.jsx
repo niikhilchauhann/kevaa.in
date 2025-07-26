@@ -71,17 +71,17 @@ function Navbar() {
         navigate('/products'); // Optional: always go to products page on search
     };
 
-    
-    useEffect(() => {
-        document.body.style.overflow = menuOpen ? "hidden" : "auto";
-    }, [menuOpen]);
-    
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
             setUser(firebaseUser || null);
         });
         return () => unsubscribe();
     }, [setUser]);
+    
+    useEffect(() => {
+        document.body.style.overflow = menuOpen ? "hidden" : "auto";
+    }, [menuOpen]);
+
     // ...rest of your code (user, menu, etc.)
 
     return (
@@ -139,7 +139,7 @@ function Navbar() {
                                 user?.photoURL ? (
                                     <img
                                         src={user?.photoURL}
-                                        alt="User"
+                                        alt={user?.displayName[0] || 'U'}
                                         style={{ width: 28, height: 28, borderRadius: '50%', objectFit: 'cover' }}
                                     />
                                 ) : (
