@@ -15,7 +15,7 @@ const ProductList = ({ products, filters }) => {
     useEffect(() => {
         setCurrentPage(1);
 
-        const filtered = products.filter(product => {
+        const filtered = products.normal.filter(product => {
             //search filter 
             const matchSearch =
                 ( product.name.toLowerCase().includes(searchQuery.toLowerCase()));

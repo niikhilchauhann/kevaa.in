@@ -12,209 +12,7 @@ import { IoStar } from 'react-icons/io5';
 import { FaArrowRight } from 'react-icons/fa6';
 import useCartStore from '../store/cartStore';
 import { NavLink } from 'react-router-dom';
-
-
-const products =
-    [
-        {
-            "id": 1,
-            "label": "Hot",
-            "title": "Fresh organic villa farm lemon 500gm pack",
-            "category": "Snack",
-            "rating": 4.0,
-            "brand": "NestFood",
-            "price": 28.85,
-            "originalPrice": 32.8,
-            "image": lemonImg
-        },
-        {
-            "id": 2,
-            "label": "Sale",
-            "title": "Best snakes with hazel nut pack 200gm",
-            "category": "Hodo Foods",
-            "rating": 3.5,
-            "brand": "Stouffer",
-            "price": 52.85,
-            "originalPrice": 55.8,
-            "image": nutpackImg
-        },
-        {
-            "id": 3,
-            "label": "New",
-            "title": "Organic fresh venila farm watermelon 5kg",
-            "category": "Snack",
-            "rating": 4.0,
-            "brand": "StarKist",
-            "price": 48.85,
-            "originalPrice": 55.8,
-            "image": watermelonImg
-        },
-        {
-            "id": 4,
-            "label": "",
-            "title": "Fresh organic apple 1kg simla marning",
-            "category": "Vegetables",
-            "rating": 4.0,
-            "brand": "NestFood",
-            "price": 17.85,
-            "originalPrice": 19.8,
-            "image": vegetablesImg
-        },
-        {
-            "id": 5,
-            "label": "",
-            "title": "Canada Dry Ginger Ale - 2 L Bottle - 200ml - 400g",
-            "category": "Meats",
-            "rating": 4.0,
-            "brand": "NestFood",
-            "price": 32.85,
-            "originalPrice": 35.8,
-            "image": gingeraleImg
-        },
-        {
-            "id": 6,
-            "label": "-15%",
-            "title": "Blue Diamond Almonds Lightly Salted Vegetables",
-            "category": "Pet Foods",
-            "rating": 4.0,
-            "brand": "NestFood",
-            "price": 23.85,
-            "originalPrice": 25.8,
-            "image": almondsImg
-        },
-        {
-            "id": 7,
-            "label": "Hot",
-            "title": "Fresh organic villa farm lemon 500gm pack",
-            "category": "Snack",
-            "rating": 4.0,
-            "brand": "NestFood",
-            "price": 28.85,
-            "originalPrice": 32.8,
-            "image": lemonImg
-        },
-        {
-            "id": 8,
-            "label": "Sale",
-            "title": "Best snakes with hazel nut pack 200gm",
-            "category": "Hodo Foods",
-            "rating": 3.5,
-            "brand": "Stouffer",
-            "price": 52.85,
-            "originalPrice": 55.8,
-            "image": nutpackImg
-        },
-        {
-            "id": 9,
-            "label": "New",
-            "title": "Organic fresh venila farm watermelon 5kg",
-            "category": "Snack",
-            "rating": 4.0,
-            "brand": "StarKist",
-            "price": 48.85,
-            "originalPrice": 55.8,
-            "image": watermelonImg
-        },
-        {
-            "id": 10,
-            "label": "",
-            "title": "Fresh organic apple 1kg simla marning",
-            "category": "Vegetables",
-            "rating": 4.0,
-            "brand": "NestFood",
-            "price": 17.85,
-            "originalPrice": 19.8,
-            "image": vegetablesImg
-        },
-        {
-            "id": 11,
-            "label": "",
-            "title": "Canada Dry Ginger Ale - 2 L Bottle - 200ml - 400g",
-            "category": "Meats",
-            "rating": 4.0,
-            "brand": "NestFood",
-            "price": 32.85,
-            "originalPrice": 35.8,
-            "image": gingeraleImg
-        },
-        {
-            "id": 12,
-            "label": "-15%",
-            "title": "Blue Diamond Almonds Lightly Salted Vegetables",
-            "category": "Pet Foods",
-            "rating": 4.0,
-            "brand": "NestFood",
-            "price": 23.85,
-            "originalPrice": 25.8,
-            "image": almondsImg
-        },
-        {
-            "id": 13,
-            "label": "Hot",
-            "title": "Fresh organic villa farm lemon 500gm pack",
-            "category": "Snack",
-            "rating": 4.0,
-            "brand": "NestFood",
-            "price": 28.85,
-            "originalPrice": 32.8,
-            "image": lemonImg
-        },
-        {
-            "id": 14,
-            "label": "Sale",
-            "title": "Best snakes with hazel nut pack 200gm",
-            "category": "Hodo Foods",
-            "rating": 3.5,
-            "brand": "Stouffer",
-            "price": 52.85,
-            "originalPrice": 55.8,
-            "image": nutpackImg
-        },
-        {
-            "id": 15,
-            "label": "New",
-            "title": "Organic fresh venila farm watermelon 5kg",
-            "category": "Snack",
-            "rating": 4.0,
-            "brand": "StarKist",
-            "price": 48.85,
-            "originalPrice": 55.8,
-            "image": watermelonImg
-        },
-        {
-            "id": 16,
-            "label": "",
-            "title": "Fresh organic apple 1kg simla marning",
-            "category": "Vegetables",
-            "rating": 4.0,
-            "brand": "NestFood",
-            "price": 17.85,
-            "originalPrice": 19.8,
-            "image": vegetablesImg
-        },
-        {
-            "id": 17,
-            "label": "",
-            "title": "Canada Dry Ginger Ale - 2 L Bottle - 200ml - 400g",
-            "category": "Meats",
-            "rating": 4.0,
-            "brand": "NestFood",
-            "price": 32.85,
-            "originalPrice": 35.8,
-            "image": gingeraleImg
-        },
-        {
-            "id": 18,
-            "label": "-15%",
-            "title": "Blue Diamond Almonds Lightly Salted Vegetables",
-            "category": "Pet Foods",
-            "rating": 4.0,
-            "brand": "NestFood",
-            "price": 23.85,
-            "originalPrice": 25.8,
-            "image": almondsImg
-        }
-    ]
+import { products as allProducts } from '../data/realProducts'
 
 export default function CategoryGrid() {
     const addToCart = useCartStore(state => state.addToCart);
@@ -225,7 +23,7 @@ export default function CategoryGrid() {
     const [selectedCategory, setSelectedCategory] = useState('Featured');
     const categories = ['Featured', 'Popular', 'New Added'];
 
-    const [visibleCount, setVisibleCount] = useState(12);
+    const [visibleCount, setVisibleCount] = useState(8);
 
     const handleLoadMore = () => {
         setVisibleCount((prevCount) => prevCount + 6); // load 6 more at a time
@@ -275,16 +73,16 @@ export default function CategoryGrid() {
                     </div>
                 </div>
                 <div className="products">
-                    {products.slice(0, visibleCount).map((product) => (
+                    {allProducts.categoryProducts.slice(0, visibleCount).map((product) => (
                         <div className="product-card" key={product.id}>
                             {product.label && (
                                 <div className={`product-label ${getLabelClass(product.label)}`}>
-                                    {product.label}
+                                    {(product.label.toLowerCase() == 'save' ) ? `Save ${product.discount}%` : product.label}
                                 </div>
                             )}
                             <img src={product.image} alt={product.title} className="product-image" />
                             <p className="product-category">{product.category}</p>
-                            <h4 className="product-title">{product.title}</h4>
+                            <h4 className="product-title">{product.name}</h4>
                             <p className='rates'> <span className='rating'><IoStar /> </span> <span>( {product.rating} ) </span></p>
                             <p className="product-brand">By <span>{product.brand}</span></p>
                             <div className='cart'>
@@ -304,7 +102,7 @@ export default function CategoryGrid() {
 
                 </div>
             </div>
-            {visibleCount < products.length && (
+            {visibleCount < allProducts.categoryProducts.length && (
                 <div className="load-more-container">
                     <button className="load-more-btn" onClick={handleLoadMore}>
                         Load More <FaArrowRight />
