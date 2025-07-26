@@ -5,7 +5,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { IoSearch } from "react-icons/io5";
 import { BsCart2 } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import DailyEssentials from "../components/dailyEssentials";
 import PoojaProducts from "../components/PoojaProducts";
 import PopularProducts from "../components/PopularProducts";
@@ -36,7 +36,7 @@ export default function Home() {
             <p>
               Crafted with devotion, Kevaa brings you authentic, soul-soothing essentials for every sacred moment.
             </p>
-            <button onClick={handleLogin}>Discover our collection</button>
+            <NavLink style={{color: 'white'}} to='/products'><button>Discover our collection</button></NavLink>
           </div>
         </div>
       </main>

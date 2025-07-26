@@ -1,6 +1,6 @@
 // src/components/DailyEssentials.jsx
 
-import dailyEssentials from "../data/dailyEssentials";
+import { products as allProducts } from "../data/realProducts";
 import "../css/home/dailyEssentials.css";
 import { useState } from "react";
 
@@ -8,9 +8,9 @@ const itemsPerPage = 8;
 
 export default function DailyEssentials() {
   const [page, setPage] = useState(0);
-  const totalPages = Math.ceil(dailyEssentials.length / itemsPerPage);
+  const totalPages = Math.ceil(allProducts.dailyEssentials.length / itemsPerPage);
 
-  const currentItems = dailyEssentials.slice(
+  const currentItems = allProducts.dailyEssentials.slice(
     page * itemsPerPage,
     page * itemsPerPage + itemsPerPage
   );

@@ -1,10 +1,10 @@
 // src/components/PopularProducts.jsx
 
-import dailyEssentials from "../data/dailyEssentials";
+import { products as allProducts} from "../data/realProducts";
 import "../css/home/popularProducts.css";
 
 export default function PopularProducts() {
-    const popularItems = dailyEssentials.slice(0, 4); // Show only 4 items
+    const popularItems = allProducts.popularProducts.slice(0); // Show only 4 items
 
     return (
         <div className="popular-section">

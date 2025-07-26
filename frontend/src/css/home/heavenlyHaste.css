@@ -108,6 +108,20 @@
 .heavenly-card img {
   width: 90%;
   margin: 0 auto 12px;
+  min-height: 160px;
+  object-fit: contain;
+  /* border: 1px solid green; */
+}
+
+.heavenly-haste-product{
+  display: flex;
+  /* border: 1px solid red; */
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: space-between;
+  /* border: 1p; */
 }
 
 .heavenly-card h4 {

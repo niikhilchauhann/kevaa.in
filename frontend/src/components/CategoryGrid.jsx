@@ -11,6 +11,7 @@ import almondsImg from '../assets/almonds.png';
 import { IoStar } from 'react-icons/io5';
 import { FaArrowRight } from 'react-icons/fa6';
 import useCartStore from '../store/cartStore';
+import { NavLink } from 'react-router-dom';
 
 
 const products =
@@ -257,7 +258,7 @@ export default function CategoryGrid() {
                         <div className="overlay-grid">
                             <h3>Chappan <span>BHOJ</span></h3>
                             <p>100% Pure 🍎</p>
-                            <button>Shop Now</button>
+                           <NavLink style={{color: 'white'}} to='/products' ><button>Shop Now</button></NavLink>
                         </div>
                     </div>
 
