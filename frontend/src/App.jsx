@@ -21,12 +21,22 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
 import useCartStore from './store/cartStore';
 import PageNotFound from "./pages/PageNotFound";
+import useAuthStore from "./store/authStore";
 function App() {
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, () => {
-      useCartStore.getState().loadCart();
+   useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        useCartStore.getState().loadCart();
+      } else {
+        // Reset cart when user logs out
+        if (typeof useCartStore.getState().clearCart === 'function') {
+          useCartStore.getState().clearCart();
+        }
+      }
     });
-    return unsubscribe;
+    return () => {
+      unsubscribe();
+    };
   }, []);
   return (
     <Router>

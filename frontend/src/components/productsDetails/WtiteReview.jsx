@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../css/productDescription/writeReview.css";
 
-const WriteReview = ({ product, onClose }) => {
+const WriteReview = ({ product, onClose, onSubmit }) => {
   const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(4);
   const [photo, setPhoto] = useState(null);
@@ -18,6 +18,7 @@ const WriteReview = ({ product, onClose }) => {
       alert("Please write something before submitting your review.");
       return
     }
+    onSubmit(reviewText.trim(), rating, photo);
     
     alert("Review submitted!");
     onClose(); 
@@ -54,6 +55,8 @@ const WriteReview = ({ product, onClose }) => {
               value={reviewText}
               onChange={(e) => setReviewText(e.target.value)}
               placeholder="Please write product review here."
+              rows={5}
+              required
             />
 
             <div className="write-review-photo-upload">

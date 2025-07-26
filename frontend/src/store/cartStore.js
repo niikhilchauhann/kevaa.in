@@ -149,7 +149,7 @@ const useCartStore = create((set, get) => ({
       const q = query(
         ordersRef,
         where('userId', '==', user.uid),
-        orderBy('createdAt', 'desc') // This line sorts the results by newest first
+        orderBy('createdAt') // This line sorts the results by newest first
       );
 
       const snapshot = await getDocs(q);

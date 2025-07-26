@@ -12,12 +12,14 @@ import { onAuthStateChanged, signOut, getAuth } from 'firebase/auth';
 import { auth } from '../firebase';
 import useSearchStore from '../store/searchStore';
 import useCartStore from '../store/cartStore';
+import useAuthStore from '../store/authStore';
 
 function Navbar() {
     const navigate = useNavigate();
     const authInstance = getAuth();
 
-    const [user, setUser] = useState(null);
+    const user = useAuthStore(state => state.user);
+    const setUser = useAuthStore(state => state.setUser);
     const [menuOpen, setMenuOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [showSearchBox, setShowSearchBox] = useState(false);
@@ -69,16 +71,17 @@ function Navbar() {
         navigate('/products'); // Optional: always go to products page on search
     };
 
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            setUser(user || null);
-        });
-        return () => unsubscribe();
-    }, []);
     
     useEffect(() => {
         document.body.style.overflow = menuOpen ? "hidden" : "auto";
     }, [menuOpen]);
+    
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+            setUser(firebaseUser || null);
+        });
+        return () => unsubscribe();
+    }, [setUser]);
     // ...rest of your code (user, menu, etc.)
 
     return (

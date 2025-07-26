@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { products as allProducts } from '../data/realProducts.js';
-import ReviewHeader from '../components/productsDetails/ReviewHeader.jsx';
+// import { testimonials } from '../data/testimonials.js'; // adjust path if needed
+import ReviewHeader from '../components/productsDetails/ReviewHeader.jsx'; // make sure the path is correct
 import '../css/productDescription/productsDetails.css';
-import '../css/productDescription/reviewProducts.css';
+import '../css/productDescription/reviewProducts.css'
 
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
@@ -12,42 +13,18 @@ import { GoVerified } from 'react-icons/go';
 import Testimonials from '../components/Testimonials.jsx';
 import useCartStore from '../store/cartStore.js';
 import useReviewStore from '../store/reviewStore.js';
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { onAuthStateChanged } from 'firebase/auth';
-import { storage, auth } from "../firebase";
-import useAuthStore from '../store/authStore';
 
 export default function ProductDetails() {
   const addToCart = useCartStore(state => state.addToCart);
   const { id } = useParams();
   const product = allProducts.find(p => p.id === parseInt(id));
   const productId = product?.id;
-  const user = useAuthStore(state => state.user);
-  const setUser = useAuthStore(state => state.setUser);
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      setUser(firebaseUser); // Update Zustand store user
-    });
-    return () => unsubscribe();
-  }, [setUser]);
-
-  console.log(user)
-
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedColor, setSelectedColor] = useState(product?.color || '');
   const [quantity, setQuantity] = useState(1);
 
-  // 1️⃣ ------- CHOOSE ONE OF THESE TWO VARIANTS FOR YOUR "reviews" LINE -------
-
-  // (A) If your store has a getReviews function:
-  // const reviews = useReviewStore(state => state.getReviews(productId));
-
-  // (B) If your store DOES NOT have getReviews, use direct access + fallback:
-  const reviews = useReviewStore(state => state.reviews[productId]) ?? [];
-
-  // --------------------------------------------------------------------------
-
+  const reviews = useReviewStore(state => state.reviews[productId] || []);
   const subscribeToProductReviews = useReviewStore(state => state.subscribeToProductReviews);
   const addReview = useReviewStore(state => state.addReview);
   const [filter, setFilter] = useState('latest');
@@ -57,25 +34,19 @@ export default function ProductDetails() {
       const unsubscribe = subscribeToProductReviews(productId);
       return () => unsubscribe();
     }
-  }, [productId, subscribeToProductReviews]);
+  }, [productId]);
+
   const handleSubmitReview = async (reviewText, rating, photo) => {
     const reviewObj = {
       message: reviewText.trim(),
       rating,
-      name: (user.firstName || user.lastName) || user.displayName || user.email,
+      name: "Anonymous",
       publishedAt: new Date().toISOString(),
       photoURL: null,
     };
 
     if (photo) {
-      try {
-        const storageRef = ref(storage, `reviews/${productId}/${Date.now()}_${photo.name}`);
-        const snapshot = await uploadBytes(storageRef, photo);
-        const downloadURL = await getDownloadURL(snapshot.ref);
-        reviewObj.photoURL = downloadURL;
-      } catch (error) {
-        console.error("Error uploading photo:", error);
-      }
+      // upload photo code & set reviewObj.photoURL
     }
 
     await addReview(productId, reviewObj);
@@ -84,22 +55,24 @@ export default function ProductDetails() {
   if (!product) return <p>Product not found!</p>;
 
   // reviews filteration
-  const productReviews = reviews;
+  const productReviews = Array.isArray(product.reviews) ? product.reviews : [];
+
 
   const filteredReviews = [...productReviews].sort((a, b) => {
     if (filter === 'highest') return b.rating - a.rating;
     if (filter === 'lowest') return a.rating - b.rating;
     return 0; // Default: latest
-  });
+  })
 
   const handleWriteReview = () => {
     alert("Redirect to review form or open modal.");
   };
 
-  // Related products
+  // related products
   const relatedProducts = allProducts.filter(
     (p) => p.category === product.category && p.id !== product.id
   );
+
 
   const images = Array.isArray(product?.variants?.[selectedColor]?.images)
     ? product.variants[selectedColor].images
@@ -162,32 +135,33 @@ export default function ProductDetails() {
       <h2 className="related-title">YOU MIGHT ALSO LIKE</h2>
       <div className="related-products-list">
         {relatedProducts.map((item) => (
-          <Link
-            key={item.id}
-            to={`/products/product/${item.id}`}
-            className="related-product-card"
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <img src={item.image || item.images?.[0]} alt={item.name} className="related-product-image" />
-            <h4 className="related-product-name">{item.name}</h4>
-            <div className="related-stars">{renderStars(item.rating)}</div>
-            <p className="related-price">
-              ${item.price}
-              {item.originalPrice && (
-                <>
-                  {" "}
-                  <span className="original-price">${item.originalPrice}</span>{" "}
-                  <span className="discount">
-                    -{Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)}%
-                  </span>
-                </>
-              )}
-            </p>
-          </Link>
+        <Link
+      key={item.id}
+      to={`/products/product/${item.id}`}
+      className="related-product-card"
+      style={{ textDecoration: "none", color: "inherit" }}
+    >
+      <img src={item.image || item.images?.[0]} alt={item.name} className="related-product-image" />
+      <h4 className="related-product-name">{item.name}</h4>
+      <div className="related-stars">{renderStars(item.rating)}</div>
+      <p className="related-price">
+        ${item.price}
+        {item.originalPrice && (
+          <>
+            {" "}
+            <span className="original-price">${item.originalPrice}</span>{" "}
+            <span className="discount">
+              -{Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)}%
+            </span>
+          </>
+        )}
+      </p>
+    </Link>
         ))}
       </div>
     </div>
   );
+
 
   return (
     <div className='main-product-details-container'>
@@ -204,7 +178,7 @@ export default function ProductDetails() {
             <div className="rating">
               <div className="stars">{renderStars(product.rating)}</div>
               <span className="rating-number">
-                {product.rating} / 5 ({productReviews.length} reviews)
+                {product.rating} / 5 ({product.reviewsCount} reviews)
               </span>
             </div>
           </div>
@@ -229,10 +203,10 @@ export default function ProductDetails() {
               <span>{quantity}</span>
               <button onClick={increment}>+</button>
             </div>
-            <button
-              className="add-to-cart-btn"
+            <button className="add-to-cart-btn"
               onClick={() => {
                 addToCart({ ...product, quantity });
+                // alert("Added to cart!");
               }}
             >Add to Cart</button>
           </div>
