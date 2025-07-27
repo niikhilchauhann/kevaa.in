@@ -1,5 +1,5 @@
 import React from "react";
-import "../../css/userDashboard/orderCard.css"; // Optional: separate styles
+import "../../css/userDashboard/orderCards.css"; // Optional: separate styles
 
 const OrderCard = ({ order }) => {
   return (
