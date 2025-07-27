@@ -1,6 +1,22 @@
+/* trackOrder.css */
+
 .track-order-container {
+  max-width: 900px;
+  margin: 30px auto;
   padding: 20px;
-  font-family: sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgb(0 0 0 / 0.1);
+}
+
+.track-order-container h2 {
+  text-align: center;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #9a155a;
 }
 
 .track-wrapper {
@@ -13,89 +29,177 @@
   flex-wrap: wrap;
 }
 
-/* Timeline */
-.timeline {
+/* Left pane - Order List */
+.orders-list {
+  width: 100%;
+  max-width: 320px;
+  border-right: 1px solid #ddd;
+  padding-right: 16px;
+  height: 500px;
+  overflow-y: auto;
+}
+
+.orders-list h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #7b2cbf;
+  margin-bottom: 16px;
+  user-select: none;
+}
+
+.order-list-ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.order-list-ul li {
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #fff;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  user-select: none;
+}
+
+.order-list-ul li:hover {
+  border-color: #9a155a;
+  background-color: #fce7f3;
+}
+
+.order-list-ul li.active,
+.order-list-ul li[style*="border: 2px solid rgb(154, 21, 90)"] {
+  border-color: #9a155a !important;
+  background-color: #f9d7e2 !important;
+}
+
+.order-list-ul li div {
+  user-select: text;
+}
+
+.order-list-ul li div:first-child {
+  font-weight: 600;
+  color: #9a155a;
+}
+
+.order-list-ul li div:nth-child(2) {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 3px;
+}
+
+.order-list-ul li div:nth-child(3) {
+  margin-top: 6px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #9a155a;
+}
+
+/* Right pane - Timeline and summary */
+.timeline-and-summary {
   flex: 1;
-  border-left: 3px solid #4CAF50;
-  padding-left: 15px;
+  min-width: 300px;
+  max-width: 540px;
+}
+
+/* Timeline Styling */
+.timeline {
+  border-left: 3px solid #9a155a;
+  padding-left: 20px;
+  margin-bottom: 30px;
 }
 
 .timeline-event {
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
 }
 
 .timeline-event .dot {
-  position: absolute;
-  left: -23px;
-  top: 5px;
-  width: 12px;
-  height: 12px;
-  background: #4CAF50;
+  position: relative;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
+  background: #ccc;
+  margin-top: 4px;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0;
 }
 
-.event-details {
-  padding-left: 10px;
+.timeline-event.active .dot {
+  background-color: #9a155a;
 }
 
-.event-details strong {
-  font-size: 16px;
+.timeline-event .event-details {
+  color: #bbb;
+  font-size: 1rem;
+  user-select: text;
+}
+
+.timeline-event.active .event-details {
   color: #333;
+  font-weight: 700;
 }
 
-.event-details span {
-  font-size: 13px;
-  color: #666;
-  margin-left: 5px;
+.timeline-event .event-details strong {
+  font-size: 1.1rem;
+  display: inline-block;
+  user-select: text;
 }
 
-.log-entry p {
-  margin: 5px 0 2px;
-  font-size: 14px;
-  color: #444;
+.timeline-event .event-details small {
+  font-size: 0.85rem;
+  color: #888;
+  user-select: text;
+  display: block;
+  margin-top: 4px;
 }
 
-.log-entry small {
-  font-size: 12px;
-  color: gray;
-}
-
-/* Order Summary */
+/* Order Summary Styling */
 .order-summary {
-  width: 280px;
   background: #fff;
   padding: 20px;
   border-radius: 10px;
-  border: 1px solid #e0e0e0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 12px rgb(0 0 0 / 0.05);
+  user-select: text;
 }
 
 .summary-header {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   margin-bottom: 15px;
 }
 
 .check-icon {
-  font-size: 24px;
-  color: green;
+  font-size: 26px;
+  color: #22c55e;
+  user-select: none;
 }
 
 .summary-header strong {
-  font-size: 16px;
-  display: block;
+  font-size: 1.4rem;
+  color: #9a155a;
+  user-select: text;
 }
 
 .summary-header p {
-  font-size: 14px;
-  color: gray;
+  margin: 0;
+  color: #555;
+  font-size: 0.9rem;
+  user-select: text;
 }
 
+/* Summary Images */
 .summary-images {
   display: flex;
-  gap: 10px;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .summary-images img {
@@ -104,4 +208,41 @@
   object-fit: cover;
   border: 1px solid #ccc;
   border-radius: 6px;
+  user-select: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.summary-images img:hover {
+  box-shadow: 0 0 10px #9a155aaa;
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 740px) {
+  .track-wrapper {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .orders-list {
+    max-width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 16px;
+  }
+
+  .timeline-and-summary {
+    max-width: 100%;
+    margin-left: 0;
+  }
+
+  .timeline {
+    border-left: none;
+    padding-left: 10px;
+  }
+
+  .timeline-event {
+    margin-bottom: 24px;
+  }
 }

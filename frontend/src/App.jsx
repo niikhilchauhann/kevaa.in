@@ -22,6 +22,7 @@ import { auth } from './firebase';
 import useCartStore from './store/cartStore';
 import PageNotFound from "./pages/PageNotFound";
 import useAuthStore from "./store/authStore";
+import AdminDashboard from "./pages/AdminDashboard";
 function App() {
    useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
@@ -46,6 +47,7 @@ function App() {
         <Route path="/forgotpassword" element={<ForgotPage />} />
         <Route path="/resetpassword" element={<ResetPassword />} />
         <Route path="/recoveryemail" element={<RecoveryEmail />} />
+        <Route path="/adminDashboard" element={<AdminDashboard />} />
         <Route path="/userDashboard" element={<UserDashboard />} />
         <Route path="/" element={<Layout />}>
           <Route path="*" element={<PageNotFound />} />
