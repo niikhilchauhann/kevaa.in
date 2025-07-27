@@ -21,7 +21,7 @@ import urlis from "../assets/urlis.jpg";
 import spicedMint from "../assets/spicedMint.jpg"
 import strawBerry from "../assets/strawberry.jpg"
 import blueBerry from "../assets/blueberry.jpg"
-import juicyLemon from "../assets/juicylemon.jpg"
+import juicyLemon from "../assets/juicyLemon.jpg"
 
 // popularProducts
 import chandanImage from '../assets/chandan.jpg';
