@@ -11,21 +11,25 @@ import classicWhitePolo from '../assets/classicWhitePolo.avif';
 import navyFormalShirt from '../assets/navyFormalShirt.jpg';
 import strippedOrangeTee from '../assets/strippedOrangeTee.avif';
 
+// daily essentials
 import poojathali from "../assets/poojathali.png";
 import temple from "../assets/temple.png";
 import decor from "../assets/decor.jpg";
 import urlis from "../assets/urlis.jpg";
 
+// havenlyhaste
 import spicedMint from "../assets/spicedMint.jpg"
 import strawBerry from "../assets/strawberry.jpg"
 import blueBerry from "../assets/blueberry.jpg"
 import juicyLemon from "../assets/juicylemon.jpg"
 
+// popularProducts
 import chandanImage from '../assets/chandan.jpg';
 import agarbatti from '../assets/agarbatti.png';
 import ajoovaSeedPowder from '../assets/ajoovaSeedPowder.jpg';
 import dhoopbatti from '../assets/dhoopbatti.webp';
 
+// categoryProducts
 import lemonImg from '../assets/lemon.png';
 import nutpackImg from '../assets/nutpack.png';
 import watermelonImg from '../assets/watermelon.png';
