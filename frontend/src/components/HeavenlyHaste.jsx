@@ -56,6 +56,7 @@ import { products as allProducts } from '../data/realProducts';
 // ];
 
 export default function HeavenlyHaste() {
+     const addToCart = useCartStore((state) => state.addToCart);
   function getLabelClass(label) {
     if (label.toLowerCase().includes('sale') && label.toLowerCase().includes('best')) {
       return 'best-sale';
@@ -97,7 +98,7 @@ export default function HeavenlyHaste() {
                 <div className="bar" style={{ width: `${(item.sold / item.total) * 100}%` }}></div>
               </div>
               <p className="sold">Sold: {!(item.sold == item.total) ? 'Available' : 'Not available'}</p>
-              <button className="cart-btn"><BsCart3 /> Add To Cart</button>
+              <button className="cart-btn" onClick={() => addToCart(item)}> Add To Cart</button>
             </div>
           </div>
         ))}

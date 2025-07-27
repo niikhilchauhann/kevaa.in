@@ -2,8 +2,10 @@
 
 import { products as allProducts} from "../data/realProducts";
 import "../css/home/popularProducts.css";
+import useCartStore from "../store/cartStore";
 
 export default function PopularProducts() {
+      const addToCart = useCartStore((state) => state.addToCart);
     const popularItems = allProducts.popularProducts.slice(0); // Show only 4 items
 
     return (
@@ -28,7 +30,7 @@ export default function PopularProducts() {
                                 ${item.price} <del>${item.originalPrice}</del>
                                 <span>-{item.discount}%</span>
                             </div>
-                            <button className="popular-add-btn">+</button>
+                            <button className="popular-add-btn" onClick={() => addToCart(item)}>+</button>
                         </div>
                     </div>
                 ))}

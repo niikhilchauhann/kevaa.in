@@ -3,10 +3,12 @@
 import { products as allProducts } from "../data/realProducts";
 import "../css/home/dailyEssentials.css";
 import { useState } from "react";
+import useCartStore from "../store/cartStore";
 
 const itemsPerPage = 8;
 
 export default function DailyEssentials() {
+  const addToCart = useCartStore((state) => state.addToCart);
   const [page, setPage] = useState(0);
   const totalPages = Math.ceil(allProducts.dailyEssentials.length / itemsPerPage);
 
@@ -34,7 +36,7 @@ export default function DailyEssentials() {
                 ${item.price} <del>${item.originalPrice}</del> 
                 <span>-{item.discount}%</span>
               </div>
-              <button className="add-btn">+</button>
+              <button className="add-btn" onClick={() => addToCart(item)}>+</button>
             </div>
           </div>
         ))}
