@@ -5,6 +5,7 @@ import aradhanaBanner from '../assets/aradhana.jpg';
 import { BsCart3 } from 'react-icons/bs';
 import { NavLink } from 'react-router-dom';
 import { products as allProducts } from '../data/realProducts';
+import useCartStore from '../store/cartStore';
 // import product2 from '../assets/product2.png';
 // import product3 from '../assets/product3.png';
 
