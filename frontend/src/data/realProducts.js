@@ -685,7 +685,7 @@ export const products = {
 
   dailyEssentials: [
     {
-      id: 1,
+      id: 13,
       name: "Spiced Mint",
       price: 200,
       originalPrice: 230,
@@ -713,7 +713,7 @@ export const products = {
       variants: {},
     },
     {
-      id: 2,
+      id: 14,
       name: "Sweet Strawberry",
       price: 220,
       originalPrice: 250,
@@ -741,7 +741,7 @@ export const products = {
       variants: {},
     },
     {
-      id: 3,
+      id: 15,
       name: "Cool Blueberries",
       price: 250,
       originalPrice: 280,
@@ -769,7 +769,7 @@ export const products = {
       variants: {},
     },
     {
-      id: 4,
+      id: 16,
       name: "Juicy Lemon",
       price: 210,
       originalPrice: 240,
@@ -797,7 +797,7 @@ export const products = {
       variants: {},
     },
     {
-      id: 5,
+      id: 17,
       name: "Spiced Mint",
       price: 205,
       originalPrice: 235,
@@ -825,7 +825,7 @@ export const products = {
       variants: {},
     },
     {
-      id: 6,
+      id: 18,
       name: "Sweet Strawberry",
       price: 215,
       originalPrice: 245,
@@ -853,7 +853,7 @@ export const products = {
       variants: {},
     },
     {
-      id: 7,
+      id: 19,
       name: "Sweet Strawberry",
       price: 215,
       originalPrice: 245,
@@ -881,7 +881,7 @@ export const products = {
       variants: {},
     },
     {
-      id: 8,
+      id: 20,
       name: "Sweet Strawberry",
       price: 215,
       originalPrice: 245,
@@ -909,7 +909,7 @@ export const products = {
       variants: {},
     },
     {
-      id: 9,
+      id: 21,
       name: "Sweet Strawberry",
       price: 215,
       originalPrice: 245,
@@ -937,7 +937,7 @@ export const products = {
       variants: {},
     },
     {
-      id: 10,
+      id: 22,
       name: "Sweet Strawberry",
       price: 215,
       originalPrice: 245,
@@ -969,7 +969,7 @@ export const products = {
 
   popularProducts: [
     {
-      id: 1,
+      id: 23,
       name: "Spiced Mint",
       price: 200,
       originalPrice: 230,
@@ -997,7 +997,7 @@ export const products = {
       variants: {},
     },
     {
-      id: 2,
+      id: 24,
       name: "Sweet Strawberry",
       price: 220,
       originalPrice: 250,
@@ -1025,7 +1025,7 @@ export const products = {
       variants: {},
     },
     {
-      id: 3,
+      id: 25,
       name: "Cool Blueberries",
       price: 250,
       originalPrice: 280,
@@ -1053,7 +1053,7 @@ export const products = {
       variants: {},
     },
     {
-      id: 4,
+      id: 26,
       name: "Juicy Lemon",
       price: 210,
       originalPrice: 240,
@@ -1084,7 +1084,7 @@ export const products = {
 
   havenlyHaste: [
     {
-      id: 1,
+      id: 27,
       label: "Sale",
       name: "Natural Chandan (100% pure) No additives",
       price: 238.85,
@@ -1114,7 +1114,7 @@ export const products = {
       variants: {},
     },
     {
-      id: 2,
+      id: 28,
       label: "Best Sale",
       name: "Agarbatti (incense sticks) and dhoop",
       price: 200.00,
@@ -1145,7 +1145,7 @@ export const products = {
       variants: {},
     },
     {
-      id: 3,
+      id: 29,
       label: "Save",
       name: "Ajoova Seed Powder",
       price: 50.15,
@@ -1176,7 +1176,7 @@ export const products = {
       variants: {},
     },
     {
-      id: 4,
+      id: 30,
       label: "Save",
       name: "DhoopBatti Pure Cowdunk Natural",
       price: 50.15,
@@ -1210,7 +1210,7 @@ export const products = {
   categoryProducts: [
 
     {
-      id: 1,
+      id: 31,
       label: "Hot",
       name: "Fresh organic villa farm lemon 500gm pack",
       category: "Snack",
@@ -1242,7 +1242,7 @@ export const products = {
     },
 
     {
-      id: 2,
+      id: 32,
       label: "Sale",
       name: "Best snakes with hazel nut pack 200gm",
       category: "Foods",
@@ -1274,7 +1274,7 @@ export const products = {
     },
     {
 
-      id: 3,
+      id: 33,
       label: "New",
       name: "Organic fresh venila farm watermelon 5kg",
       category: "Snack",
@@ -1306,7 +1306,7 @@ export const products = {
 
     {
 
-      id: 4,
+      id: 34,
       label: "",
       name: "Fresh organic apple 1kg simla marning",
       category: "Vegetables",
@@ -1337,7 +1337,7 @@ export const products = {
     },
     {
 
-      id: 5,
+      id: 35,
       label: "",
       name: "Canada Dry Ginger Ale - 2 L Bottle - 200ml - 400g",
       category: "Meats",
@@ -1369,7 +1369,7 @@ export const products = {
 
     {
 
-      id: 6,
+      id: 36,
       label: "Save",
       name: "Blue Diamond Almonds Lightly Salted Vegetables",
       category: "Foods",
@@ -1399,7 +1399,7 @@ export const products = {
       variants: {},
     },
     {
-      id: 7,
+      id: 37,
       label: "New",
       name: "Brass Diya (Decorative Deepak) - 5 Inch",
       category: "Deepaks",
@@ -1429,7 +1429,7 @@ export const products = {
       variants: {},
     },
     {
-      id: 8,
+      id: 38,
       label: "Hot",
       name: "Kanjivaram Style Silk Poshak for Laddu Gopal",
       category: "Poshaks",
@@ -1459,7 +1459,7 @@ export const products = {
       variants: {},
     },
     {
-      id: 9,
+      id: 39,
       label: "Sale",
       name: "Natural Rose Attar - Alcohol-Free",
       category: "Attars",
@@ -1489,7 +1489,7 @@ export const products = {
       variants: {},
     },
     {
-    id: 10,
+    id: 40,
     label: "New",
     name: "Tulsi Mala (Holy Basil Beads)",
     price: 89.99,
@@ -1519,7 +1519,7 @@ export const products = {
     variants: {},
   },
   {
-    id: 11,
+    id: 41,
     label: "Save",
     name: "Havan Samagri Combo Pack",
     price: 299.0,
@@ -1550,7 +1550,7 @@ export const products = {
   },
 
   {
-    id: 12,
+    id: 42,
     label: "Hot",
     name: "Sandalwood Dhoop Cone",
     price: 120.00,
