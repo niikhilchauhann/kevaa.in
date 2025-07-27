@@ -1,6 +1,7 @@
 import React from 'react';
 import '../css/home/poojaProducts.css';
 import decor from '../assets/decor.jpg'; // rename and place your image in /src/assets/
+import { NavLink } from 'react-router-dom';
 
 const PoojaProducts = () => {
   return (
@@ -16,7 +17,7 @@ const PoojaProducts = () => {
           <li><span>✓</span> <strong>Made to Endure:</strong> Designed to last, with timeless quality and spiritual depth in every use.</li>
         </ul>
 
-        <button className="learn-more">Learn more</button>
+        <NavLink to='/about'><button className="learn-more">Learn more</button></NavLink>
       </div>
 
       <div className="pooja-right">

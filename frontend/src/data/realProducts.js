@@ -966,7 +966,6 @@ export const products = {
     },
   ],
 
-
   popularProducts: [
     {
       id: 23,
@@ -1581,5 +1580,4 @@ export const products = {
     variants: {},
   },
   ]
-
 };

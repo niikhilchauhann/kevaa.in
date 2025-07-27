@@ -20,7 +20,11 @@ import useAuthStore from '../store/authStore';
 export default function ProductDetails() {
   const addToCart = useCartStore(state => state.addToCart);
   const { id } = useParams();
-  const product = allProducts.find(p => p.id === parseInt(id));
+  const product = allProducts.normal.find(p => p.id === parseInt(id))
+              || allProducts.dailyEssentials.find(p => p.id === parseInt(id)) 
+              || allProducts.havenlyHaste.find(p => p.id === parseInt(id)) 
+              || allProducts.popularProducts.find(p => p.id === parseInt(id)) 
+              || allProducts.categoryProducts.find(p => p.id === parseInt(id));
   const productId = product?.id;
   const user = useAuthStore(state => state.user);
   const setUser = useAuthStore(state => state.setUser);
@@ -97,7 +101,15 @@ export default function ProductDetails() {
   };
 
   // Related products
-  const relatedProducts = allProducts.filter(
+  const relatedProducts = allProducts.normal.filter(
+    (p) => p.category === product.category && p.id !== product.id
+  ) || allProducts.dailyEssentials.filter(
+    (p) => p.category === product.category && p.id !== product.id
+  ) || allProducts.havenlyHaste.filter(
+    (p) => p.category === product.category && p.id !== product.id
+  ) || allProducts.popularProducts.filter(
+    (p) => p.category === product.category && p.id !== product.id
+  ) || allProducts.categoryProducts.filter(
     (p) => p.category === product.category && p.id !== product.id
   );
 
