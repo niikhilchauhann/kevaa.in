@@ -1402,7 +1402,7 @@ export const products = {
       id: 7,
       label: "New",
       name: "Brass Diya (Decorative Deepak) - 5 Inch",
-      category: "Deepak",
+      category: "Deepaks",
       price: 129.99,
       originalPrice: 149.99,
       discount: 13,
