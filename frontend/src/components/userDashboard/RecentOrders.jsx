@@ -24,12 +24,13 @@ const RecentOrders = () => {
   return (
     <section className="orders-container">
       <h2 className="orders-title">All orders</h2>
-
-      {orders.length === 0 ? (
-        <p className="no-orders">No recent orders found.</p>
-      ) : (
-        [...orders].reverse().map((order) => <OrderCard key={order.id} order={order} />)
-      )}
+      <div className="orders-container-render">
+        {orders.length === 0 ? (
+          <p className="no-orders">No recent orders found.</p>
+        ) : (
+          [...orders].reverse().map((order) => <OrderCard key={order.id} order={order} />)
+        )}
+      </div>
     </section>
   );
 };

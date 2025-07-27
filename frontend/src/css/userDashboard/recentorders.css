@@ -1,25 +1,81 @@
 .orders-container {
-  max-width: 960px;
-  margin-left: 3rem;
-  margin-right: 3rem; 
-  padding: 2rem;
-  background-color: #dddde0;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  width: 90%;
+  margin: 0px auto;
+  padding: 2.5rem 3rem;
+  border-radius: 20px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333333;
+  user-select: none;
+  border: 1px solid green;
+}
+
+.orders-container-render{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .orders-title {
-  font-size: 2.2rem;
-  margin-bottom: 2rem;
+  font-size: 2.6rem;
+  margin-bottom: 2.5rem;
   text-align: center;
-  color: #2b2b2b;
+  color: #1a202c; /* deep charcoal for a premium feel */
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  user-select: text;
 }
 
 .orders-loading,
 .no-orders {
-  text-align: center;
-  color: #999;
-  font-size: 1.1rem;
-  margin: 3rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* flex-wrap: wrap; */
+  color: #6b7280; /* a nice gray tone */
+  font-size: 1.25rem;
+  min-height: 140px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+
+/* Optional subtle animation for loading */
+.orders-loading::after {
+  content: "...";
+  animation: dots 1.2s steps(3, end) infinite;
+}
+
+@keyframes dots {
+  0%, 20% {
+    content: "";
+  }
+  40% {
+    content: ".";
+  }
+  60% {
+    content: "..";
+  }
+  80%, 100% {
+    content: "...";
+  }
+}
+
+/* Responsive padding for smaller screens */
+@media (max-width: 640px) {
+  .orders-container {
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+  }
+
+  .orders-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .orders-loading,
+  .no-orders {
+    font-size: 1.1rem;
+    min-height: 110px;
+  }
 }
