@@ -21,7 +21,7 @@ import urlis from "../assets/urlis.jpg";
 import spicedMint from "../assets/spicedMint.jpg"
 import strawBerry from "../assets/strawberry.jpg"
 import blueBerry from "../assets/blueberry.jpg"
-import juicyLemon from "../assets/juicyLemon.jpg"
+import juiceLemon from "../assets/juiceLemon.jpg"
 
 // popularProducts
 import chandanImage from '../assets/chandan.jpg';
@@ -1060,8 +1060,8 @@ export const products = {
       discount: 12,
       rating: "",
       reviewsCount: "",
-      image: juicyLemon,
-      images: [juicyLemon],
+      image: juiceLemon,
+      images: [juiceLemon],
       description: "",
       shortDescription: "",
       color: "",
