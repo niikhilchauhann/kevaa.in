@@ -20,38 +20,29 @@ import useAuthStore from '../store/authStore';
 export default function ProductDetails() {
   const addToCart = useCartStore(state => state.addToCart);
   const { id } = useParams();
-  const product = allProducts.normal.find(p => p.id === parseInt(id))
-              || allProducts.dailyEssentials.find(p => p.id === parseInt(id)) 
-              || allProducts.havenlyHaste.find(p => p.id === parseInt(id)) 
-              || allProducts.popularProducts.find(p => p.id === parseInt(id)) 
-              || allProducts.categoryProducts.find(p => p.id === parseInt(id));
+  const product =
+    allProducts.normal.find(p => p.id === parseInt(id)) ||
+    allProducts.dailyEssentials.find(p => p.id === parseInt(id)) ||
+    allProducts.havenlyHaste.find(p => p.id === parseInt(id)) ||
+    allProducts.popularProducts.find(p => p.id === parseInt(id)) ||
+    allProducts.categoryProducts.find(p => p.id === parseInt(id));
+
   const productId = product?.id;
   const user = useAuthStore(state => state.user);
   const setUser = useAuthStore(state => state.setUser);
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      setUser(firebaseUser); // Update Zustand store user
+      setUser(firebaseUser);
     });
     return () => unsubscribe();
   }, [setUser]);
-
-  console.log(user)
-
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedColor, setSelectedColor] = useState(product?.color || '');
   const [quantity, setQuantity] = useState(1);
 
-  // 1️⃣ ------- CHOOSE ONE OF THESE TWO VARIANTS FOR YOUR "reviews" LINE -------
-
-  // (A) If your store has a getReviews function:
-  // const reviews = useReviewStore(state => state.getReviews(productId));
-
-  // (B) If your store DOES NOT have getReviews, use direct access + fallback:
   const reviews = useReviewStore(state => state.reviews[productId]) ?? [];
-
-  // --------------------------------------------------------------------------
-
   const subscribeToProductReviews = useReviewStore(state => state.subscribeToProductReviews);
   const addReview = useReviewStore(state => state.addReview);
   const [filter, setFilter] = useState('latest');
@@ -62,6 +53,7 @@ export default function ProductDetails() {
       return () => unsubscribe();
     }
   }, [productId, subscribeToProductReviews]);
+
   const handleSubmitReview = async (reviewText, rating, photo) => {
     const reviewObj = {
       message: reviewText.trim(),
@@ -87,31 +79,29 @@ export default function ProductDetails() {
 
   if (!product) return <p>Product not found!</p>;
 
-  // reviews filteration
-  const productReviews = reviews;
-
-  const filteredReviews = [...productReviews].sort((a, b) => {
+  const filteredReviews = [...reviews].sort((a, b) => {
     if (filter === 'highest') return b.rating - a.rating;
     if (filter === 'lowest') return a.rating - b.rating;
-    return 0; // Default: latest
+    return 0;
   });
 
   const handleWriteReview = () => {
     alert("Redirect to review form or open modal.");
   };
 
-  // Related products
-  const relatedProducts = allProducts.normal.filter(
-    (p) => p.category === product.category && p.id !== product.id
-  ) || allProducts.dailyEssentials.filter(
-    (p) => p.category === product.category && p.id !== product.id
-  ) || allProducts.havenlyHaste.filter(
-    (p) => p.category === product.category && p.id !== product.id
-  ) || allProducts.popularProducts.filter(
-    (p) => p.category === product.category && p.id !== product.id
-  ) || allProducts.categoryProducts.filter(
-    (p) => p.category === product.category && p.id !== product.id
-  );
+  // ✅ Related Products from all categories
+  const relatedProducts = [
+    ...allProducts.normal,
+    ...allProducts.dailyEssentials,
+    ...allProducts.havenlyHaste,
+    ...allProducts.popularProducts,
+    ...allProducts.categoryProducts
+  ]
+    .filter(p =>
+      p.id !== product.id &&
+      (p.category === product.category || p.dressStyle === product.dressStyle)
+    )
+    .slice(0, 10);
 
   const images = Array.isArray(product?.variants?.[selectedColor]?.images)
     ? product.variants[selectedColor].images
@@ -141,7 +131,7 @@ export default function ProductDetails() {
   const renderReviews = () => (
     <div className='main-review-container'>
       <ReviewHeader
-        count={productReviews.length}
+        count={reviews.length}
         filter={filter}
         setFilter={setFilter}
         product={product}
@@ -156,7 +146,7 @@ export default function ProductDetails() {
             <div className="review-card" key={index}>
               <div className="review-header">
                 <div className="review-stars">{renderStars(review.rating)}</div>
-                <strong> {review.name}</strong> <span className="verified"><GoVerified /></span>
+                <strong>{review.name}</strong> <span className="verified"><GoVerified /></span>
               </div>
               <p className="review-message">"{review.message}"</p>
               {review.publishedAt && (
@@ -178,9 +168,12 @@ export default function ProductDetails() {
             key={item.id}
             to={`/products/product/${item.id}`}
             className="related-product-card"
-            style={{ textDecoration: "none", color: "inherit" }}
           >
-            <img src={item.image || item.images?.[0]} alt={item.name} className="related-product-image" />
+            <img
+              src={item.image || item.images?.[0]}
+              alt={item.name}
+              className="related-product-image"
+            />
             <h4 className="related-product-name">{item.name}</h4>
             <div className="related-stars">{renderStars(item.rating)}</div>
             <p className="related-price">
@@ -204,7 +197,7 @@ export default function ProductDetails() {
   return (
     <div className='main-product-details-container'>
       <div className='main-product-details-header'>
-        <h4>{product.category} <MdKeyboardArrowRight /> {product.dressStyle} </h4>
+        <h4>{product.category} <MdKeyboardArrowRight /> {product.dressStyle}</h4>
       </div>
 
       <div className="product-details-container">
@@ -216,7 +209,7 @@ export default function ProductDetails() {
             <div className="rating">
               <div className="stars">{renderStars(product.rating)}</div>
               <span className="rating-number">
-                {product.rating} / 5 ({productReviews.length} reviews)
+                {product.rating} / 5 ({reviews.length} reviews)
               </span>
             </div>
           </div>
@@ -243,10 +236,10 @@ export default function ProductDetails() {
             </div>
             <button
               className="add-to-cart-btn"
-              onClick={() => {
-                addToCart({ ...product, quantity });
-              }}
-            >Add to Cart</button>
+              onClick={() => addToCart({ ...product, quantity })}
+            >
+              Add to Cart
+            </button>
           </div>
 
           <p className="extra-info">
@@ -259,8 +252,7 @@ export default function ProductDetails() {
           <div className="main-image-container">
             <div className="image-controls-wrapper">
               <div className="image-counter">
-                <span>{String(currentImageIndex + 1).padStart(2, '0')}</span> /
-                {String(images.length).padStart(2, '0')}
+                <span>{String(currentImageIndex + 1).padStart(2, '0')}</span> / {String(images.length).padStart(2, '0')}
               </div>
               <div className="arrow-controls">
                 <button onClick={prevImage}>‹</button>
@@ -275,10 +267,8 @@ export default function ProductDetails() {
             />
             <div
               className='shadow-appealing'
-              style={{
-                background: `linear-gradient(to left, ${selectedColor}, transparent)`
-              }}
-            ></div>
+              style={{ background: `linear-gradient(to left, ${selectedColor}, transparent)` }}
+            />
           </div>
 
           <div className="thumbnail-container">

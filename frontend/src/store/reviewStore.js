@@ -1,18 +1,30 @@
 import { create } from 'zustand';
-import { 
-  collection, 
-  query, 
-  orderBy, 
-  onSnapshot, 
+import {
+  collection,
+  query,
+  orderBy,
+  onSnapshot,
+  collectionGroup,
   addDoc,
   getDocs,
 } from 'firebase/firestore';
 import { db } from '../firebase';
 
-const useReviewStore = create((set) => ({
+const useReviewStore = create((set, get) => ({
   reviews: {}, // { productId: [reviews] }
+  allReviews: [],
   getReviews: (productId) => get().reviews[productId] ?? [],
-  
+
+  getAllReviews: async () => {
+  try {
+    const q = collectionGroup(db, "reviews"); // 🔁 get all reviews from all products
+    const querySnapshot = await getDocs(q);
+    const reviews = querySnapshot.docs.map(doc => doc.data());
+    set({ allReviews: reviews });
+  } catch (error) {
+    console.error("Error fetching reviews:", error);
+  }
+},
   // Subscribe to realtime reviews of a product
   subscribeToProductReviews: (productId) => {
     const reviewsQuery = query(

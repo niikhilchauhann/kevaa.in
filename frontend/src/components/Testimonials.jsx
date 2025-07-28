@@ -1,14 +1,18 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import "../css/home/testimonials.css";
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
-import { testimonials } from "../data/testimonials";
-
+import useReviewStore from "../store/reviewStore"; // ✅ use your review store
 
 export default function Testimonials() {
   const scrollRef = useRef();
+  const allReviews = useReviewStore(state => state.allReviews);
+  const fetchReviews = useReviewStore(state => state.getAllReviews);
 
+  useEffect(() => {
+    fetchReviews(); // fetch reviews when component mounts
+  }, []);
   const scroll = (direction) => {
     const container = scrollRef.current;
     const scrollAmount = 320;
@@ -28,22 +32,26 @@ export default function Testimonials() {
         </div>
       </div>
       <div className="testimonial-carousel" ref={scrollRef}>
-        {testimonials.map((item, index) => (
-          <div className="testimonial-card" key={index}>
-            <div className="stars">
-              {Array.from({ length: item.rating }).map((_, i) => (
-                <MdOutlineStarPurple500 key={i} />
-              ))}
+        {allReviews.length > 0 ? (
+          allReviews.map((item, index) => (
+            <div className="testimonial-card" key={index}>
+              <div className="stars">
+                {Array.from({ length: item.rating }).map((_, i) => (
+                  <MdOutlineStarPurple500 key={i} />
+                ))}
+              </div>
+              <h4>
+                {item.name}{" "}
+                <span className="verified">
+                  <RiVerifiedBadgeFill />
+                </span>
+              </h4>
+              <p>{item.message}</p>
             </div>
-            <h4>
-              {item.name}{" "}
-              <span className="verified">
-                <RiVerifiedBadgeFill />
-              </span>
-            </h4>
-            <p>{item.message}</p>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p>No reviews yet!</p>
+        )}
       </div>
     </section>
   );
