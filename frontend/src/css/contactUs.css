@@ -27,6 +27,7 @@
   outline: none;
   background: #fafafa;
   transition: border 0.2s;
+  color: black;
 }
 .contactus-form input:focus,
 .contactus-form textarea:focus {

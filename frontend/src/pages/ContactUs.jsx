@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../css/contactUs.css"; 
+import "../css/contactUs.css";
 
 function ContactUs() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -9,10 +9,26 @@ function ContactUs() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    setSubmitted(true);
+    try {
+      const res = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error connecting to server.");
+    }
   };
+
 
   return (
     <div className="contactus-container">
