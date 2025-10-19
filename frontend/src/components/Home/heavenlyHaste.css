@@ -1,0 +1,303 @@
+.heavenly-container {
+  padding: 40px 80px;
+  background: #fff;
+}
+
+.section-title {
+  font-size: 26px;
+  font-weight: 600;
+  color: #0d1b2a;
+  margin-bottom: 30px;
+  letter-spacing: 0.5px;
+}
+
+.heavenly-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.heavenly-banner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  min-height: 100%;
+}
+
+.heavenly-banner img {
+  width: 100%;
+  border-radius: 14px;
+  height: 100%;
+  object-fit: cover;
+}
+
+.banner-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  position: absolute;
+  inset: 0;
+  padding: 40px 40px;
+  color: white;
+  background-color: #00000066;
+}
+
+.banner-overlay h3 {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.banner-overlay button {
+  background: #d61458;
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.heavenly-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  height: 100%;
+  min-height: 330px;
+  transition: all 0.2s ease;
+}
+
+.heavenly-card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.heavenly-card .label {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  font-size: 12px;
+  font-weight: 500;
+  background: #ffe8e8;
+  color: #e60023;
+  padding: 4px 16px;
+  border-top-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+.label.sale {
+  background-color: #ed294d;
+  color: #fff;
+}
+
+.label.best-sale {
+  background-color: #fcb15c;
+  color: #fff;
+}
+
+.label.save {
+  background-color: #fc3880;
+  color: #fff;
+}
+
+.heavenly-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.heavenly-haste-product {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.heavenly-card h4 {
+  margin: 0;
+  font-size: 13px;
+  color: #666;
+  font-weight: 400;
+}
+
+.heavenly-card .title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2e2e2e;
+  margin: 6px 0px 10px;
+  height: 22px;
+  line-height: 22px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.heavenly-card .price {
+  display: flex;
+  align-items: center;
+  color: black;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+
+}
+
+.heavenly-card .price span {
+  color: rgb(18, 195, 18);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.price del {
+  color: #aaa;
+  font-size: 12px;
+  font-weight: 400;
+
+}
+
+.sold-bar {
+  width: 100%;
+  background: #eee;
+  height: 6px;
+  border-radius: 4px;
+  margin: 6px 0;
+  overflow: hidden;
+
+}
+
+.sold-bar .bar {
+  height: 100%;
+  background: #d8185b;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+
+}
+
+.sold {
+  font-size: 12px;
+  color: #777;
+}
+
+.cart-btn {
+  background: #d41256;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: white;
+  padding: 10px 0;
+  border: none;
+  border-radius: 6px;
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.cart-btn:hover {
+  background: #c10e4b;
+}
+
+
+.heavenly-boxes {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 0 20px;
+}
+
+.heavenly-boxes .box:nth-child(1) {
+  background-image: url('https://res.cloudinary.com/dh3qwxhmm/image/upload/v1754670863/product2_xaub1n.png');
+}
+
+.heavenly-boxes .box:nth-child(2) {
+  background-image: url('https://res.cloudinary.com/dh3qwxhmm/image/upload/v1754670862/product1_inksdq.png');
+}
+
+.heavenly-boxes .box:nth-child(3) {
+  background-image: url('https://res.cloudinary.com/dh3qwxhmm/image/upload/v1754670863/product3_my6t59.png');
+}
+
+.box {
+  flex: 1;
+  min-width: 200px;
+  min-height: 172px;
+  padding: 20px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 10px;
+  color: #333;
+  font-weight: 500;
+}
+
+.box p {
+  width: 60%;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.box button {
+  margin-top: 10px;
+  font-size: 14px;
+  padding: 8px 14px;
+  background: #f92b72;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+  .heavenly-container {
+    padding: 20px 0; 
+  }
+
+  .section-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 20px 20px; 
+  }
+
+  .heavenly-grid {
+    display: flex;
+    overflow-x: auto;
+    gap: 16px;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 20px;
+    scroll-padding-right: 20px;
+    padding: 0 20px;
+  }
+
+  .heavenly-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .heavenly-card {
+    flex: 0 0 220px;
+    scroll-snap-align: start;
+    min-width: 220px;
+  }
+
+  .heavenly-banner {
+    display: none;
+  }
+}

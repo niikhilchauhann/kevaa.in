@@ -1,0 +1,59 @@
+.review-card {
+  flex: 0 0 300px;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  scroll-snap-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.review-card:hover {
+  transform: translateY(-4px);
+}
+
+.review-stars {
+  font-size: 20px;
+  color: #f1c234;
+}
+
+.review-name {
+  font-weight: bold;
+  display: flex;
+  color: black;
+}
+
+.verified {
+  color: green;
+  font-size: 16px;
+  margin-left: 5px;
+}
+
+.review-message {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.4;
+  margin-top: 5px;
+}
+
+.review-date {
+  font-size: 13px;
+  color: gray;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .review-card {
+    flex: 0 0 250px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .review-card {
+    flex: 0 0 100%;
+  }
+}

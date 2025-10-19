@@ -1,0 +1,247 @@
+/* AdminDashboard.css */
+
+/* Container */
+.admin-dashboard-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 32px;
+  color: #333;
+}
+
+/* Heading */
+.admin-dashboard-container h1 {
+  font-size: 2.2rem;
+  margin-bottom: 24px;
+  color: #222;
+  text-align: center;
+}
+
+/* Table styling */
+.admin-orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.admin-orders-table thead {
+  background: linear-gradient(90deg, #6b21a8, #9d4edd);
+  color: #fff;
+}
+
+.admin-orders-table thead th {
+  padding: 12px 16px;
+  font-weight: 600;
+  text-align: left;
+  user-select: none;
+  font-size: 0.9rem;
+}
+
+.admin-orders-table tbody tr {
+  background-color: #fff;
+  transition: background-color 0.2s ease;
+  cursor: default;
+}
+
+.admin-orders-table tbody tr:hover {
+  background-color: #f5f3ff; /* light purple */
+}
+
+.admin-orders-table tbody td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: middle;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* Highlight OrderID */
+.admin-orders-table tbody td:first-child {
+  font-weight: 700;
+  color: #6b21a8;
+  letter-spacing: 0.05em;
+}
+
+/* Timeline list inside table */
+.timeline-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 280px;
+}
+
+.timeline-list li {
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background-color: #e0e0e0;
+  color: #666;
+  user-select: none;
+  white-space: nowrap;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.timeline-list li.active {
+  background-color: #6b21a8; /* purple */
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Items list inside table */
+.items-list {
+  list-style: none;
+  padding-left: 12px;
+  margin: 0;
+  max-height: 80px;
+  overflow-y: auto;
+}
+
+.items-list li {
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/* Buttons */
+.status-btn {
+  padding: 8px 14px;
+  background: linear-gradient(135deg, #7c3aed, #a78bfa);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgb(124 58 237 / 0.5);
+  transition: background 0.3s ease;
+  user-select: none;
+}
+
+.status-btn:disabled {
+  background: #c7d2fe;
+  box-shadow: none;
+  cursor: not-allowed;
+  color: #6b7280;
+}
+
+.status-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #a78bfa, #7c3aed);
+}
+
+/* Complete label */
+.complete-label {
+  color: #22c55e;
+  font-weight: 700;
+  font-size: 1rem;
+  user-select: none;
+}
+
+/* Track button */
+.track-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1.5px solid #6b21a8;
+  background: transparent;
+  color: #6b21a8;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  user-select: none;
+}
+
+.track-btn:hover {
+  background-color: #6b21a8;
+  color: white;
+}
+
+/* Selected order timeline container */
+.selected-order-timeline {
+  margin-top: 28px;
+  padding: 24px;
+  border: 1px solid #d4d4d8;
+  border-radius: 12px;
+  background-color: #fafafa;
+  max-width: 900px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.05);
+}
+
+/* Timeline title */
+.selected-order-timeline h3 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #5b21b6;
+  border-bottom: 2px solid #a78bfa;
+  padding-bottom: 6px;
+  user-select: none;
+}
+
+/* Status steps list for selected order */
+.selected-order-timeline ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.selected-order-timeline li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background-color: #f3f4f6; /* light gray */
+  color: #4b5563; /* gray-700 */
+  user-select: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.selected-order-timeline li.active {
+  background-color: #7c3aed; /* purple */
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgb(124 58 237 / 0.3);
+}
+
+/* Date/time in timeline */
+.selected-order-timeline li span:last-child {
+  font-size: 0.85rem;
+  color: #d1d5db; /* gray-300 */
+  user-select: text;
+}
+
+/* Items status list inside timeline */
+.selected-order-timeline h4 {
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+  color: #6b21a8;
+  user-select: none;
+}
+
+.selected-order-timeline ul.items-status {
+  list-style: none;
+  padding-left: 12px;
+  margin: 0;
+}
+
+.selected-order-timeline ul.items-status li {
+  font-size: 1rem;
+  color: #374151; /* gray-800 */
+  margin-bottom: 6px;
+  user-select: text;
+}
+
+/* Footer note */
+.footer-note {
+  margin-top: 24px;
+  color: #6b7280; /* gray-500 */
+  font-size: 0.9rem;
+  text-align: center;
+  user-select: none;
+}

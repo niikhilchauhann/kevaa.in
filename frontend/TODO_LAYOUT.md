@@ -1,0 +1,3 @@
+- [x] Update HelpCenter.jsx for side-by-side layout
+- [x] Update HelpCenter.css for responsive styling
+- [x] Test layout on different screen sizes (image hidden on mobile/tablet)

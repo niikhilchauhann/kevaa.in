@@ -1,0 +1,46 @@
+.discount-banner {
+  background-color: #f0fdfa; /* teal-50 */
+  border: 1px solid #99f6e4; /* teal-200 */
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 0 1px #d1fae5; /* optional subtle inner glow */
+}
+
+.discount-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.icon-wrapper {
+  flex-shrink: 0;
+}
+
+.icon-circle {
+  width: 1.75rem;
+  height: 1.75rem;
+  background-color: #14b8a6; /* teal-500 */
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.percent-symbol {
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.discount-text {
+  font-size: 0.875rem;
+  color: #0f766e; /* teal-700 */
+  line-height: 1.5;
+}
+
+.highlight {
+  font-weight: 600;
+  color: #0f766e;
+}

@@ -1,0 +1,237 @@
+.profile-container {
+  width: 100%;
+  background-color: white;
+}
+
+.date {
+  color: gray;
+  font-size: 14px;
+}
+
+.profile-card {
+  /* margin-top: 20px; */
+  border-radius: 10px;
+  background: #fff;
+  overflow: hidden;
+  /* box-shadow: 0 2px 10px rgba(0,0,0,0.1); */
+}
+
+.profile-header {
+  height: 60px;
+  background: #d00057;
+}
+
+.profile-content {
+  display: flex;
+  align-items: center;
+  padding: 18px 24px;
+  position: relative;
+}
+
+.profile-content .avatar-initial{
+  width: 60px; 
+  border: 1px solid rgb(186, 186, 186);
+  margin-right: 10px; 
+  display: flex;
+  padding: 1px;
+  align-content: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.user-info h3 {
+  margin: 0;
+}
+
+.user-info p {
+  /* margin: 4px 0 0; */
+  color: gray;
+}
+
+.edit-btn {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background: #2962ff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.form {
+  padding: 10px 24px;
+  display: flex;
+  /* justify-content: start; */
+  flex-direction: column;
+  /* align-items: start; */
+}
+
+.form label {
+  margin-top: 8px;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+.form input,
+.form select {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #eee;
+  color:gray;
+  background: #fafafa;
+}
+
+.email-box {
+  display: flex;
+  align-items: center;
+  /* justify-content: start; */
+  gap: 10px;
+  background: #f5f5f5;
+  padding: 10px;
+  border-radius: 8px;
+  /* margin-top: 5px; */
+}
+
+.email-icon {
+  font-size: 20px;
+}
+
+.add-btn {
+  margin-top: 10px;
+  background: #e0ebff;
+  color: #2962ff;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+
+
+
+@media (max-width: 900px) {
+  .profile-card {
+    margin: 0 0 24px 0;
+    border-radius: 8px;
+  }
+  .profile-header {
+  height: 40px;
+  margin-top: 10px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background: #d00057;
+}
+
+  .profile-content {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 10px;
+  }
+  .profile-content .avatar-initial,
+  .avatar {
+    margin-right: 0;
+    margin-bottom: 10px;
+    width: 60px;
+    height: 60px;
+  }
+  .user-info h3 {
+    font-size: 20px;
+  }
+  .edit-btn {
+    position: static;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 200px;
+    align-self: flex-end;
+  }
+  .form {
+    padding: 12px 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-container {
+    padding: 0 2vw;
+    font-size: 15px;
+  }
+  .profile-card {
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+  }
+  .profile-header {
+    height: 40px;
+  }
+  .profile-content {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 4px;
+  }
+  .profile-content .avatar-initial,
+  .avatar {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    margin-bottom: 8px;
+    margin-right: 0;
+  }
+  .user-info h3 {
+    font-size: 17px;
+  }
+  .edit-btn {
+    position: static;
+    margin-top: 8px;
+    width: 100%;
+    max-width: 150px;
+    padding: 7px 0;
+    font-size: 15px;
+  }
+  .form {
+    padding: 8px 2px;
+  }
+  .form label {
+    font-size: 15px;
+    margin-top: 5px;
+    margin-bottom: 2px;
+  }
+  .form input,
+  .form select {
+    padding: 8px 10px;
+    font-size: 15px;
+  }
+  .email-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 8px;
+    font-size: 14px;
+  }
+  .add-btn {
+    width: 100%;
+    padding: 9px 0;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 400px) {
+  .form > div[style] {
+    flex-direction: column !important;
+    gap: 4px !important;
+    align-items: stretch !important;
+  }
+  .form select[style] {
+    width: 100% !important;
+  }
+}

@@ -1,0 +1,47 @@
+.popular-section {
+  text-align: center;
+  padding: 40px 130px;
+  background-color: #fefefe;
+}
+
+.popular-section h3 {
+  font-size: 16px;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.popular-section h2 {
+  font-size: 32px;
+  color: #0d1b2a;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.popular-section p {
+  line-height: 2;
+  color: #7c8ba1;
+  margin-bottom: 60px;
+}
+
+
+@media (max-width: 1200px) {
+  .popular-section {
+    padding: 40px 80px; 
+  }
+  .popular-grid {
+    grid-template-columns: repeat(3, 1fr); 
+  }
+}
+
+@media (max-width: 768px) {
+  .popular-section {
+    padding: 40px 20px; 
+  }
+
+}
+
+@media (max-width: 468px) {
+  .popular-section {
+    display: none;
+  }
+}

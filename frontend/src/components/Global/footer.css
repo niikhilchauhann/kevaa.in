@@ -1,0 +1,271 @@
+.footer {
+  background-color: #f5f5f5;
+  padding: 60px 100px;
+  color: #222;
+}
+
+.newsletter {
+  background-color: #d9045a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  border-radius: 16px;
+  padding: 20px 30px;
+  /* text-align: center; */
+  margin-bottom: 60px;
+}
+
+.newsletter h2 {
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  /* border: 1px solid green; */
+  gap: 15px;
+}
+
+.input-box {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 40px;
+  padding: 10px 20px;
+  width: 80%;
+  max-width: 400px;
+  min-width: 260px;
+}
+
+.input-box input {
+  background-color: white;
+  color: #222;
+  border: none;
+  outline: none;
+  padding: 10px;
+  flex: 1;
+  font-size: 16px;
+  min-width: 0;
+  /* prevent overflow */
+}
+
+.input-box svg {
+  font-size: 20px;
+  color: #999;
+  margin-right: 10px;
+}
+
+.newsletter-form a {
+  width: 60%;
+  /* border: 1px solid  green; */
+  display: flex;
+}
+
+.newsletter-form button {
+  background-color: white;
+  color: #d9045a;
+  border: none;
+  width: 100%;
+  padding: 12px 32px;
+  border-radius: 40px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-company {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-navigations {
+  flex: 2;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.footer-column h4 {
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.footer-column p {
+  font-size: 14px;
+  color: #444;
+  margin: 6px 0;
+  cursor: pointer;
+}
+
+.footer-column.brand h3 {
+  font-size: 22px;
+  color: #d9045a;
+  font-weight: bold;
+}
+
+.footer-column.brand p {
+  max-width: 260px;
+}
+
+.social-icons {
+  margin-top: 15px;
+  display: flex;
+  gap: 12px;
+}
+
+.social-icons svg {
+  font-size: 20px;
+  cursor: pointer;
+  color: #444;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+  font-size: 13px;
+  color: #777;
+}
+.footer-bottom .payments{
+  display: flex;
+  align-items: center;
+}
+
+.footer-bottom .payments img {
+  height: 24px;
+  margin-left: 10px;
+}
+
+@media screen and (max-width: 1024px) {
+  .newsletter-form a {
+    width: 100%;
+  }
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .footer {
+    padding: 40px 20px;
+    /* Adjust padding for smaller screens */
+  }
+
+  .newsletter {
+    flex-direction: column;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .newsletter h2 {
+    font-size: 24px;
+    /* Smaller heading for medium screens */
+  }
+
+  .newsletter-form {
+    width: 100%;
+  }
+
+  .newsletter-form a {
+    justify-content: center;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+  }
+
+  
+  .footer-column {
+    text-align: center;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    /* Stack footer bottom elements */
+    align-items: center;
+    /* Center align items */
+    text-align: center;
+    /* Center align text */
+  }
+  .social-icons{
+    display: flex;
+    justify-content: center;
+  }
+
+  .newsletter-form button {
+    width: 70%;
+  }
+
+  .input-box {
+    width: 100%;
+    padding: 8px 16px;
+  }
+
+  .input-box input {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .footer {
+    padding: 20px 10px;
+    /* Further reduce padding */
+  }
+
+  .newsletter h2 {
+    font-size: 24px;
+    /* Smaller heading for smaller screens */
+  }
+
+  .footer-column h4 {
+    font-size: 16px;
+    /* Adjust heading size */
+  }
+
+  .footer-column p {
+    font-size: 12px;
+    /* Adjust paragraph size */
+  }
+
+  .footer-bottom {
+    font-size: 12px;
+    /* Adjust footer bottom font size */
+  }
+
+  .newsletter-form button {
+    width: 90%;
+  }
+
+  .input-box {
+    width: 100%;
+    padding: 6px 12px;
+  }
+
+  .input-box input {
+    font-size: 13px;
+    padding: 6px;
+  }
+
+}

@@ -1,0 +1,42 @@
+body{
+  background-color: var(--surface);
+}
+
+.wrapper-main{
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  background-color: var(--white);
+} 
+
+
+/* 600, 601, 768, 992, 1200 */
+@media(max-width: 600px){
+}
+
+@media (max-width: 768px) {
+  .project-section,
+  .hire-me-section,
+  .header-main, .timeline-center-content {
+    display: none !important;
+  }
+
+  .hero-greeting{
+    padding-top: 60px !important;
+  }
+
+.timeline-left-content, .timeline-right-content{
+  max-width: 42% !important;
+} 
+.certifications-card{
+    width: 35rem !important;
+    height: 26rem !important;
+}
+.contact-me-section .heading{
+  max-width: 80% !important;
+}
+
+}
+
+
