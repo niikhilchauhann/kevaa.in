@@ -1,238 +1,144 @@
-import React, { useState } from 'react';
-import "./filters.css";
+import React, { useMemo, useState } from "react";
 import { IoIosArrowUp } from "react-icons/io";
 
-const Filters = ({ onApply }) => {
+export default function Filters({ onApply }) {
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedSizes, setSelectedSizes] = useState([]);
   const [selectedStyles, setSelectedStyles] = useState([]);
-  const [priceRange, setPriceRange] = useState(500);
+  const [price, setPrice] = useState(500);
   const [selectedRatings, setSelectedRatings] = useState([]);
-  const [availability, setAvailability] = useState(null); // 'in' | 'out' | null
-
-  const [visibleFilters, setVisibleFilters] = useState({
-    category: true,
+  const [availability, setAvailability] = useState(null);
+  const [open, setOpen] = useState({
+    category: false,
     price: true,
-    colors: true,
-    sizes: true,
-    styles: true,
-    rating: true,
-    availability: true
+    colors: false,
+    sizes: false,
+    styles: false,
+    rating: false,
+    availability: false,
   });
 
-  const toggleFilterGroup = (key) => {
-    setVisibleFilters(prev => ({ ...prev, [key]: !prev[key] }));
-  };
+  const categories = ["Maala", "Poshaks", "Kits", "Diwali Special", "Attars"];
+  const colors = [
+    "black", "white", "gray", "silver", "red", "maroon", "orange", "coral", "gold",
+    "yellow", "olive", "lime", "green", "teal", "cyan", "aqua", "blue", "navy",
+    "skyblue", "purple", "indigo", "violet", "pink", "hotpink", "deeppink",
+    "brown", "chocolate", "beige", "khaki", "lavender", "mintcream",
+  ];
+  const sizes = ["XXS", "XS", "S", "M", "L", "XL", "XXL", "XXXL"];
+  const styles = ["Casual", "Daily", "Event", "Festival"];
+  const ratings = [5, 4, 3, 2, 1];
 
-  const toggle = (value, list, setter) => {
-    setter(list.includes(value) ? list.filter(v => v !== value) : [...list, value]);
+  const toggleListVal = (value, list, setter) => {
+    setter(list.includes(value) ? list.filter((v) => v !== value) : [...list, value]);
   };
 
   const handleApply = () => {
-    onApply({
-      category: selectedCategory,
-      colors: selectedColors,
-      sizes: selectedSizes,
-      dressStyles: selectedStyles,
-      priceRange,
-      rating: selectedRatings,
-      availability
-    });
+    onApply?.({ category: selectedCategory, colors: selectedColors, sizes: selectedSizes, dressStyles: selectedStyles, priceRange: price, rating: selectedRatings, availability });
   };
 
-  const resetFilters = () => {
+  const handleReset = () => {
     setSelectedCategory([]);
     setSelectedColors([]);
     setSelectedSizes([]);
     setSelectedStyles([]);
     setSelectedRatings([]);
     setAvailability(null);
-    setPriceRange(500);
-    onApply({});
+    setPrice(500);
+    onApply?.({});
   };
 
-  const category = ['Maala', 'Poshaks', 'Kits', 'Diwali Special', 'Attars'];
-  const colors = [
-    'black', 'white', 'gray', 'silver', 'red', 'maroon', 'orange', 'coral', 'gold',
-    'yellow', 'olive', 'lime', 'green', 'teal', 'cyan', 'aqua', 'blue', 'navy',
-    'skyblue', 'purple', 'indigo', 'violet', 'pink', 'hotpink', 'deeppink',
-    'brown', 'chocolate', 'beige', 'khaki', 'lavender', 'mintcream'
-  ];
-  const sizes = ['XX-Small', 'X-Small', 'Small', 'Medium', 'Large', 'X-Large', 'XX-large', 'XXX-Large'];
-  const styles = ['Casual', 'Daily', 'Event', 'Festival'];
-  const ratings = [5, 4, 3, 2, 1];
+  const anyActive = useMemo(
+    () => selectedCategory.length || selectedColors.length || selectedSizes.length || selectedStyles.length || selectedRatings.length || availability !== null || price !== 500,
+    [selectedCategory, selectedColors, selectedSizes, selectedStyles, selectedRatings, availability, price]
+  );
 
   return (
-    <div className="filter-panel">
-      <h2>Filters</h2>
+    <div className="filter-panel" role="region" aria-label="Product Filters">
 
-      {/* Category */}
-      <div className="filter-group">
-        <div className="category-list">
-          {category.map(c => (
-            <div
-              key={c}
-              className={`category-item ${selectedCategory.includes(c) ? 'selected' : ''}`}
-              onClick={() => toggle(c, selectedCategory, setSelectedCategory)}
-            >
-              <span className="category-text">{c}</span>
-              <span className="category-arrow">→</span>
+      <div className="panel-head">
+        <h2 className="heading">Filters</h2>
+        {anyActive && (
+          <button type="button" className="text-btn" onClick={handleReset}>Reset all</button>
+        )}
+      </div>
+
+      <Accordion id="category" label="Category" open={open.category} onToggle={() => setOpen(p => ({ ...p, category: !p.category }))} badge={selectedCategory.length || undefined}>
+        <div className="list">
+          {categories.map((c) => (
+            <div key={c} className={`item ${selectedCategory.includes(c) ? 'active' : ''}`} onClick={() => toggleListVal(c, selectedCategory, setSelectedCategory)}>
+              <span>{c}</span>
             </div>
           ))}
         </div>
-      </div>
+      </Accordion>
 
-      {/* Price */}
-      <div className="filter-group">
-        <div className="filter-header" onClick={() => toggleFilterGroup('price')}>
-          <label>Price</label>
-          <span className={`arrow-icon ${visibleFilters.price ? 'rotate-up' : 'rotate-down'}`}>
-            <IoIosArrowUp />
-          </span>
+      <Accordion id="price" label="Price" open={open.price} onToggle={() => setOpen(p => ({ ...p, price: !p.price }))} badge={`₹${price}`}>
+        <div className="range-box">
+          <input type="range" min={50} max={500} value={price} onChange={(e) => setPrice(Number(e.target.value))} className="range" />
+          <div className="range-values"><span>₹50</span><span>₹{price}</span></div>
         </div>
-        {visibleFilters.price && (
-          <>
-            <input
-              type="range"
-              min="50"
-              max="500"
-              value={priceRange}
-              onChange={(e) => setPriceRange(e.target.value)}
-              className="custom-range"
-            />
-            <div className="range">
-              <label>₹20</label>
-              <label>₹{priceRange}</label>
+      </Accordion>
+
+      <Accordion id="colors" label="Colors" open={open.colors} onToggle={() => setOpen(p => ({ ...p, colors: !p.colors }))} badge={selectedColors.length || undefined}>
+        <div className="swatches">
+          {colors.map((c) => (
+            <button key={c} className={`swatch ${selectedColors.includes(c) ? 'active' : ''}`} style={{ backgroundColor: c }} onClick={() => toggleListVal(c, selectedColors, setSelectedColors)} />
+          ))}
+        </div>
+      </Accordion>
+
+      <Accordion id="sizes" label="Sizes" open={open.sizes} onToggle={() => setOpen(p => ({ ...p, sizes: !p.sizes }))} badge={selectedSizes.length || undefined}>
+        <div className="chips">
+          {sizes.map((s) => (
+            <button key={s} className={`chip ${selectedSizes.includes(s) ? 'active' : ''}`} onClick={() => toggleListVal(s, selectedSizes, setSelectedSizes)}>{s}</button>
+          ))}
+        </div>
+      </Accordion>
+
+      <Accordion id="styles" label="Dress Style" open={open.styles} onToggle={() => setOpen(p => ({ ...p, styles: !p.styles }))} badge={selectedStyles.length || undefined}>
+        <div className="list">
+          {styles.map((s) => (
+            <div key={s} className={`item ${selectedStyles.includes(s) ? 'active' : ''}`} onClick={() => toggleListVal(s, selectedStyles, setSelectedStyles)}>
+              <span>{s}</span>
             </div>
-          </>
-        )}
-      </div>
-
-      {/* Colors */}
-      <div className="filter-group">
-        <div className="filter-header" onClick={() => toggleFilterGroup('colors')}>
-          <label>Colors</label>
-          <span className={`arrow-icon ${visibleFilters.colors ? 'rotate-up' : 'rotate-down'}`}>
-            <IoIosArrowUp />
-          </span>
+          ))}
         </div>
-        {visibleFilters.colors && (
-          <div className="colors">
-            {colors.map(c => (
-              <span
-                key={c}
-                className={`color-swatch ${selectedColors.includes(c) ? 'selected' : ''}`}
-                style={{ backgroundColor: c }}
-                onClick={() => toggle(c, selectedColors, setSelectedColors)}
-              ></span>
-            ))}
-          </div>
-        )}
-      </div>
+      </Accordion>
 
-      {/* Sizes */}
-      <div className="filter-group">
-        <div className="filter-header" onClick={() => toggleFilterGroup('sizes')}>
-          <label>Sizes</label>
-          <span className={`arrow-icon ${visibleFilters.sizes ? 'rotate-up' : 'rotate-down'}`}>
-            <IoIosArrowUp />
-          </span>
+      <Accordion id="rating" label="Rating" open={open.rating} onToggle={() => setOpen(p => ({ ...p, rating: !p.rating }))} badge={selectedRatings.length || undefined}>
+        <div className="chips">
+          {ratings.map((r) => (
+            <button key={r} className={`chip ${selectedRatings.includes(r) ? 'active' : ''}`} onClick={() => toggleListVal(r, selectedRatings, setSelectedRatings)}>{r}★ & up</button>
+          ))}
         </div>
-        {visibleFilters.sizes && (
-          <div className="options">
-            {sizes.map(s => (
-              <button
-                key={s}
-                className={selectedSizes.includes(s) ? 'selected' : ''}
-                onClick={() => toggle(s, selectedSizes, setSelectedSizes)}
-              >
-                {s}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
+      </Accordion>
 
-      {/* Styles */}
-      <div className="filter-group">
-        <div className="filter-header" onClick={() => toggleFilterGroup('styles')}>
-          <label>Dress Style</label>
-          <span className={`arrow-icon ${visibleFilters.styles ? 'rotate-up' : 'rotate-down'}`}>
-            <IoIosArrowUp />
-          </span>
+      <Accordion id="availability" label="Availability" open={open.availability} onToggle={() => setOpen(p => ({ ...p, availability: !p.availability }))} badge={availability ? 1 : undefined}>
+        <div className="chips">
+          <button className={`chip ${availability === 'in' ? 'active' : ''}`} onClick={() => setAvailability(availability === 'in' ? null : 'in')}>In stock</button>
+          <button className={`chip ${availability === 'out' ? 'active' : ''}`} onClick={() => setAvailability(availability === 'out' ? null : 'out')}>Out of stock</button>
         </div>
-        {visibleFilters.styles && (
-          <div className="style-list">
-            {styles.map(s => (
-              <div
-                key={s}
-                className={`style-item ${selectedStyles.includes(s) ? 'selected' : ''}`}
-                onClick={() => toggle(s, selectedStyles, setSelectedStyles)}
-              >
-                <span className="style-text">{s}</span>
-                <span className="style-arrow">→</span>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+      </Accordion>
 
-      {/* Rating */}
-      <div className="filter-group">
-        <div className="filter-header" onClick={() => toggleFilterGroup('rating')}>
-          <label>Rating</label>
-          <span className={`arrow-icon ${visibleFilters.rating ? 'rotate-up' : 'rotate-down'}`}>
-            <IoIosArrowUp />
-          </span>
-        </div>
-        {visibleFilters.rating && (
-          <div className="options">
-            {ratings.map(r => (
-              <button
-                key={r}
-                className={selectedRatings.includes(r) ? 'selected' : ''}
-                onClick={() => toggle(r, selectedRatings, setSelectedRatings)}
-              >
-                {r}★ & up
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Availability */}
-      <div className="filter-group">
-        <div className="filter-header" onClick={() => toggleFilterGroup('availability')}>
-          <label>Availability</label>
-          <span className={`arrow-icon ${visibleFilters.availability ? 'rotate-up' : 'rotate-down'}`}>
-            <IoIosArrowUp />
-          </span>
-        </div>
-        {visibleFilters.availability && (
-          <div className="options">
-            <button
-              className={availability === 'in' ? 'selected' : ''}
-              onClick={() => setAvailability(availability === 'in' ? null : 'in')}
-            >
-              In Stock
-            </button>
-            <button
-              className={availability === 'out' ? 'selected' : ''}
-              onClick={() => setAvailability(availability === 'out' ? null : 'out')}
-            >
-              Out of Stock
-            </button>
-          </div>
-        )}
-      </div>
-
-      <div className="filter-buttons">
-        <button className="apply-btn" onClick={handleApply}>Apply Filters</button>
-        <button className="reset-btn" onClick={resetFilters}>Reset</button>
+      <div className="actions">
+        <button className="btn primary" onClick={handleApply}>Apply Filters</button>
+        <button className="btn secondary" onClick={handleReset}>Reset</button>
       </div>
     </div>
   );
-};
+}
 
-export default Filters;
+function Accordion({ id, label, open, onToggle, badge, children }) {
+  return (
+    <section className="group">
+      <header className="group-header" onClick={onToggle}>
+        <span className="group-label">{label}</span>
+        {badge && <span className="badge">{badge}</span>}
+        <span className={`arrow ${open ? 'open' : ''}`}><IoIosArrowUp /></span>
+      </header>
+      {open && <div className="group-body">{children}</div>}
+    </section>
+  );
+}

@@ -106,7 +106,7 @@ function Navbar() {
         <div className={`header-navbar-controller ${!loggedIn ? 'has-topbar' : ''}`}>
             <nav className="navbar">
                 <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
-                    {menuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+                    {menuOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
                 </div>
                 <NavLink to='/' className='navbar-logo-link'>
                 <div className="logo">
