@@ -8,12 +8,12 @@
 }
 
 .blog-heading {
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: bold;
   text-transform: uppercase;
   color: #d9045a;
-  border-bottom: 3px solid #bcc571;
-  padding-bottom: 0.8rem;
+  border-bottom: 2px solid #bcc571;
+  /* padding-bottom: 0.8rem; */
 }
 
 .blog-list {
@@ -27,7 +27,7 @@
 }
 
 .blog-title {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 600;
   color: #d9045a;
   margin-bottom: 0.6rem;
@@ -61,15 +61,17 @@
 }
 
 .blog-description {
-  font-size: 1.1rem;
+  /* font-size: 1.1rem; */
+  font-size: 1rem;
+
   color: #737373;
   line-height: 1.6;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .read-more-btn {
     /* width: 120px; */
-    width: max-content;
+  width: max-content;
   display: inline-block;
   background: #d9045a;
   color: #fff;

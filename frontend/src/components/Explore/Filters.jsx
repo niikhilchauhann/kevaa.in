@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { IoIosArrowUp } from "react-icons/io";
+import "./filters.css"
 
 export default function Filters({ onApply }) {
   const [selectedCategory, setSelectedCategory] = useState([]);

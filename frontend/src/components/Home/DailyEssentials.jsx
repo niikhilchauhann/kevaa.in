@@ -37,11 +37,14 @@ export default function DailyEssentials() {
   };
 
   useEffect(() => {
-    if (sectionRef.current) {
-      const topOffset = sectionRef.current.offsetTop - 80;
-      window.scrollTo({ top: topOffset, behavior: "smooth" });
-    }
-  }, [page]);
+  if (!sectionRef.current) return;
+
+  if (page !== 0) { 
+    const topOffset = sectionRef.current.offsetTop - 80;
+    window.scrollTo({ top: topOffset, behavior: "smooth" });
+  }
+}, [page]);
+
 
   return (
     <div className="daily-section" ref={sectionRef}>

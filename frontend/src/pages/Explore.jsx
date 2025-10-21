@@ -5,10 +5,12 @@ import { products as allProducts } from '../data/realProducts.js';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { MdOutlineKeyboardArrowRight, MdFilterList } from "react-icons/md";
 import './explore.css';
-import ServiceHighlights from '../components/home/ServiceHighlights.jsx';
-import Testimonials from '../components/home/Testimonials.jsx';
+import ServiceHighlights from '../components/Home/ServiceHighlights.jsx';
+import Testimonials from '../components/Home/Testimonials.jsx';
 import useAuthStore from '../store/authStore.js';
-import ScrollToTop from '../components/global/ScrollTop.jsx';
+import ScrollToTop from '../components/Global/ScrollTop.jsx';
+
+
 
 const Products = () => {
     const user = useAuthStore(state => state.user);
