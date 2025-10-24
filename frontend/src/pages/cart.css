@@ -402,3 +402,8 @@
     order: 10; /* already there; maintains mobile stacking */
   }
 }
+.address-step-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* maintains spacing even without button */
+}

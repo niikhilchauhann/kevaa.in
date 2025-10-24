@@ -1,4 +1,4 @@
-.address-wrapper {
+/* .address-wrapper {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -19,10 +19,10 @@
 .address-card.selected {
   border: 2px solid #198a62;
   background: #f6fff9;
-}
+} */
 /* Optional hover styling */
 
-.address-info {
+/* .address-info {
   display: flex;
   gap: 1rem;
 }
@@ -143,4 +143,293 @@
   padding: 0.5rem 0;
   margin: 5px;
   align-self: flex-start;
+} */
+
+
+
+
+
+
+
+.address-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* increased gap between cards */
+  border-bottom: 2px solid #e5e7eb;
+  padding: 1rem 0; /* added spacing */
+}
+
+.address-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.75rem; /* increased padding */
+  background-color: #fff;
+  border: 2px solid #e5e7eb; /* slightly thicker */
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  font-size: 1rem; /* larger text */
+}
+
+.address-card:hover {
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+  border-color: #f4a0b2;
+}
+
+.address-card.selected {
+  border: 2px solid #e6607d;
+  background: #fff;
+}
+
+.address-info {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.address-info input[type="radio"] {
+  appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid #d1d5db;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  margin-top: 4px;
+}
+
+.address-info input[type="radio"]:checked {
+  border-color: #10b981;
+}
+
+.address-info input[type="radio"]::before {
+  content: "";
+  position: absolute;
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background-color: #10b981;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.2s ease;
+}
+
+.address-info input[type="radio"]:checked::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.name-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #111827;
+}
+
+.badge {
+  background-color: #fff;
+  color: #10b981;
+  border: 1.5px solid #10b981;
+  font-size: 0.85rem;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.address-text {
+  font-size: 1rem;
+  color: #4b5563;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.contact {
+  font-size: 1rem;
+  color: #6b7280;
+  margin-top: 6px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.actions button {
+  background: none;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.actions .edit {
+  color: #3b82f6;
+}
+.actions .edit:hover {
+  color: #2563eb;
+}
+
+
+.actions .remove {
+  color: #ef4444;
+}
+
+.actions .remove:hover {
+  color: #dc2626;
+}
+
+.actions .separator {
+  width: 1px;
+  height: 20px;
+  background-color: #d1d5db;
+}
+
+.add-new {
+  background: none;
+  border: none;
+  color: #e6607d;
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 1rem;
+}
+
+/* Centered Edit/Add Form Card */
+.edit-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.edit-card {
+  background: #fff;
+  border: 2px solid #e5e7eb;
+  border-radius: 1rem;
+  padding: 2.5rem;
+  width: 750px; /* increased width */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.edit-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 1.5rem;
+}
+
+.edit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem 1rem;
+}
+
+.edit-grid label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.edit-grid input,
+.edit-grid select {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  font-size: 1rem;
+  border: 1.5px solid #d1d5db;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  background-color: #ffffff;
+  color: #111827;
+}
+
+.edit-grid input:focus,
+.edit-grid select:focus {
+  border-color: #10b981;
+}
+
+/* Buttons */
+.edit-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+.save-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.6rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.save-btn:hover {
+  background: #0ea86b;
+}
+
+.cancel-btn {
+  background: #f3f4f6;
+  color: #374151;
+  border: none;
+  padding: 0.8rem 1.6rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.cancel-btn:hover {
+  background: #e5e7eb;
+}
+
+
+.address-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.edit-btn {
+  color: #3b82f6;
+  background: none;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.edit-btn:hover {
+  color: #2563eb;
+}
+
+.remove-btn {
+  color: #ef4444;
+  background: none;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.remove-btn:hover {
+  color: #dc2626;
 }

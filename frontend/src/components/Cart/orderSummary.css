@@ -1,4 +1,4 @@
-.summary-heading {
+/* .summary-heading {
   color: #17183B;
   font-weight: 700;
   font-size: 24px;
@@ -114,4 +114,164 @@
 
 .checkout-btn:hover {
   background-color: #db2777;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.cart-summary {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 2rem; /* increased from 1.5rem */
+  width: 420px;  /* increased from 320px */
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.summary-heading {
+  color: #17183B;
+  font-weight: 700;
+  font-size: 28px; /* larger heading */
+  line-height: 36px;
+  margin-bottom: 2rem;
+}
+
+.summary-breakdown {
+  margin-bottom: 2rem;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  color: #4b5563;
+  font-size: 1.1rem; /* slightly bigger */
+  margin-bottom: 1rem;
+}
+
+.summary-divider {
+  border-top: 1px solid #e5e7eb;
+  margin: 1.5rem 0;
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.25rem; /* increased */
+  font-weight: 600;
+  color: #111827;
+}
+
+.shipping-free {
+  color: #14b8a6;
+  font-weight: 500;
+}
+
+.summary-delivery {
+  margin-bottom: 2rem;
+}
+
+.summary-row-sm {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+.summary-date {
+  font-weight: 700;
+  color: #111827;
+}
+
+.summary-coupon {
+  width: 100%;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.coupon-input {
+  width: 100%;
+  padding: 1rem;
+  padding-right: 2.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  color: #111827;
+  background-color: #f9fafb;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.coupon-input:focus {
+  border-color: #e65ea2;
+  box-shadow: 0 0 0 2px #f9d8e8;
+}
+
+.input-icon {
+  position: absolute;
+  right: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #9ca3af;
+}
+
+.checkout-btn {
+  width: 100%;
+  background-color: #e6005c;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.checkout-btn:hover {
+  background-color: #c0004c;
+}
+
+.pink-btn {
+  background-color: #ff5f8f; /* soft pink */
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.pink-btn:hover {
+  background-color: #ff3f7a;
+}
+
+.pink-btn:disabled {
+  background-color: #f8a5b8;
+  cursor: not-allowed;
 }
