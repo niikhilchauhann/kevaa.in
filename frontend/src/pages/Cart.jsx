@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate, NavLink } from "react-router-dom";
 import CartItem from '../components/Cart/CartItem';
-import OrderSummary from '../components/cart/OrderSummary';
+import OrderSummary from '../components/Cart/OrderSummary';
 import DiscountBanner from '../components/Cart/DiscountBanner';
 import AddressArea from '../components/Cart/AddressArea';
 import Shipment from '../components/Cart/Shipment';
@@ -13,7 +14,6 @@ import './cart.css';
 import OrderReceiptModal from '../components/Cart/OrderReceiptModal';
 import { auth } from '../firebase';
 import ScrollToTop from '../components/global/ScrollTop';
-import { NavLink } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
 
 
@@ -27,12 +27,14 @@ const Cart = () => {
 
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [selectedPaymentType, setSelectedPaymentType] = useState('online'); // added payment type state
+  
 
   useEffect(() => {
     loadCart(); // Firestore se current user ka cart load karo
   }, []);
 
   const [userId, setUserId] = useState(null);
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -42,6 +44,29 @@ const Cart = () => {
     });
     return () => unsubscribe();
   }, []);
+
+useEffect(() => {
+  const handlePopState = () => {
+    setCurrentStep((prev) => {
+      if (prev > 1) {
+        // Go one step back
+        return prev - 1;
+      } else {
+        // If on step 1, go to home
+        navigate("/");
+        return prev;
+      }
+    });
+  };
+
+  // Push a fake state so browser detects popstate
+  window.history.pushState(null, "", window.location.href);
+  window.addEventListener("popstate", handlePopState);
+
+  return () => {
+    window.removeEventListener("popstate", handlePopState);
+  };
+}, [navigate]);
 
 
 
@@ -80,80 +105,131 @@ const Cart = () => {
   }
 
 
-  const handleCODOrder = async () => {
-    setPayLoading(true);
-    try {
-      const amount = subtotal - discount + shipping - couponApplied;
-      const orderDetails = {
-        addressId: selectedAddress,
-        amount,
-        paymentId: 'COD',
-        items,
+      const handleCODOrder = async () => {
+        setPayLoading(true);
+        try {
+          const totalAmount = subtotal - discount + shipping - couponApplied;
+
+          // ✅ Create order data here
+          const orderData = {
+            userId,
+            address: selectedAddress, // store full address object, not just ID
+            items,
+            totalAmount,
+          };
+
+          const orderDetails = {
+            addressId: selectedAddress.id || selectedAddress, // keep this if placeOrder expects ID
+            amount: totalAmount,
+            paymentId: 'COD',
+            items,
+          };
+
+          await placeOrder(orderDetails);
+          await clearCart();
+          setShowThankYou(true);
+        } catch (err) {
+          alert('Something went wrong while placing the order.');
+        } finally {
+          setPayLoading(false);
+        }
       };
-      await placeOrder(orderDetails);
-      await clearCart();
-      // alert('Order placed successfully with Cash on Delivery.');
-      setShowThankYou(true);
-    } catch (err) {
-      alert('Something went wrong while placing the order.');
-    } finally {
-      setPayLoading(false);
-    }
-  };
-  let stepComponent;
-  switch (currentStep) {
-    case 1:
-      stepComponent = <AddressArea userId={userId} onSelectAddress={setSelectedAddress} />;
-      break;
-    case 2:
-      stepComponent = <Shipment />;
-      break;
-    case 3:
-      stepComponent = (
-        <>
-          <PaymentType selectedPaymentType={selectedPaymentType} setSelectedPaymentType={setSelectedPaymentType} />
-          {selectedPaymentType === 'cod' ? (
-            <button
-              className="show-order-modal-btn"
-              onClick={async () => {
-                setPayLoading(true);
-                try {
-                  const amount = subtotal - discount + shipping - couponApplied;
-                  const orderDetails = {
-                    addressId: selectedAddress,
-                    amount,
-                    paymentId: 'COD',
-                    items,
-                  };
-                  await placeOrder(orderDetails);
-                  await clearCart();
-                  alert('Order placed successfully with Cash on Delivery.');
-                } catch (err) {
-                  console.error('Error placing order:', err.message);
-                  alert('Something went wrong while placing the order.');
-                } finally {
-                  setPayLoading(false);
-                }
-              }}
-              style={{ marginTop: 24 }}
-            >
-              Place Order (Cash on Delivery)
-            </button>
-          ) : (
-            <button
-              className="show-order-modal-btn"
-              onClick={() => setShowOrderModal(true)}
-              style={{ marginTop: 24 }}
-            >
-              Review & Place Order
-            </button>
-          )}
-        </>
-      );
-      break;
-    default:
-      stepComponent = <AddressArea />;
-  }
+
+let stepComponent;
+switch (currentStep) {
+  case 1:
+    stepComponent = (
+      <>
+        <div className="cart-items-section">
+          <div className="cart-box">
+            <div className="cart-header">
+              <h1 className="cart-title">
+                Cart <span className="cart-count">{items.length} ITEMS</span>
+              </h1>
+            </div>
+            <div className="cart-items">
+              {loading ? (
+                <div>Loading...</div>
+              ) : items.length === 0 ? (
+                <div>Your cart is empty.</div>
+              ) : (
+              items.map(item => (
+                <CartItem
+                  key={item.id}
+                  id={item.id}
+                  title={item.title || item.name}  // ✅ add this
+                  color={item.color}
+                  price={item.price}
+                  quantity={item.quantity}
+                  image={item.image}
+                  onQuantityChange={handleQuantityChange}
+                  onRemove={handleRemoveItem}
+                />
+              ))
+
+              )}
+            </div>
+          </div>
+        </div>
+        <DiscountBanner />
+      </>
+    );
+    break;
+
+  case 2:
+    stepComponent = (
+      <>
+        <Breadcrumb step={1} />
+        <AddressArea userId={userId} onSelectAddress={(addressObj) => setSelectedAddress(addressObj)} />
+
+      </>
+    );
+    break;
+
+  case 3:
+    stepComponent = (
+      <>
+        <Breadcrumb step={2} />
+        <Shipment />
+      </>
+    );
+    break;
+
+  case 4:
+    stepComponent = (
+      <>
+        <Breadcrumb step={3} />
+        <PaymentType
+          selectedPaymentType={selectedPaymentType}
+          setSelectedPaymentType={setSelectedPaymentType}
+        />
+        {selectedPaymentType === 'cod' ? (
+          <button
+            className="show-order-modal-btn"
+            onClick={handleCODOrder}
+            disabled={payLoading}
+            style={{ marginTop: 24 }}
+          >
+            {payLoading ? "Placing Order..." : "Place Order (Cash on Delivery)"}
+          </button>
+        ) : (
+          <button
+            className="show-order-modal-btn"
+            onClick={() => setShowOrderModal(true)}
+            disabled={payLoading}
+            style={{ marginTop: 24 }}
+          >
+            Review & Place Order
+          </button>
+        )}
+      </>
+    );
+    break;
+
+  default:
+    stepComponent = <AddressArea />;
+}
+
 
   // Razorpay payment handler
   const handlePlaceOrder = () => {
@@ -275,12 +351,18 @@ const Cart = () => {
                         items.map(item => (
                           <div key={item.id} className="cart-item-wrapper">
                             <CartItem
-                              {...item}
+                              id={item.id}
+                              title={item.title || item.name}   // ✅ add title prop
+                              color={item.color}
+                              price={item.price}
+                              quantity={item.quantity}
+                              image={item.image}
                               onQuantityChange={handleQuantityChange}
                               onRemove={handleRemoveItem}
                             />
                           </div>
                         ))
+
                       )}
                     </div>
                   </div>
@@ -299,20 +381,15 @@ const Cart = () => {
 
             {/* STEP 2: AddressArea + Next Button */}
             {currentStep === 2 && (
-              <>
+              <div className="address-step-container">
                 <Breadcrumb step={1} />
-                <AddressArea userId={userId} onSelectAddress={setSelectedAddress} />
-                <button
-                  className="step-btn"
-                  onClick={() => setCurrentStep(3)}
-                  style={{ marginTop: 16 }}
-                  disabled={!selectedAddress}
-                >
-                  Next
-                </button>
-              </>
+                <AddressArea userId={userId} onSelectAddress={(addressObj) => setSelectedAddress(addressObj)} />
+
+                {/* Next button removed */}
+              </div>
             )}
 
+          
             {/* STEP 3: PaymentMethod + PaymentType + Place Order Button */}
             {currentStep === 3 && (
               <>
@@ -322,7 +399,7 @@ const Cart = () => {
                   selectedPaymentType={selectedPaymentType}
                   setSelectedPaymentType={setSelectedPaymentType}
                 />
-                {selectedPaymentType === 'cod' ? (
+                {/* {selectedPaymentType === 'cod' ? (
                   <button
                     className="show-order-modal-btn"
                     onClick={handleCODOrder}
@@ -340,30 +417,43 @@ const Cart = () => {
                   >
                     Review & Place Order
                   </button>
-                )}
+                )} */}
               </>
             )}
           </div>
 
           {/* === RIGHT STICKY ORDER SUMMARY === */}
           <div className="cart-summary-section">
+            {/* Show OrderSummary always */}
             <OrderSummary
               subtotal={subtotal}
               discount={discount}
               shipping={shipping}
               couponApplied={couponApplied}
+              currentStep={currentStep}
+              onProceedToCheckout={() => {
+                if (currentStep < 4) setCurrentStep(currentStep + 1);
+              }}
+              onReviewOrder={() => setShowOrderModal(true)}     
+              onCODOrder={handleCODOrder}                      
+              payLoading={payLoading}  
             />
-              {currentStep === 1 && (
-               <button
-               className="checkout-btn summary-action"
-               onClick={() => setCurrentStep(2)}
+
+
+
+            {/* Show Proceed button only on Step 1 */}
+            {/* {currentStep === 1 && (
+              <button
+                className="checkout-btn summary-action"
+                onClick={() => setCurrentStep(2)}
               >
                 Proceed to Checkout
               </button>
-           )}
+            )} */}
           </div>
         </div>
       </div>
+console.log("🧩 Selected address before modal:", selectedAddress);
 
       <OrderReceiptModal
         isOpen={showOrderModal}
