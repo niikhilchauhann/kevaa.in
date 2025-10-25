@@ -18,7 +18,7 @@
     --text: #e5e7eb;
     --muted: #9aa4b2;
     --border: #1f2937;
-    --ring: rgba(233, 30, 99, 0.5);
+    --ring: #DC0057;
   }
 }
 
@@ -116,7 +116,7 @@
 .contactus-banner.success { background: rgba(15, 157, 88, 0.08); }
 .contactus-banner.success .icon { background: #0f9d58; color: white; }
 .contactus-banner.error { background: rgba(209, 67, 67, 0.1); }
-.contactus-banner.error .icon { background: #d14343; color: white; }
+.contactus-banner.error .icon { background: #DC0057; color: white; }
 
 .privacy-note { margin-top: 14px; color: var(--muted); font-size: 0.9rem; }
 

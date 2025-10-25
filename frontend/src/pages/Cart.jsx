@@ -279,11 +279,11 @@ switch (currentStep) {
   // 1️⃣ Paste the function here:
   const handleRazorpayPayment = async ({ amount, user, address, items, onSuccess, onFailure }) => {
     const options = {
-      key: "rzp_test_aNekzbf3DEXHpA", // Replace with your Razorpay key
-      amount: amount * 100, // paise
+      key: "yYVcHXougXkUs78wQimil4xs", // Replace with your Razorpay key
+      amount: amount * 100,
       currency: "INR",
-      name: "Kevaa",
-      description: "Order Payment",
+      name: "Kevaa.in",
+      description: "Payment for your Kevaa order",
       handler: function (response) {
         onSuccess(response);
       },
@@ -295,7 +295,7 @@ switch (currentStep) {
       notes: {
         address: `${address?.houseNo}, ${address?.streetName}, ${address?.city}`,
       },
-      theme: { color: "#9a155a" },
+      theme: { color: "#DC0057" },
       modal: { ondismiss: onFailure },
     };
     const rzp = new window.Razorpay(options);

@@ -75,7 +75,7 @@
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 5px 13px;
-  color: #b30000;
+  color: #DC0057;
   font-weight: 600;
   align-items: center;
   gap: 3px;
@@ -85,7 +85,7 @@
 
 .mobile-filter-btn:hover {
   background: #ffeaea;
-  border: 1px solid red;
+  border: 1px solid #DC0057;
   color: #373737;
 }
 
@@ -197,7 +197,7 @@
     right: 10px;
     background: #ffcfcf;
     border: none;
-    color: #ba0000;
+    color: #DC0057;
     font-size: 19px;
     border-radius: 50%;
     padding: 8px 14px;

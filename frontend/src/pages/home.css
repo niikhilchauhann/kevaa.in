@@ -37,6 +37,17 @@ html {
   padding: 20px;
 }
 
+.hero-card {
+  backdrop-filter: blur(10px);
+  background: rgb(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 32px 70px;
+  text-align: center;
+  color: #fff;
+  max-width: 600px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
 .hero-content {
   text-align: center;
   color: white;
@@ -46,7 +57,6 @@ html {
 }
 
 .hero-content h1 {
-  font-family: 'Poppins', sans-serif;
   font-size: 2rem;
   color: black;
   font-weight: 600;
@@ -65,8 +75,8 @@ html {
   /* background: linear-gradient(90deg, #d9045a, #ff6f61); */
   color: white;
   background-color: var(--primary);
-  font-weight: 600;
-  padding: 14px 36px;
+  font-weight: 500;
+  padding: 12px 32px;
   border: none;
   border-radius: 40px;
   font-size: 1rem;
@@ -90,15 +100,8 @@ html {
     font-size: 0.8rem;
     padding: 12px 28px;
   }
-}
-
-.hero-card {
-  backdrop-filter: blur(10px);
-  background: rgb(255, 255, 255, 0.9);
-  border-radius: 12px;
-  padding: 32px 70px;
-  text-align: center;
-  color: #fff;
-  max-width: 600px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  
+  .hero-card {
+    padding: 32px 32px;
+  }
 }

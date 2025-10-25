@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate, NavLink } from 'react-router-dom';
+import { useNavigate, NavLink, useLocation } from 'react-router-dom';
 import logo from "../../assets/keva2.png";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { IoSearch } from 'react-icons/io5';
@@ -15,6 +15,9 @@ import './../../components/global/navbar.css';
 
 
 function Navbar() {
+
+    const location = useLocation();
+
     const [cartOpen, setCartOpen] = useState(false);
     const navigate = useNavigate();
     const authInstance = getAuth();
@@ -51,6 +54,13 @@ function Navbar() {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [showSearchBox]);
+
+    useEffect(() => {
+        setMenuOpen(false);
+        setDropdownOpen(false);
+        setShowSearchBox(false);
+        document.body.style.overflow = "auto";
+    }, [location.pathname]);
 
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
@@ -105,8 +115,12 @@ function Navbar() {
     return (
         <div className={`header-navbar-controller ${!loggedIn ? 'has-topbar' : ''}`}>
             <nav className="navbar">
-                <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
-                    {menuOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
+                <div className="hamburger" 
+                    aria-label="Toggle navigation"
+                    aria-expanded={menuOpen}
+                    onClick={() => setMenuOpen(prev => !prev)}
+                >
+                    {menuOpen ? <FaTimes size={22} /> : <FaBars size={20} />}
                 </div>
                 <NavLink to='/' className='navbar-logo-link'>
                 <div className="logo">
@@ -114,12 +128,20 @@ function Navbar() {
                 </div>
                 </NavLink>
 
-                <ul className={`nav-links ${menuOpen ? "active" : ""}`} style={{ top: `${menuOpen && !loggedIn ? '120px' : ' '}` }}>
+                {/* <ul className={`nav-links ${menuOpen ? "active" : ""}`} style={{ top: `${menuOpen && !loggedIn ? '120px' : ' '}` }}>
                     <NavLink to='products'><li>Explore</li></NavLink>
                     <NavLink to='/about'><li>About</li></NavLink>
                     <NavLink to='/blogs'><li>Blogs</li></NavLink>
                     <NavLink to='/contact-us'><li>Contact Us</li></NavLink>
-                </ul>
+                </ul> */}
+                {menuOpen && <div className="nav-overlay" onClick={() => setMenuOpen(false)} />}
+
+                <ul className={`nav-links ${menuOpen ? "active" : ""}`} style={{ top: `${menuOpen && !loggedIn ? '120px' : ''}` }}>
+                    <NavLink to="/products" onClick={() => setMenuOpen(false)}><li>Explore</li></NavLink>
+                    <NavLink to="/about" onClick={() => setMenuOpen(false)}><li>About</li></NavLink>
+                    <NavLink to="/blogs" onClick={() => setMenuOpen(false)}><li>Blogs</li></NavLink>
+                    <NavLink to="/contact-us" onClick={() => setMenuOpen(false)}><li>Contact Us</li></NavLink>
+                    </ul>
 
                 <div className="icons">
                     <span className="search-icon-wrapper">

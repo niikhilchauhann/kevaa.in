@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Blogs.css"; 
-import NavBar from "../components/Global/NavBar";
+import Navbar from "../components/Global/NavBar";
 
 const blogs = [
   {
@@ -74,7 +74,7 @@ const Blog = () => {
 
   return (
     <div>
-      <NavBar />
+      <Navbar />
       <div className="blog-container">
         {/* Heading */}
         <h2 className="blog-heading">Blogs</h2>

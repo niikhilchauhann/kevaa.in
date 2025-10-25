@@ -99,6 +99,15 @@
   cursor: pointer;
 }
 
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(2px);
+  z-index: 1200; /* below hamburger (1300) but above page content */
+}
+
+
 
 /*Search Styles*/
 .search-dropdown {
@@ -208,7 +217,7 @@
   background: none;
   border: none;
   font-size: 1.8rem;
-  color: #e91e63;
+  color: #DC0057;
   cursor: pointer;
 }
 
@@ -360,7 +369,7 @@
   .hamburger {
     display: block;
     order: 0;
-    color: #a9456c;
+    color: #DC0057;
     background: transparent;
     border: none;
     cursor: pointer;
