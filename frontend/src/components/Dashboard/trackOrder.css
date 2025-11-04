@@ -439,3 +439,162 @@
 
 
 }
+.track-container {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  margin: 20px auto;
+  color: #333;
+}
+
+.track-container h2 {
+  color: #7d113e;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.track-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 50px;
+  background: #fafafa;
+  padding: 25px;
+  border-radius: 10px;
+}
+
+/* Timeline */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 50%;
+}
+
+.timeline-step {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 28px;
+}
+
+.timeline-step .dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  background: #fff;
+  z-index: 2;
+}
+
+.timeline-step .dot.filled {
+  background: #9a155a;
+  border-color: #9a155a;
+}
+
+.timeline-step .line {
+  position: absolute;
+  left: 6px;
+  top: -24px;
+  width: 2px;
+  height: 28px;
+  background: #ccc;
+  z-index: 1;
+}
+
+.timeline-step .line.filled {
+  background: #9a155a;
+}
+
+.step-details {
+  margin-left: 12px;
+}
+
+.step-details strong {
+  display: block;
+  font-weight: 700;
+}
+
+.step-details small {
+  color: #777;
+  font-size: 0.9rem;
+}
+
+/* Summary Card */
+.summary-card {
+  background: #fff;
+  width: 45%;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+  padding: 20px;
+}
+
+.summary-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.check-icon {
+  font-size: 26px;
+  color: #22c55e;
+}
+
+.summary-header h3 {
+  color: #9a155a;
+  font-weight: 700;
+  margin: 0;
+}
+
+.summary-header p {
+  margin: 0;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.summary-images {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.summary-images img {
+  width: 70px;
+  height: 90px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  object-fit: cover;
+}
+
+/* No Progress State */
+.no-progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  text-align: center;
+  background: #f5f7fa;
+  border-radius: 10px;
+  border: 1px dashed #ccc;
+  padding: 40px;
+}
+
+.no-progress img {
+  width: 120px;
+  opacity: 0.85;
+  margin-bottom: 20px;
+}
+
+.no-progress h3 {
+  font-size: 1.4rem;
+  color: #333;
+}
+
+.no-progress p {
+  color: #666;
+  font-size: 1rem;
+}

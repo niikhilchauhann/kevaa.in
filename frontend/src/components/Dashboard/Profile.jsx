@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './profile.css';
 import useAuthStore from '../../store/authStore';
-import { Timestamp } from 'firebase/firestore'; // Import if needed
 
 const COUNTRY_OPTIONS = [
   { code: "+91", name: "India", flag: "🇮🇳" },
@@ -9,18 +8,17 @@ const COUNTRY_OPTIONS = [
   { code: "+44", name: "United Kingdom", flag: "🇬🇧" },
   { code: "+971", name: "United Arab Emirates", flag: "🇦🇪" },
   { code: "+61", name: "Australia", flag: "🇦🇺" },
-  // Add more as needed
 ];
 
 const Profile = ({ user }) => {
   const [imgError, setImgError] = useState(false);
   const { loading, error } = useAuthStore();
+
   const displayName = user?.displayName || user?.firstName || "User";
   const email = user?.email || "";
   const userPhotoURL = user?.photoURL || user?.imageUrl;
 
-  // Initial country code
-  const [editCountryCode, setEditCountryCode] = useState(user?.countryCode || "+91");
+  // Editable fields
   const [editMode, setEditMode] = useState(false);
   const [editName, setEditName] = useState(
     [user?.firstName, user?.lastName].filter(Boolean).join(" ") ||
@@ -29,29 +27,27 @@ const Profile = ({ user }) => {
   );
   const [editGender, setEditGender] = useState(user?.gender || "Not specified");
   const [editPhone, setEditPhone] = useState(user?.phone || "");
+  const [editCountryCode, setEditCountryCode] = useState(user?.countryCode || "+91");
 
-  const updateProfile = useAuthStore(state => state.updateProfile);
+  // Email management
+  const [emails, setEmails] = useState([email]);
+  const [showEmailInput, setShowEmailInput] = useState(false);
+  const [newEmail, setNewEmail] = useState("");
 
-  // Update local state when user prop changes
+  const updateProfile = useAuthStore((state) => state.updateProfile);
+
+  // Sync updates
   useEffect(() => {
     setEditName(
       [user?.firstName, user?.lastName].filter(Boolean).join(" ") ||
       user?.displayName ||
       ""
     );
-  }, [user?.firstName, user?.lastName, user?.displayName]);
-
-  useEffect(() => {
     setEditGender(user?.gender || "Not specified");
-  }, [user?.gender]);
-
-  useEffect(() => {
     setEditPhone(user?.phone || "");
-  }, [user?.phone]);
-
-  useEffect(() => {
     setEditCountryCode(user?.countryCode || "+91");
-  }, [user?.countryCode]);
+    if (user?.email) setEmails([user.email]);
+  }, [user]);
 
   const handleSave = async () => {
     const [firstName, ...rest] = editName.split(" ");
@@ -74,36 +70,36 @@ const Profile = ({ user }) => {
     }
   };
 
-  let createdAtDisplay = "";
-  if (user?.createdAt) {
-    if (user.createdAt?.seconds) {
-      // Firestore timestamp
-      const date = new Date(user.createdAt.seconds * 1000);
-      createdAtDisplay = date.toLocaleDateString('en-IN', {
-        weekday: 'short',
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
-      });
-    } else if (user.createdAt instanceof Date || !isNaN(new Date(user.createdAt).getTime())) {
-      // Date or valid date string
-      const date = new Date(user.createdAt);
-      createdAtDisplay = date.toLocaleDateString('en-IN', {
-        weekday: 'short',
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
-      });
-    } else {
-      // Fallback
-      createdAtDisplay = user.createdAt.toString();
+  const handleAddEmail = () => {
+    setShowEmailInput(true);
+  };
+
+  const handleSaveEmail = () => {
+    if (newEmail.trim() !== "") {
+      setEmails([...emails, newEmail.trim()]);
+      setNewEmail("");
+      setShowEmailInput(false);
     }
-  }
+  };
+
+  const handleRemoveEmail = (emailToRemove) => {
+    setEmails(emails.filter((e) => e !== emailToRemove));
+  };
+
+  const createdAtDisplay = user?.createdAt
+    ? new Date(
+        user.createdAt?.seconds
+          ? user.createdAt.seconds * 1000
+          : user.createdAt
+      ).toLocaleDateString('en-IN', {
+        weekday: 'short',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      })
+    : "";
 
   const initial = displayName[0] || "U";
-
-  // Find the selected country for displaying flag and name in view mode
-  const selectedCountry = COUNTRY_OPTIONS.find(c => c.code === (user?.countryCode || "+91")) || COUNTRY_OPTIONS[0];
 
   return (
     <div className="profile-container">
@@ -113,7 +109,7 @@ const Profile = ({ user }) => {
           weekday: 'short',
           day: 'numeric',
           month: 'long',
-          year: 'numeric'
+          year: 'numeric',
         })}
       </p>
 
@@ -130,11 +126,14 @@ const Profile = ({ user }) => {
           ) : (
             <h1 className="avatar-initial">{initial}</h1>
           )}
+
           <div className="user-info">
             <h3>{displayName}</h3>
             <p>{email}</p>
           </div>
-          <button className="edit-btn"
+
+          <button
+            className="edit-btn"
             onClick={editMode ? handleSave : () => setEditMode(true)}
           >
             {editMode ? "Save" : "Edit"}
@@ -145,16 +144,16 @@ const Profile = ({ user }) => {
           <label>Full Name</label>
           <input
             type="text"
-            placeholder="Your First Name"
-            value={editMode ? editName : ([user?.firstName, user?.lastName].filter(Boolean).join(" ") || user?.displayName || "")}
-            onChange={e => setEditName(e.target.value)}
+            placeholder="Your Full Name"
+            value={editName}
+            onChange={(e) => setEditName(e.target.value)}
             readOnly={!editMode}
           />
 
           <label>Gender</label>
           <select
-            value={editMode ? editGender : (user?.gender || "Not specified")}
-            onChange={e => setEditGender(e.target.value)}
+            value={editGender}
+            onChange={(e) => setEditGender(e.target.value)}
             disabled={!editMode}
           >
             <option value="Male">Male</option>
@@ -167,7 +166,7 @@ const Profile = ({ user }) => {
           <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
             <select
               value={editCountryCode}
-              onChange={e => setEditCountryCode(e.target.value)}
+              onChange={(e) => setEditCountryCode(e.target.value)}
               disabled={!editMode}
               style={{ width: "180px" }}
             >
@@ -179,32 +178,52 @@ const Profile = ({ user }) => {
             </select>
             <input
               type="text"
-              value={editMode ? editPhone : (user?.phone || "")}
-              onChange={e => setEditPhone(e.target.value)}
+              value={editPhone}
+              onChange={(e) => setEditPhone(e.target.value)}
               readOnly={!editMode}
               placeholder="Phone Number"
               style={{ flex: 1 }}
             />
           </div>
-          <div style={{ marginTop: 4, color: "#555" }}>
-            Country Code: <b>
-              {editMode
-                ? editCountryCode
-                : (user?.countryCode || selectedCountry.code)
-              }
-            </b>
-          </div>
 
-          <label>My email Address</label>
-          <div className="email-box">
-            <span className="email-icon">📧</span>
-            <div>
-              <p>{email}</p>
-              <small>{createdAtDisplay}</small>
+          {/* 📧 Email Section */}
+          <label>My Email Address</label>
+          {emails.map((mail, index) => (
+            <div key={index} className="email-box">
+              <div className="email-left">
+                <span className="email-icon">📧</span>
+                <div>
+                  <p>{mail}</p>
+                  <small>{createdAtDisplay}</small>
+                </div>
+              </div>
+              {emails.length > 0 && (
+                <button
+                  className="remove-btn"
+                  onClick={() => handleRemoveEmail(mail)}
+                  title="Remove Email"
+                >
+                  ✕
+                </button>
+              )}
             </div>
-          </div>
+          ))}
 
-          <button className="add-btn">+ Add Email Address</button>
+          {showEmailInput ? (
+            <div className="add-email-box">
+              <input
+                type="email"
+                placeholder="Enter new email"
+                value={newEmail}
+                onChange={(e) => setNewEmail(e.target.value)}
+              />
+              <button onClick={handleSaveEmail}>Save</button>
+            </div>
+          ) : (
+            <button className="add-btn" onClick={handleAddEmail}>
+              + Add Email Address
+            </button>
+          )}
         </div>
       </div>
     </div>

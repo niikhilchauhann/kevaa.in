@@ -9,8 +9,11 @@ const OrderReceiptModal = ({
   items,
   total,
   onPlaceOrder,
+  onCODOrder,            // ✅ added
+  selectedPaymentType,   // ✅ added
   loading,
 }) => {
+
 
 console.log("🧾 Modal received address (keys):", address);
 console.log("🧾 Full address object:", JSON.stringify(address, null, 2));
@@ -77,12 +80,25 @@ if (address) {
 
         {/* === BUTTON === */}
         <button
-          className="order-modal-place-btn"
-          onClick={onPlaceOrder}
-          disabled={loading}
-        >
-          {loading ? "Processing..." : "Place Order & Pay"}
-        </button>
+        className="order-modal-place-btn"
+        onClick={() => {
+          if (selectedPaymentType === "cod") {
+            onCODOrder();
+          } else {
+            onPlaceOrder();
+          }
+        }}
+        disabled={loading}
+      >
+        {loading
+          ? "Processing..."
+          : selectedPaymentType === "cod"
+          ? "Place Order (Cash on Delivery)"
+          : "Place Order & Pay"}
+      </button>
+
+
+
       </div>
     </div>
   );
