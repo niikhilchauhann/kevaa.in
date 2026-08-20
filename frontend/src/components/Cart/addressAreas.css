@@ -254,43 +254,56 @@
   color: #6b7280;
   margin-top: 6px;
 }
-
 .actions {
   display: flex;
+  flex-direction: row; /* ensure horizontal layout */
   align-items: center;
-  gap: 1rem;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+  white-space: nowrap;
 }
 
-.actions button {
+.actions .edit,
+.actions .remove {
   background: none;
   border: none;
-  font-size: 0.95rem;
-  font-weight: 600;
   cursor: pointer;
-  transition: color 0.2s ease;
+  font-size: 1.05rem; /* increased from 0.95rem */
+  font-weight: 650; /* slightly bolder for readability */
+  padding: 6px 10px; /* gives better click area */
+  border-radius: 6px; /* soft rounded edges */
+  transition: all 0.2s ease;
+  line-height: 1.2;
 }
 
 .actions .edit {
-  color: #3b82f6;
-}
-.actions .edit:hover {
   color: #2563eb;
 }
 
-
-.actions .remove {
-  color: #ef4444;
+.actions .edit:hover {
+  color: white;
+  background: #2563eb; /* highlight on hover */
 }
 
-.actions .remove:hover {
+.actions .remove {
   color: #dc2626;
 }
 
-.actions .separator {
-  width: 1px;
-  height: 20px;
-  background-color: #d1d5db;
+.actions .remove:hover {
+  color: white;
+  background: #dc2626; /* highlight on hover */
 }
+
+
+.separator {
+  width: 1px;
+  height: 14px; /* keep it small so it doesn’t expand parent height */
+  background-color: #d1d5db;
+  align-self: center; /* keeps it vertically centered */
+}
+
+
 
 .add-new {
   background: none;

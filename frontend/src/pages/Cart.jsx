@@ -232,11 +232,101 @@ switch (currentStep) {
 
 
   // Razorpay payment handler
-  const handlePlaceOrder = () => {
-    setPayLoading(true);
+  // Razorpay + COD handler
+  // const handlePlaceOrder = async (paymentType) => {
+  //   setPayLoading(true);
 
-    const amount = subtotal - discount + shipping - couponApplied;
+  //   const amount = subtotal - discount + shipping - couponApplied;
 
+  //   if (paymentType === "cod") {
+  //     // 🟢 COD flow — no Razorpay
+  //     try {
+  //       const orderDetails = {
+  //         addressId: selectedAddress?.id || selectedAddress,
+  //         amount,
+  //         paymentId: "COD",
+  //         items,
+  //       };
+
+  //       await placeOrder(orderDetails);
+  //       await clearCart();
+
+  //       setShowOrderModal(false); // Close order receipt modal
+  //       setTimeout(() => setShowThankYou(true), 400); // Show Thank You modal after a short delay
+  //     } catch (err) {
+  //       console.error("COD order failed:", err.message);
+  //       alert("Something went wrong while placing the COD order.");
+  //     } finally {
+  //       setPayLoading(false);
+  //     }
+  //   } else {
+  //     // 💳 Online payment flow — Razorpay
+  //     const handleSuccess = async (paymentResponse) => {
+  //       try {
+  //         const orderDetails = {
+  //           addressId: selectedAddress,
+  //           amount,
+  //           paymentId: paymentResponse.razorpay_payment_id,
+  //           items,
+  //         };
+
+  //         await placeOrder(orderDetails);
+  //         await clearCart();
+
+  //         alert("Payment successful! Payment ID: " + paymentResponse.razorpay_payment_id);
+  //       } catch (err) {
+  //         console.error("Error placing order:", err.message);
+  //         alert("Something went wrong while placing the order.");
+  //       } finally {
+  //         setPayLoading(false);
+  //         setShowOrderModal(false);
+  //       }
+  //     };
+
+  //     const handleFailure = () => {
+  //       setPayLoading(false);
+  //       alert("Payment cancelled.");
+  //     };
+
+  //     handleRazorpayPayment({
+  //       amount,
+  //       user,
+  //       address: selectedAddress,
+  //       items,
+  //       onSuccess: handleSuccess,
+  //       onFailure: handleFailure,
+  //     });
+  //   }
+  // };
+  // ✅ Unified payment handler (COD + Razorpay)
+const handlePlaceOrder = async (paymentType) => {
+  setPayLoading(true);
+
+  const amount = subtotal - discount + shipping - couponApplied;
+
+  if (paymentType === "cod") {
+    // 🟢 COD flow
+    try {
+      const orderDetails = {
+        addressId: selectedAddress?.id || selectedAddress,
+        amount,
+        paymentId: "COD",
+        items,
+      };
+
+      await placeOrder(orderDetails);
+      await clearCart();
+
+      setShowOrderModal(false); 
+      setTimeout(() => setShowThankYou(true), 400);
+    } catch (err) {
+      console.error("COD order failed:", err.message);
+      alert("Something went wrong while placing the COD order.");
+    } finally {
+      setPayLoading(false);
+    }
+  } else {
+    // 💳 Razorpay flow
     const handleSuccess = async (paymentResponse) => {
       try {
         const orderDetails = {
@@ -247,16 +337,15 @@ switch (currentStep) {
         };
 
         await placeOrder(orderDetails);
-
         await clearCart();
 
-        alert("Payment successful! Payment ID: " + paymentResponse.razorpay_payment_id);
+        setShowOrderModal(false);
+        setTimeout(() => setShowThankYou(true), 400);
       } catch (err) {
         console.error("Error placing order:", err.message);
         alert("Something went wrong while placing the order.");
       } finally {
         setPayLoading(false);
-        setShowOrderModal(false);
       }
     };
 
@@ -273,13 +362,16 @@ switch (currentStep) {
       onSuccess: handleSuccess,
       onFailure: handleFailure,
     });
-  };
+  }
+};
+
+
 
 
   // 1️⃣ Paste the function here:
   const handleRazorpayPayment = async ({ amount, user, address, items, onSuccess, onFailure }) => {
     const options = {
-      key: "yYVcHXougXkUs78wQimil4xs", // Replace with your Razorpay key
+      key: "rzp_test_aNekzbf3DEXHpA", // Replace with your Razorpay key
       amount: amount * 100,
       currency: "INR",
       name: "Kevaa.in",
@@ -453,7 +545,7 @@ switch (currentStep) {
           </div>
         </div>
       </div>
-console.log("🧩 Selected address before modal:", selectedAddress);
+{/* console.log("🧩 Selected address before modal:", selectedAddress); */}
 
       <OrderReceiptModal
         isOpen={showOrderModal}
@@ -462,9 +554,15 @@ console.log("🧩 Selected address before modal:", selectedAddress);
         address={selectedAddress}
         items={items}
         total={subtotal - discount + shipping - couponApplied}
-        onPlaceOrder={handlePlaceOrder}
+        onPlaceOrder={() => handlePlaceOrder(selectedPaymentType)} 
+        onCODOrder={() => handlePlaceOrder("cod")} // ✅ Add this line
         loading={payLoading}
+        selectedPaymentType={selectedPaymentType}
       />
+
+
+{showThankYou && <ThankYouModal onClose={() => setShowThankYou(false)} />}
+
     </div>
   );
 

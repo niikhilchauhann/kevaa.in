@@ -133,7 +133,7 @@ const fetchAddresses = async () => {
   // Remove Address
   const handleRemove = async (id) => {
     if (!userId || !id) return;
-    if (!window.confirm('Are you sure you want to delete this address?')) return;
+    
 
     try {
       const addressRef = doc(db, 'addresses', id);
@@ -200,16 +200,23 @@ const fetchAddresses = async () => {
     setEditId(null);
   };
 
-  return (
-    <div className="address-wrapper">
-      {/* <h2>Your Addresses</h2> */}
-      <div className="address-box">
-        <div className="address-header">
-          <h3>My Address</h3>
-          <button className="add-address" onClick={handleAddNew}>
-            ➕ Add new address
-          </button>
-        </div>
+ return (
+  <div className="address-wrapper">
+    {/* Top Heading */}
+    <h2 className="page-title">📍 Your Addresses</h2>
+
+<div className="address-box">
+  <div className="address-header">
+    <h3>Saved Locations</h3>
+  </div>
+
+
+      <button className="add-address" onClick={handleAddNew}>
+  + Add new address
+</button>
+
+
+
 
         {/* Address Form */}
         {showForm && (
@@ -269,38 +276,49 @@ const fetchAddresses = async () => {
         )}
 
         {/* Address List */}
-        <div className="address-list">
-          {addresses.map((item) => (
-            <div key={item.id} className="address-item" style={{ position: "relative" }}>
-              <div className="icon">🏠</div>
-              <div className="details">
-                <strong>{item.type} (ID: {item.id})</strong>
-                <p>
-                  House No - {item.houseNo} <br />
-                  Colony / Street Name - {item.streetName} <br />
-                  Street Name - {item.streetName2 ? ` ${item.streetName2}` : ''} <br />
-                  City - {item.city} <br />
-                  State - {item.state} <br />
-                  Postal Code - {item.postalCode} <br />
-                  Phone Number - {item.phoneNo}
-                </p>
-              </div>
-              <div className="options" onClick={() => setMenuOpenId(menuOpenId === item.id ? null : item.id)}>⋮</div>
-
-              {/* Slide-in menu */}
-              <div
-                className={`address-actions-menu${menuOpenId === item.id ? " open" : ""}`}
-                onClick={e => e.stopPropagation()}
-              >
-                <button onClick={() => handleEdit(item)}>✏️ Edit</button>
-                <button onClick={() => handleRemove(item.id)} style={{ color: "red" }}>🗑️ Remove</button>
-              </div>
-            </div>
-          ))}
-        </div>
+        {/* Address List */}
+{/* Address List */}
+<div className="address-list">
+  {addresses.map((address) => (
+    <div className="address-item" key={address.id}>
+      <div className="address-icon">
+        {address.type === "Home" && "🏠"}
+        {address.type === "Work" && "💼"}
+        {address.type === "Other" && "📦"}
       </div>
+
+      <div className="address-details">
+        <h4 className="address-type">{address.type}</h4>
+        <p className="address-text">
+          {[address.houseNo, address.streetName, address.streetName2, address.city, address.state, address.postalCode]
+            .filter(Boolean)
+            .join(", ")}
+        </p>
+      </div>
+
+      <div
+        className="address-options"
+        onClick={() =>
+          setMenuOpenId(menuOpenId === address.id ? null : address.id)
+        }
+      >
+        ⋮
+      </div>
+
+      {menuOpenId === address.id && (
+        <div className="address-actions-menu open">
+          <button onClick={() => handleEdit(address)}>Edit</button>
+          <button onClick={() => handleRemove(address.id)}>Delete</button>
+        </div>
+      )}
     </div>
-  );
+  ))}
+</div>
+
+
+    </div>
+  </div>
+);
 };
 
 export default AddressList;
